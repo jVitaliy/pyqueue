@@ -1,0 +1,4 @@
+branch(develop);
+repoHost(git.tauproject.com);
+openGitRepoLocally();
+//closeGitRepo();

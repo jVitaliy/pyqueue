@@ -1,0 +1,2 @@
+class OpenGitRepoException(Exception):
+    pass

@@ -3,6 +3,7 @@ import os
 import re
 import sys
 
+from interpreter.DescLog import DescLog
 from interpreter.DescProcessor import DescProcessor
 from interpreter.TauDeployScriptInterpreter import get_tree_and_parser, start_walking
 
@@ -35,6 +36,7 @@ def process_file(filename):
 
 
 def start(args):
+    DescLog()
     folder_to_scan = DEFAULT_QUEUE_FOLDER if len(args) < 2 else args[1]
     pattern = re.compile('\*.git')
     for root, dirs, files in os.walk(folder_to_scan):

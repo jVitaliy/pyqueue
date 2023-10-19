@@ -44,5 +44,3 @@ def start(args):
                 process_file(filename)
 
 
-if __name__ == '__main__':
-    start(sys.argv)

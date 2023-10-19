@@ -22,6 +22,10 @@ class GitService(AbstractExternalShellCmd):
             raise GitException(self.error)
         return temp_dir
 
+    def checkout(self, branch_name, repo_dir):
+        self.shell_command = f"/usr/bin/git checkout {branch_name}"
+        self.execute(repo_dir)
+
     def removeFolder(self, temp_dir):
         self._fsService.deleteTemp(temp_dir)
 

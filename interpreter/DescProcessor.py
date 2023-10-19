@@ -3,6 +3,7 @@ import logging
 from interpreter.DescListener import DescListener
 from interpreter.DescLog import DescLog
 from interpreter.DescParser import DescParser
+from interpreter.exceptions.GitBranchException import GitBranchException
 from interpreter.services.DeployService import DeployService
 from interpreter.services.GitService import GitService
 from interpreter.exceptions.OpenGitRepoException import OpenGitRepoException
@@ -10,8 +11,9 @@ from interpreter.exceptions.OpenGitRepoException import OpenGitRepoException
 
 class DescProcessor(DescListener):
 
-    def __init__(self, repo_path=None, git_service=None, deploy_service=None):
+    def __init__(self, branch, repo_path=None, git_service=None, deploy_service=None):
         self._current_branch = None
+        self._target_branch = branch
         self._repo_host = None
         self.scope_stack = list()
         self._initial_repo_path = repo_path
@@ -42,7 +44,10 @@ class DescProcessor(DescListener):
 
     def exitBranchName(self, ctx:DescParser.BranchNameContext):
         self._current_branch = ctx.getText()
-        logging.info(f"set branch {self._current_branch}")
+        if self._current_branch.__eq__(self._target_branch):
+            logging.info(f"set branch {self._current_branch}")
+        else:
+            raise GitBranchException(f"branch {self._current_branch} does not match to target branch {self._target_branch}")
 
     def exitSetRepoSource(self, ctx:DescParser.SetRepoSourceContext):
         logging.info(f"set repo host to {self._repo_host}")
@@ -66,7 +71,8 @@ class DescProcessor(DescListener):
 
         self._repo_data = None
         repo_obj['tmp_folder'] = self._git_service.clone(repo_obj['path'], self._repo_host)
-        logging.info(f"cloned repo to tmp folder {repo_obj['tmp_folder']}")
+        self._git_service.checkout(self._current_branch, repo_obj['tmp_folder'])
+        logging.info(f"cloned repo to tmp folder {repo_obj['tmp_folder']} and checkout to {self._current_branch}")
         self.scope_stack.append(repo_obj)
 
     def exitRepoPath(self, ctx:DescParser.RepoPathContext):

@@ -1,0 +1,2 @@
+class GitBranchException(Exception):
+    pass

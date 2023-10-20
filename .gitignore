@@ -1,2 +1,2 @@
 *.jar
-desc.log
+**/desc.log

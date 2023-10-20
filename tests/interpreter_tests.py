@@ -3,7 +3,7 @@ import unittest
 from unittest.mock import Mock
 
 from interpreter.DescProcessor import DescProcessor
-from interpreter.TauDeployScriptInterpreter import get_tree_and_parser, start_walking
+from interpreter.TauDeployScriptInterpreter import TauDeployScriptInterpreter
 
 
 class InterpreterTest(unittest.TestCase):
@@ -15,16 +15,17 @@ class InterpreterTest(unittest.TestCase):
         super().__init__(methodName)
         self._git_service = Mock()
         self._deploy_service = Mock()
+        self._script_interpreter = TauDeployScriptInterpreter()
 
     def walk(self, filename, processor):
         data_dir = os.path.join(os.path.dirname(__file__), 'test_data')
         data_file = os.path.join(data_dir, filename)
-        tree_and_parser = get_tree_and_parser(data_file)
+        tree_and_parser = self._script_interpreter.get_tree_and_parser(data_file)
         parser = tree_and_parser[0]
         if parser.getNumberOfSyntaxErrors() > 0:
             print("syntax errors")
             return
-        start_walking(tree_and_parser[1], processor)
+        self._script_interpreter.start_walking_with_processor(tree_and_parser[1], processor)
 
     def build_processor(self, branch, repo_path=None):
         repo_path_correct = self.REPO_PATH if repo_path is None else repo_path

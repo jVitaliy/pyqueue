@@ -3,7 +3,7 @@ import unittest
 
 from interpreter.DescProcessor import DescProcessor
 from interpreter.services.FSService import FSService
-from interpreter.TauDeployScriptInterpreter import get_tree_and_parser, start_walking
+from interpreter.TauDeployScriptInterpreter import TauDeployScriptInterpreter
 
 
 class InterpreterTest(unittest.TestCase):
@@ -11,12 +11,13 @@ class InterpreterTest(unittest.TestCase):
     def walk(self, filename, processor):
         data_dir = os.path.join(os.path.dirname(__file__), 'test_data')
         data_file = os.path.join(data_dir, filename)
-        tree_and_parser = get_tree_and_parser(data_file)
+        interpreter = TauDeployScriptInterpreter()
+        tree_and_parser = interpreter.get_tree_and_parser(data_file)
         parser = tree_and_parser[0]
         if parser.getNumberOfSyntaxErrors() > 0:
             print("syntax errors")
             return
-        start_walking(tree_and_parser[1], processor)
+        interpreter.start_walking_with_processor(tree_and_parser[1], processor)
 
     @unittest.skip("skip due to not ready infrastructure")
     def test_minimal_script(self):
@@ -43,7 +44,7 @@ class InterpreterTest(unittest.TestCase):
 
     @unittest.skip("skip due to not ready infrastructure")
     def test_minimal_with_deploy(self):
-        processor = DescProcessor('tauproject/alcyone-pdm/queue-scripts.git')
+        processor = DescProcessor('develop', 'tauproject/alcyone-pdm/queue-scripts.git')
         self.walk('minimal_to_clone_and_deploy.desc', processor)
 
         self.assertEqual('develop', processor._current_branch)
@@ -52,7 +53,7 @@ class InterpreterTest(unittest.TestCase):
 
     @unittest.skip("skip due to not ready infrastructure")
     def test_minimal_with_deploy_and_exclude(self):
-        processor = DescProcessor('tauproject/alcyone-pdm/queue-scripts.git')
+        processor = DescProcessor('develop', 'tauproject/alcyone-pdm/queue-scripts.git')
         self.walk('minimal_to_clone_and_deploy_with_exclude.desc', processor)
 
         self.assertEqual('develop', processor._current_branch)
@@ -61,7 +62,7 @@ class InterpreterTest(unittest.TestCase):
 
     @unittest.skip("skip due to not ready infrastructure")
     def test_minimal_with_deploy_from(self):
-        processor = DescProcessor('tauproject/alcyone-pdm/queue-scripts.git')
+        processor = DescProcessor('develop', 'tauproject/alcyone-pdm/queue-scripts.git')
         self.walk('minimal_to_clone_and_deploy_from.desc', processor)
 
         self.assertEqual('develop', processor._current_branch)

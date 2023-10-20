@@ -62,5 +62,3 @@ class RequestFilesProcessor:
                         self.processFile(root, filename)
         except GitBranchException as gite:
             logging.error(f"error: {gite}")
-        except Exception as e:
-            logging.error(f"error: {e}")

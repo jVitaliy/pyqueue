@@ -1,6 +1,5 @@
-import sys
-
-from processor.processing_request_files import start
+from processor.RequestFilesProcessor import RequestFilesProcessor
 
 if __name__ == '__main__':
-    start(sys.argv)
+    file_processor = RequestFilesProcessor()
+    file_processor.start()

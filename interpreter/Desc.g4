@@ -12,8 +12,8 @@ deployTo : DEPLOY_TO '(' (pathFrom ',')? pathForDeployTo (
                     | (',' deployPattern ',' excludePattern)
                     | (',' excludePattern ',' deployPattern)
                      )?  ')';
-excludePattern : 'exclude=' pattern (',' pattern)*;
-deployPattern : 'pattern=' pattern (',' pattern)*;
+excludePattern : 'exclude=' pattern ('|' pattern)*;
+deployPattern : 'pattern=' pattern ('|' pattern)*;
 pathForDeployTo : pathForDeploy;
 pathFrom : 'from=' pathForDeploy;
 setBranch : BRANCH '(' branchName ')';

@@ -13,7 +13,7 @@ class Init(AbstractProcessor):
             logging.info(f"set branch {self._current_branch}")
         else:
             raise GitBranchException(
-                f"branch {self._current_branch} does not match to target branch {self._target_branch}")
+                f"branch `{self._current_branch}` does not match to target branch `{self._target_branch}`")
 
     def exitSetRepoSource(self, ctx: DescParser.SetRepoSourceContext):
         logging.info(f"set repo host to {self._repo_host}")

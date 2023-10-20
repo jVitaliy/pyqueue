@@ -38,7 +38,7 @@ class RequestFilesProcessor:
                 if line.startswith("path:"):
                     path = line.split(':')[1]
                 elif line.startswith("branch:"):
-                    branch = line.split(':')[1]
+                    branch = line.split(':')[1].strip()
 
         script_filename = self.get_scriptname(filename)
         if path is not None and branch is not None:

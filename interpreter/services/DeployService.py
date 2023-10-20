@@ -25,7 +25,7 @@ class DeployService:
         return ignored_names
 
     def deploy(self, src_path, dest_path, project_name, exclude=None, pattern=None):
-        dest = f"{dest_path}/{project_name}"
+        dest = f"{dest_path}"
         shutil.rmtree(dest, ignore_errors=True)
         src = f"{src_path}/{project_name}"
 

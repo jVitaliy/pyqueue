@@ -30,6 +30,9 @@ class InterpreterTest(unittest.TestCase):
         self.interpreter.start_walking.assert_not_called()
 
     def test_develop_ui_git_no_script(self):
+        script_folder = os.environ["PYQUEUE_SCRIPT_FOLDER"]
+        if os.path.exists(f"{script_folder}/ui.desc"):
+            os.remove(f"{script_folder}/ui.desc")
         queue_folder = os.environ["PYQUEUE_QUEUE_FOLDER"]
         with open(f"{queue_folder}/develop.ui.git", 'w') as file:
             file.write(f"path:ui.git\n")
@@ -43,7 +46,8 @@ class InterpreterTest(unittest.TestCase):
 
         queue_folder = os.environ["PYQUEUE_QUEUE_FOLDER"]
         script_folder = os.environ["PYQUEUE_SCRIPT_FOLDER"]
-        os.remove(f"{script_folder}/ui.desc")
+        if os.path.exists(f"{script_folder}/ui.desc"):
+            os.remove(f"{script_folder}/ui.desc")
         with open(f"{queue_folder}/develop.ui.git", 'w') as file:
             file.write(f"path:ui.git\n")
             file.write(f"branch:develop\n")

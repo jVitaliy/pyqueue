@@ -55,7 +55,7 @@ class RequestFilesProcessor:
         DescLog()
         logging.info(f"start scanning {self._queue_folder}")
 
-        pattern = re.compile("\*\.git")
+        pattern = re.compile("\*\.git$")
         for root, dirs, files in os.walk(self._queue_folder):
             for filename in files:
                 print(f"{filename} {re.findall(pattern, filename)}")

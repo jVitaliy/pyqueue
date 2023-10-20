@@ -44,7 +44,7 @@ class InterpreterTest(unittest.TestCase):
 
     @unittest.skip("skip due to not ready infrastructure")
     def test_minimal_with_deploy(self):
-        processor = DescProcessor('develop', 'tauproject/alcyone-pdm/queue-scripts.git')
+        processor = DescProcessor('develop', 'queue-scripts', 'tauproject/alcyone-pdm/queue-scripts.git')
         self.walk('minimal_to_clone_and_deploy.desc', processor)
 
         self.assertEqual('develop', processor._current_branch)

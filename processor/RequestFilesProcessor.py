@@ -19,10 +19,15 @@ class RequestFilesProcessor:
             else os.environ.get("PYQUEUE_GIT_HOME")
         self._desc_interpreter = TauDeployScriptInterpreter()
 
-    def get_scriptname(self, tast_filename):
-        filename_parts = tast_filename.split('.')
+    def get_scriptname(self, task_filename):
+        filename_parts = task_filename.split('.')
         script_name_arr = filename_parts[1:-1]
         script_name_arr.append("desc")
+        return ".".join(script_name_arr)
+
+    def get_project_name(self, task_filename):
+        filename_parts = task_filename.split('.')
+        script_name_arr = filename_parts[1:-1]
         return ".".join(script_name_arr)
 
     def processFile(self, root, filename):
@@ -41,12 +46,13 @@ class RequestFilesProcessor:
                     branch = line.split(':')[1].strip()
 
         script_filename = self.get_scriptname(filename)
+        project_name = self.get_project_name(filename)
         if path is not None and branch is not None:
             script_file_path = f"{self._script_folder}/{script_filename}"
 
             if os.path.isfile(script_file_path):
                 path_to_script = f"{self._script_folder}/{script_filename}"
-                self._desc_interpreter.start_walking(path_to_script, branch, path.replace(f"{self._git_home}/", ""))
+                self._desc_interpreter.start_walking(path_to_script, branch, project_name, path.replace(f"{self._git_home}/", ""))
             else:
                 logging.info(f"there is no script {script_file_path} - no actions")
         os.remove(f"{root}/{filename_processing}")

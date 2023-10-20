@@ -27,28 +27,28 @@ class InterpreterTest(unittest.TestCase):
             return
         self._script_interpreter.start_walking_with_processor(tree_and_parser[1], processor)
 
-    def build_processor(self, branch, repo_path=None):
+    def build_processor(self, branch, project_name, repo_path=None):
         repo_path_correct = self.REPO_PATH if repo_path is None else repo_path
-        processor = DescProcessor(branch, repo_path=repo_path_correct)
+        processor = DescProcessor(branch, project_name, repo_path=repo_path_correct)
         processor._deploy_service = self._deploy_service
         processor._git_service = self._git_service
         self._git_service.clone.return_value = self.TMP_PATH
         return processor
 
     def test_branch(self):
-        processor = self.build_processor("develop")
+        processor = self.build_processor("develop", "")
         self.walk('openbranch.desc', processor)
         self.assertEqual('develop', processor._current_branch)
 
     def test_branch_and_repo_host(self):
-        processor = self.build_processor("develop")
+        processor = self.build_processor("develop", "")
         self.walk('openbranch_and_set_repo.desc', processor)
 
         self.assertEqual('develop', processor._current_branch)
         self.assertEqual('git.tauproject.com', processor._repo_host)
 
     def test_minimal_script(self):
-        processor = self.build_processor("develop")
+        processor = self.build_processor("develop", "")
         self.walk('minimal_to_clone.desc', processor)
 
         self.assertEqual('develop', processor._current_branch)
@@ -58,7 +58,7 @@ class InterpreterTest(unittest.TestCase):
         self._git_service.clone.assert_called_with(self.REPO_PATH, self.GIT_HOST)
 
     def test_minimal_script_with_commented_close(self):
-        processor = self.build_processor("develop")
+        processor = self.build_processor("develop", "clone")
         self.walk('minimal_to_clone_with_commented_close.desc', processor)
 
         self.assertEqual('develop', processor._current_branch)
@@ -70,7 +70,7 @@ class InterpreterTest(unittest.TestCase):
         self._git_service.clone.assert_called_with(self.REPO_PATH, self.GIT_HOST)
 
     def test_minimal_with_deploy(self):
-        processor = self.build_processor("develop")
+        processor = self.build_processor("develop", "")
         self.walk('minimal_to_clone_and_deploy.desc', processor)
 
         self.assertEqual('develop', processor._current_branch)
@@ -82,10 +82,10 @@ class InterpreterTest(unittest.TestCase):
         self._deploy_service.deploy.assert_called_once()
         self._deploy_service.deploy.assert_called_with(self.TMP_PATH,
                                                        '/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy',
-                                                       exclude=None, pattern=None)
+                                                       '', exclude=None, pattern=None)
 
     def test_minimal_with_deploy_and_exclude(self):
-        processor = self.build_processor("develop")
+        processor = self.build_processor("develop", "")
         self.walk('minimal_to_clone_and_deploy_with_exclude.desc', processor)
 
         self.assertEqual('develop', processor._current_branch)
@@ -96,10 +96,10 @@ class InterpreterTest(unittest.TestCase):
         self._deploy_service.deploy.assert_called_once()
         self._deploy_service.deploy.assert_called_with(self.TMP_PATH,
                                                        '/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy',
-                                                       exclude=['.git'], pattern=['queue-scripts', 'queue.git'])
+                                                       '', exclude=['.git'], pattern=['queue-scripts', 'queue.git'])
 
     def test_minimal_with_deploy_from(self):
-        processor = self.build_processor("develop")
+        processor = self.build_processor("develop", "")
         self.walk('minimal_to_clone_and_deploy_from.desc', processor)
 
         self.assertEqual('develop', processor._current_branch)
@@ -110,7 +110,7 @@ class InterpreterTest(unittest.TestCase):
         self._deploy_service.deploy.assert_called_once()
         self._deploy_service.deploy.assert_called_with(f"{self.TMP_PATH}/scripts",
                                                        '/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy',
-                                                       exclude=['.git'], pattern=None)
+                                                       '', exclude=['.git'], pattern=None)
 
 
 if __name__ == '__main__':

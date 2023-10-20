@@ -24,10 +24,13 @@ class DeployService:
         # print(f"ignored_names={ignored_names}")
         return ignored_names
 
-    def deploy(self, src_path, dest_path, exclude=None, pattern=None):
-        shutil.rmtree(dest_path, ignore_errors=True)
-        os.mkdir(dest_path)
-        self.walk_through_tree(src_path, dest_path, exclude=exclude, pattern=pattern)
+    def deploy(self, src_path, dest_path, project_name, exclude=None, pattern=None):
+        dest = f"{dest_path}/{project_name}"
+        shutil.rmtree(dest, ignore_errors=True)
+        src = f"{src_path}/{project_name}"
+
+        os.mkdir(dest)
+        self.walk_through_tree(src, dest, exclude=exclude, pattern=pattern)
         # shutil.copytree(src_path, dest_path, ignore=shutil.ignore_patterns(self._ignore_patterns, exclude, pattern), dirs_exist_ok=True)
 
     def walk_through_tree(self, folder_src, folder_dest, exclude=None, pattern=None):

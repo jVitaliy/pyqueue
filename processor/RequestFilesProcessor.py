@@ -45,7 +45,6 @@ class RequestFilesProcessor:
             script_file_path = f"{self._script_folder}/{script_filename}"
 
             if os.path.isfile(script_file_path):
-                print(f"script_file_path={script_file_path}")
                 path_to_script = f"{self._script_folder}/{script_filename}"
                 self._desc_interpreter.start_walking(path_to_script, branch, path.replace(f"{self._git_home}/", ""))
             else:
@@ -59,10 +58,9 @@ class RequestFilesProcessor:
             pattern = re.compile("\*\.git$")
             for root, dirs, files in os.walk(self._queue_folder):
                 for filename in files:
-                    print(f"{filename} {re.findall(pattern, filename)}")
                     if re.findall(pattern, filename) is not None:
                         self.processFile(root, filename)
         except GitBranchException as gite:
-            logging.error(gite.__context__)
+            logging.error(f"error: {gite}")
         except Exception as e:
             logging.error(f"error: {e}")

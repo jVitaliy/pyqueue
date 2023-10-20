@@ -36,7 +36,7 @@ class RequestFilesProcessor:
             lines = file.readlines()
             for line in lines:
                 if line.startswith("path:"):
-                    path = line.split(':')[1]
+                    path = line.split(':')[1].strip()
                 elif line.startswith("branch:"):
                     branch = line.split(':')[1].strip()
 

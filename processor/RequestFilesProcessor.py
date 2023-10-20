@@ -4,6 +4,7 @@ import re
 
 from interpreter.DescLog import DescLog
 from interpreter.TauDeployScriptInterpreter import TauDeployScriptInterpreter
+from interpreter.exceptions.GitBranchException import GitBranchException
 
 
 class RequestFilesProcessor:
@@ -54,10 +55,14 @@ class RequestFilesProcessor:
     def start(self):
         DescLog()
         logging.info(f"start scanning {self._queue_folder}")
-
-        pattern = re.compile("\*\.git$")
-        for root, dirs, files in os.walk(self._queue_folder):
-            for filename in files:
-                print(f"{filename} {re.findall(pattern, filename)}")
-                if re.findall(pattern, filename) is not None:
-                    self.processFile(root, filename)
+        try:
+            pattern = re.compile("\*\.git$")
+            for root, dirs, files in os.walk(self._queue_folder):
+                for filename in files:
+                    print(f"{filename} {re.findall(pattern, filename)}")
+                    if re.findall(pattern, filename) is not None:
+                        self.processFile(root, filename)
+        except GitBranchException as gite:
+            logging.error(gite.__context__)
+        except Exception as e:
+            logging.error(f"error: {e}")

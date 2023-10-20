@@ -10,7 +10,7 @@ class AbstractExternalShellCmd:
         self.returncode = None
 
     def execute(self, working_folder=None):
-        result = subprocess.run(self.shell_command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, cwd=working_folder)
+        result = subprocess.run(self.shell_command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=working_folder)
         self.output = result.stdout
         self.error = result.stderr
         self.returncode = result.returncode

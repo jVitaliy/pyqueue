@@ -1,4 +1,5 @@
 import fnmatch
+import logging
 import os
 import shutil
 from pathlib import Path
@@ -31,6 +32,7 @@ class DeployService:
         src = f"{src_path}/{project_name}"
         Path(dest).mkdir(parents=True, exist_ok=True)
         self.walk_through_tree(src, dest, exclude=exclude, pattern=pattern)
+        logging.info(f"deploy from {src} to {dest} with excluding={exclude} and pattern={pattern}")
         # shutil.copytree(src_path, dest_path, ignore=shutil.ignore_patterns(self._ignore_patterns, exclude, pattern), dirs_exist_ok=True)
 
     def walk_through_tree(self, folder_src, folder_dest, exclude=None, pattern=None):
@@ -52,6 +54,7 @@ class DeployService:
                 os.makedirs(os.path.dirname(f"{folder_dest}{related_path}/"), exist_ok=True)
                 # print(f"copy {root}/{file} to {folder_dest}{related_path}/{file}")
                 shutil.copyfile(f"{root}/{file}", f"{folder_dest}{related_path}/{file}")
+                logging.info(f"copied from {root}/{file} to {folder_dest}{related_path}/{file}")
 
 
     def filter_names(self, names, exclude=None, pattern=None):

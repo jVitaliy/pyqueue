@@ -1,0 +1,2 @@
+class SystemServiceException(Exception):
+    pass

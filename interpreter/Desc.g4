@@ -5,6 +5,8 @@ cmd : setBranch
     | cloneGitToTmp
     | closeGitRepo
     | deployTo
+    | startSystemService
+    | stopSystemService
     ;
 deployTo : DEPLOY_TO '(' (pathFrom ',')? pathForDeployTo (
                     (',' excludePattern)
@@ -25,8 +27,9 @@ repoPath: namingChars+ ;
 pathForDeploy : ( namingChars | '/')+ ;
 pattern : (namingChars | '*' | '.' ) +;
 branchName : namingChars+ ;
-//expr : atom | ('+' | '-') expr | expr '**' expr | expr ('*' | '/') expr | expr ('+' | '-') expr | '(' expr ')' | atom ;
-//atom : INT ;
+startSystemService : 'startSystemService(' serviceName ')';
+stopSystemService : 'stopSystemService(' serviceName ')';
+serviceName : namingChars+;
 repoAliasName : namingChars+ ;
 namingChars: NUM | CHARS | '-' | '_' ;
 BRANCH : 'branch';

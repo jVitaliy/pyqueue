@@ -152,6 +152,33 @@ class DescListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by DescParser#startSystemService.
+    def enterStartSystemService(self, ctx:DescParser.StartSystemServiceContext):
+        pass
+
+    # Exit a parse tree produced by DescParser#startSystemService.
+    def exitStartSystemService(self, ctx:DescParser.StartSystemServiceContext):
+        pass
+
+
+    # Enter a parse tree produced by DescParser#stopSystemService.
+    def enterStopSystemService(self, ctx:DescParser.StopSystemServiceContext):
+        pass
+
+    # Exit a parse tree produced by DescParser#stopSystemService.
+    def exitStopSystemService(self, ctx:DescParser.StopSystemServiceContext):
+        pass
+
+
+    # Enter a parse tree produced by DescParser#serviceName.
+    def enterServiceName(self, ctx:DescParser.ServiceNameContext):
+        pass
+
+    # Exit a parse tree produced by DescParser#serviceName.
+    def exitServiceName(self, ctx:DescParser.ServiceNameContext):
+        pass
+
+
     # Enter a parse tree produced by DescParser#repoAliasName.
     def enterRepoAliasName(self, ctx:DescParser.RepoAliasNameContext):
         pass

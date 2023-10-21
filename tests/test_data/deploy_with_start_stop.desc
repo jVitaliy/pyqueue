@@ -1,0 +1,7 @@
+branch(develop);
+repoHost(git.tauproject.com);
+openGitRepoLocally();
+stopSystemService(www-service);
+deployTo(/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy);
+startSystemService(www-service);
+closeGitRepo();

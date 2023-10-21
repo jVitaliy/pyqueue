@@ -20,3 +20,13 @@ class Init(AbstractProcessor):
 
     def exitHost(self, ctx: DescParser.SetRepoSourceContext):
         self._repo_host = ctx.getText()
+
+    def exitStartSystemService(self, ctx: DescParser.StartSystemServiceContext):
+        service_name = ctx.serviceName().getText()
+        self._system_service.startService(service_name)
+        logging.info(f"service {service_name} has been started")
+
+    def exitStopSystemService(self, ctx: DescParser.StopSystemServiceContext):
+        service_name = ctx.serviceName().getText()
+        self._system_service.stopService(service_name)
+        logging.info(f"service {service_name} has been stopped")

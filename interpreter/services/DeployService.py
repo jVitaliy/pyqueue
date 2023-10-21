@@ -1,6 +1,7 @@
 import fnmatch
 import os
 import shutil
+from pathlib import Path
 
 
 class DeployService:
@@ -28,8 +29,7 @@ class DeployService:
         dest = f"{dest_path}"
         shutil.rmtree(dest, ignore_errors=True)
         src = f"{src_path}/{project_name}"
-
-        os.mkdir(dest)
+        Path(dest).mkdir(parents=True, exist_ok=True)
         self.walk_through_tree(src, dest, exclude=exclude, pattern=pattern)
         # shutil.copytree(src_path, dest_path, ignore=shutil.ignore_patterns(self._ignore_patterns, exclude, pattern), dirs_exist_ok=True)
 

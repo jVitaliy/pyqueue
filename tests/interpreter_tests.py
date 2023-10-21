@@ -134,6 +134,7 @@ class InterpreterTest(unittest.TestCase):
 
     def test_open_with_start_stop_and_build(self):
         processor = self.build_processor("develop", "")
+        self._git_service.getRepoName.return_value = "test-pro"
         self.walk('open_with_start_stop_and_build.desc', processor)
 
         self.assertEqual('develop', processor._current_branch)
@@ -145,7 +146,7 @@ class InterpreterTest(unittest.TestCase):
         self._system_service.startService.assert_called_once()
         self._system_service.stopService.assert_called_once()
         self._builder_service.build.assert_called_once()
-        self._builder_service.build.assert_called_with("java17", "gradle", self.TMP_PATH)
+        self._builder_service.build.assert_called_with("java17", "gradle", f"{self.TMP_PATH}/test-pro")
 
 
 if __name__ == '__main__':

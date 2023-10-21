@@ -64,9 +64,13 @@ then script interpretation will be stopped.
 `openGitRepoLocally();`  clones git repo locally to temp folder, if there is no any parameter then current repo url will be used.
 Current repo url means the url which was read by scanner from task file (path in task file).
 
+`startSystemService(servicename)` equals to `systemctl start`, the user which start this should be in sudoers list
+
+`stopSystemService(servicename)` equals to `systemctl stop`, the user which start this should be in sudoers list
 ## Pre-building
 
 ## Building
+`buildProject(language=java17, type=gradle);` build project for language java 17 and with gradle builder
 
 ## Post-building
 

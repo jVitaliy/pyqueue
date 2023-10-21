@@ -13,6 +13,9 @@ class GitService(AbstractExternalShellCmd):
         self._fsService = FSService()
         self.gitRepoName = None
 
+    def getRepoName(self, repo_path):
+        return self._fsService.extractFilenameWithoutExt(repo_path)
+
     def clone(self, repo_path, host='localhost'):
         self.gitRepoName = self._fsService.extractFilenameWithoutExt(repo_path)
         os.environ["GIT_SSH_COMMAND"] = "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"

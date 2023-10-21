@@ -1,6 +1,6 @@
-#!/usr/bin/env bash
+#!/usr/bin/bash
 
-PYQUEUE_QUEUE_FOLDER=/var/lib/tauproject/alcyone-pdm/queue
-PYQUEUE_SCRIPT_FOLDER=/var/lib/tauproject/alcyone-pdm/scripts
-PYQUEUE_GIT_HOME=/home/git
-PYQUEUE_LOG_HOME=/var/log/tauproject/alcyone-pdm
+export PYQUEUE_QUEUE_FOLDER=/var/lib/tauproject/alcyone-pdm/queue
+export PYQUEUE_SCRIPT_FOLDER=/var/lib/tauproject/alcyone-pdm/scripts
+export PYQUEUE_GIT_HOME=/home/git
+export PYQUEUE_LOG_HOME=/var/log/tauproject/alcyone-pdm

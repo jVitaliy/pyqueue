@@ -74,7 +74,7 @@ class InterpreterTest(unittest.TestCase):
         self._git_service.clone.assert_called_with(self.REPO_PATH, self.GIT_HOST)
 
     def test_minimal_with_deploy(self):
-        processor = self.build_processor("develop", "")
+        processor = self.build_processor("develop", "deploy")
         self.walk('minimal_to_clone_and_deploy.desc', processor)
 
         self.assertEqual('develop', processor._current_branch)
@@ -84,12 +84,12 @@ class InterpreterTest(unittest.TestCase):
         self._git_service.clone.assert_called_once()
         self._git_service.clone.assert_called_with(self.REPO_PATH, self.GIT_HOST)
         self._deploy_service.deploy.assert_called_once()
-        self._deploy_service.deploy.assert_called_with(self.TMP_PATH,
+        self._deploy_service.deploy.assert_called_with(f"{self.TMP_PATH}/deploy",
                                                        '/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy',
-                                                       '', exclude=None, pattern=None)
+                                                       exclude=None, pattern=None)
 
     def test_minimal_with_deploy_and_exclude(self):
-        processor = self.build_processor("develop", "")
+        processor = self.build_processor("develop", "deploy")
         self.walk('minimal_to_clone_and_deploy_with_exclude.desc', processor)
 
         self.assertEqual('develop', processor._current_branch)
@@ -98,12 +98,12 @@ class InterpreterTest(unittest.TestCase):
         self._git_service.clone.assert_called_once()
         self._git_service.clone.assert_called_with(self.REPO_PATH, self.GIT_HOST)
         self._deploy_service.deploy.assert_called_once()
-        self._deploy_service.deploy.assert_called_with(self.TMP_PATH,
+        self._deploy_service.deploy.assert_called_with(f"{self.TMP_PATH}/deploy",
                                                        '/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy',
-                                                       '', exclude=['.git'], pattern=['queue-scripts', 'queue.git'])
+                                                       exclude=['.git'], pattern=['queue-scripts', 'queue.git'])
 
     def test_minimal_with_deploy_from(self):
-        processor = self.build_processor("develop", "")
+        processor = self.build_processor("develop", "deploy")
         self.walk('minimal_to_clone_and_deploy_from.desc', processor)
 
         self.assertEqual('develop', processor._current_branch)
@@ -112,12 +112,12 @@ class InterpreterTest(unittest.TestCase):
         self._git_service.clone.assert_called_once()
         self._git_service.clone.assert_called_with(self.REPO_PATH, self.GIT_HOST)
         self._deploy_service.deploy.assert_called_once()
-        self._deploy_service.deploy.assert_called_with(f"{self.TMP_PATH}/scripts",
+        self._deploy_service.deploy.assert_called_with(f"{self.TMP_PATH}/deploy/scripts",
                                                        '/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy',
-                                                       '', exclude=['.git'], pattern=None)
+                                                       exclude=['.git'], pattern=None)
 
     def test_deploy_with_start_stop_service(self):
-        processor = self.build_processor("develop", "")
+        processor = self.build_processor("develop", "deploy")
         self.walk('deploy_with_start_stop.desc', processor)
 
         self.assertEqual('develop', processor._current_branch)
@@ -126,9 +126,9 @@ class InterpreterTest(unittest.TestCase):
         self._git_service.clone.assert_called_once()
         self._git_service.clone.assert_called_with(self.REPO_PATH, self.GIT_HOST)
         self._deploy_service.deploy.assert_called_once()
-        self._deploy_service.deploy.assert_called_with(f"{self.TMP_PATH}",
+        self._deploy_service.deploy.assert_called_with(f"{self.TMP_PATH}/deploy",
                                                        '/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy',
-                                                       '', exclude=None, pattern=None)
+                                                       exclude=None, pattern=None)
         self._system_service.startService.assert_called_once()
         self._system_service.stopService.assert_called_once()
 

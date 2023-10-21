@@ -44,6 +44,6 @@ class DeployingStage(ConfiguringStage):
 
         # self._deploy_service = DeployService()
         current_repo_data = self.scope_stack[len(self.scope_stack) - 1]
-        path_from = current_repo_data['tmp_folder'] if 'path_from' not in self._deploy_data.keys() \
-            else f"{current_repo_data['tmp_folder']}/{self._deploy_data['path_from']}"
-        self._deploy_service.deploy(path_from, self._deploy_data['path'], self._project_name, exclude=excluded, pattern=pattern)
+        path_from = f"{current_repo_data['tmp_folder']}/{self._project_name}" if 'path_from' not in self._deploy_data.keys() \
+            else f"{current_repo_data['tmp_folder']}/{self._project_name}/{self._deploy_data['path_from']}"
+        self._deploy_service.deploy(path_from, self._deploy_data['path'], exclude=excluded, pattern=pattern)

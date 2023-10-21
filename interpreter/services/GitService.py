@@ -1,4 +1,5 @@
 import logging
+import os
 
 from interpreter.services.AbstractExternalShellCmd import AbstractExternalShellCmd
 from interpreter.services.FSService import FSService
@@ -14,6 +15,7 @@ class GitService(AbstractExternalShellCmd):
 
     def clone(self, repo_path, host='localhost'):
         self.gitRepoName = self._fsService.extractFilenameWithoutExt(repo_path)
+        os.environ["GIT_SSH_COMMAND"] = "ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
         temp_dir = self._fsService.createTemp(self.gitRepoName)
         self.shell_command = f"/usr/bin/git clone git@{host}:{repo_path}"
         self.execute(temp_dir)

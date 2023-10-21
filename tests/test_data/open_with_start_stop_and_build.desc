@@ -1,0 +1,7 @@
+branch(develop);
+repoHost(git.tauproject.com);
+openGitRepoLocally();
+stopSystemService(www-service);
+buildProject(language=java17, type=gradle);
+startSystemService(www-service);
+closeGitRepo();

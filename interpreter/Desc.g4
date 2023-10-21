@@ -7,31 +7,50 @@ cmd : setBranch
     | deployTo
     | startSystemService
     | stopSystemService
+    | buildProject
     ;
+
+setBranch : BRANCH '(' branchName ')';
+setRepoSource : REPO_HOST '(' host ')';
+host : (namingChars+ '.')* namingChars+;
+
+buildProject : BUILD_PROJECT '(' projectLanguage COMMA builderType')';
+projectLanguage : LANGUAGE '=' (JAVA17 | NEXT | PYTHON39);
+builderType : 'type=' (MAVEN | GRADLE);
 deployTo : DEPLOY_TO '(' (pathFrom ',')? pathForDeployTo (
-                    (',' excludePattern)
-                    | (',' deployPattern)
-                    | (',' deployPattern ',' excludePattern)
-                    | (',' excludePattern ',' deployPattern)
+                    (COMMA excludePattern)
+                    | (COMMA deployPattern)
+                    | (COMMA deployPattern ',' excludePattern)
+                    | (COMMA excludePattern ',' deployPattern)
                      )?  ')';
 excludePattern : 'exclude=' pattern ('|' pattern)*;
 deployPattern : 'pattern=' pattern ('|' pattern)*;
 pathForDeployTo : pathForDeploy;
 pathFrom : 'from=' pathForDeploy;
-setBranch : BRANCH '(' branchName ')';
-setRepoSource : REPO_HOST '(' host ')';
-host : (namingChars+ '.')* namingChars+;
-cloneGitToTmp : OPEN_GIT_REPO_LOCALLY '(' (repoPath  (',' repoAliasName)?)? ')';
+
+
+cloneGitToTmp : OPEN_GIT_REPO_LOCALLY '(' (repoPath  (COMMA repoAliasName)?)? ')';
 closeGitRepo : CLOSE_GIT_REPO '(' repoAliasName? ')';
 repoPath: namingChars+ ;
 pathForDeploy : ( namingChars | '/')+ ;
 pattern : (namingChars | '*' | '.' ) +;
 branchName : namingChars+ ;
-startSystemService : 'startSystemService(' serviceName ')';
-stopSystemService : 'stopSystemService(' serviceName ')';
+startSystemService : START_SYSTEM_SERVICE '(' serviceName ')';
+stopSystemService : STOP_SYSTEM_SERVICE '(' serviceName ')';
 serviceName : namingChars+;
 repoAliasName : namingChars+ ;
 namingChars: NUM | CHARS | '-' | '_' ;
+
+GRADLE : 'gradle';
+MAVEN : 'maven';
+JAVA17 : 'java17';
+NEXT : 'next';
+PYTHON39 : 'python39';
+LANGUAGE : 'language';
+COMMA : ',';
+BUILD_PROJECT: 'buildProject';
+START_SYSTEM_SERVICE : 'startSystemService';
+STOP_SYSTEM_SERVICE : 'stopSystemService';
 BRANCH : 'branch';
 DEPLOY_TO : 'deployTo';
 REPO_HOST : 'repoHost';

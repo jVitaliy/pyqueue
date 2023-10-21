@@ -1,5 +1,6 @@
 from interpreter.DescListener import DescListener
 from interpreter.DescLog import DescLog
+from interpreter.services.BuilderService import BuilderService
 from interpreter.services.DeployService import DeployService
 from interpreter.services.GitService import GitService
 from interpreter.services.SystemService import SystemService
@@ -19,9 +20,11 @@ class AbstractProcessor(DescListener):
         self._exclude_pattern = None
         self._deploy_pattern = None
         self._deploy_data = None
+        self._builder_data = None
         self._git_service = GitService()
         self._deploy_service = DeployService()
         self._system_service = SystemService()
+        self._builder_service = BuilderService()
 
 
     def getBranch(self):

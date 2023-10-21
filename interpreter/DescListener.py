@@ -26,6 +26,60 @@ class DescListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by DescParser#setBranch.
+    def enterSetBranch(self, ctx:DescParser.SetBranchContext):
+        pass
+
+    # Exit a parse tree produced by DescParser#setBranch.
+    def exitSetBranch(self, ctx:DescParser.SetBranchContext):
+        pass
+
+
+    # Enter a parse tree produced by DescParser#setRepoSource.
+    def enterSetRepoSource(self, ctx:DescParser.SetRepoSourceContext):
+        pass
+
+    # Exit a parse tree produced by DescParser#setRepoSource.
+    def exitSetRepoSource(self, ctx:DescParser.SetRepoSourceContext):
+        pass
+
+
+    # Enter a parse tree produced by DescParser#host.
+    def enterHost(self, ctx:DescParser.HostContext):
+        pass
+
+    # Exit a parse tree produced by DescParser#host.
+    def exitHost(self, ctx:DescParser.HostContext):
+        pass
+
+
+    # Enter a parse tree produced by DescParser#buildProject.
+    def enterBuildProject(self, ctx:DescParser.BuildProjectContext):
+        pass
+
+    # Exit a parse tree produced by DescParser#buildProject.
+    def exitBuildProject(self, ctx:DescParser.BuildProjectContext):
+        pass
+
+
+    # Enter a parse tree produced by DescParser#projectLanguage.
+    def enterProjectLanguage(self, ctx:DescParser.ProjectLanguageContext):
+        pass
+
+    # Exit a parse tree produced by DescParser#projectLanguage.
+    def exitProjectLanguage(self, ctx:DescParser.ProjectLanguageContext):
+        pass
+
+
+    # Enter a parse tree produced by DescParser#builderType.
+    def enterBuilderType(self, ctx:DescParser.BuilderTypeContext):
+        pass
+
+    # Exit a parse tree produced by DescParser#builderType.
+    def exitBuilderType(self, ctx:DescParser.BuilderTypeContext):
+        pass
+
+
     # Enter a parse tree produced by DescParser#deployTo.
     def enterDeployTo(self, ctx:DescParser.DeployToContext):
         pass
@@ -68,33 +122,6 @@ class DescListener(ParseTreeListener):
 
     # Exit a parse tree produced by DescParser#pathFrom.
     def exitPathFrom(self, ctx:DescParser.PathFromContext):
-        pass
-
-
-    # Enter a parse tree produced by DescParser#setBranch.
-    def enterSetBranch(self, ctx:DescParser.SetBranchContext):
-        pass
-
-    # Exit a parse tree produced by DescParser#setBranch.
-    def exitSetBranch(self, ctx:DescParser.SetBranchContext):
-        pass
-
-
-    # Enter a parse tree produced by DescParser#setRepoSource.
-    def enterSetRepoSource(self, ctx:DescParser.SetRepoSourceContext):
-        pass
-
-    # Exit a parse tree produced by DescParser#setRepoSource.
-    def exitSetRepoSource(self, ctx:DescParser.SetRepoSourceContext):
-        pass
-
-
-    # Enter a parse tree produced by DescParser#host.
-    def enterHost(self, ctx:DescParser.HostContext):
-        pass
-
-    # Exit a parse tree produced by DescParser#host.
-    def exitHost(self, ctx:DescParser.HostContext):
         pass
 
 

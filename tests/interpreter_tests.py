@@ -16,6 +16,7 @@ class InterpreterTest(unittest.TestCase):
         self._git_service = Mock()
         self._deploy_service = Mock()
         self._system_service = Mock()
+        self._builder_service = Mock()
         self._script_interpreter = TauDeployScriptInterpreter()
 
     def walk(self, filename, processor):
@@ -34,6 +35,7 @@ class InterpreterTest(unittest.TestCase):
         processor._deploy_service = self._deploy_service
         processor._git_service = self._git_service
         processor._system_service = self._system_service
+        processor._builder_service = self._builder_service
         self._git_service.clone.return_value = self.TMP_PATH
         return processor
 
@@ -129,6 +131,21 @@ class InterpreterTest(unittest.TestCase):
                                                        '', exclude=None, pattern=None)
         self._system_service.startService.assert_called_once()
         self._system_service.stopService.assert_called_once()
+
+    def test_open_with_start_stop_and_build(self):
+        processor = self.build_processor("develop", "")
+        self.walk('open_with_start_stop_and_build.desc', processor)
+
+        self.assertEqual('develop', processor._current_branch)
+        self.assertEqual(self.GIT_HOST, processor._repo_host)
+        self.assertEqual(0, len(processor.scope_stack))
+        self._git_service.clone.assert_called_once()
+        self._git_service.clone.assert_called_with(self.REPO_PATH, self.GIT_HOST)
+        self._deploy_service.deploy.assert_not_called()
+        self._system_service.startService.assert_called_once()
+        self._system_service.stopService.assert_called_once()
+        self._builder_service.build.assert_called_once()
+        self._builder_service.build.assert_called_with("java17", "gradle", self.TMP_PATH)
 
 
 if __name__ == '__main__':

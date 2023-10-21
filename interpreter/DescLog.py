@@ -5,7 +5,7 @@ import os
 class DescLog:
 
     def __init__(self, path=None):
-        log_home = os.environ["PYQUEUE_LOG_HOME"]
+        log_home = os.environ.get("PYQUEUE_LOG_HOME")
         if path is not None:
             filepath = f"{path}/desc.log"
         elif log_home is not None:

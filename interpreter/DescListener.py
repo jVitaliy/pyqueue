@@ -224,5 +224,14 @@ class DescListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by DescParser#pathChars.
+    def enterPathChars(self, ctx:DescParser.PathCharsContext):
+        pass
+
+    # Exit a parse tree produced by DescParser#pathChars.
+    def exitPathChars(self, ctx:DescParser.PathCharsContext):
+        pass
+
+
 
 del DescParser

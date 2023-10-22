@@ -12,7 +12,7 @@ cmd : setBranch
 
 setBranch : BRANCH '(' branchName ')';
 setRepoSource : REPO_HOST '(' host ')';
-host : (namingChars+ '.')* namingChars+;
+host : (namingChars+ DOT)* namingChars+;
 
 buildProject : BUILD_PROJECT '(' projectLanguage COMMA builderType')';
 projectLanguage : LANGUAGE '=' (JAVA17 | NEXT | PYTHON39);
@@ -31,16 +31,17 @@ pathFrom : 'from=' pathForDeploy;
 
 cloneGitToTmp : OPEN_GIT_REPO_LOCALLY '(' (repoPath  (COMMA repoAliasName)?)? ')';
 closeGitRepo : CLOSE_GIT_REPO '(' repoAliasName? ')';
-repoPath: namingChars+ ;
-pathForDeploy : ( namingChars | '/')+ ;
-pattern : (namingChars | '*' | '.' ) +;
+repoPath: (pathChars | DOT)+ ;
+pathForDeploy : pathChars+ ;
+pattern : (namingChars | '*' | DOT ) +;
 branchName : namingChars+ ;
 startSystemService : START_SYSTEM_SERVICE '(' serviceName ')';
 stopSystemService : STOP_SYSTEM_SERVICE '(' serviceName ')';
 serviceName : namingChars+;
 repoAliasName : namingChars+ ;
 namingChars: NUM | CHARS | '-' | '_' ;
-
+pathChars : namingChars | '/' ;
+DOT : '.';
 GRADLE : 'gradle';
 MAVEN : 'maven';
 JAVA17 : 'java17';

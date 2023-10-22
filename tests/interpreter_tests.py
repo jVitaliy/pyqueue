@@ -1,6 +1,6 @@
 import os
 import unittest
-from unittest.mock import Mock
+from unittest.mock import Mock, call
 
 from interpreter.DescProcessor import DescProcessor
 from interpreter.TauDeployScriptInterpreter import TauDeployScriptInterpreter
@@ -10,6 +10,7 @@ class InterpreterTest(unittest.TestCase):
     GIT_HOST = 'git.tauproject.com'
     REPO_PATH = 'tauproject/alcyone-pdm/queue-scripts.git'
     TMP_PATH = '/tmp/tauproject/alcyone-pdm/queue-scripts'
+    TMP_PATH_CONF = '/tmp/tauproject/alcyone-pdm/config'
 
     def __init__(self, methodName='runTest'):
         super().__init__(methodName)
@@ -36,7 +37,9 @@ class InterpreterTest(unittest.TestCase):
         processor._git_service = self._git_service
         processor._system_service = self._system_service
         processor._builder_service = self._builder_service
-        self._git_service.clone.return_value = self.TMP_PATH
+        paths = [self.TMP_PATH, self.TMP_PATH_CONF]
+        self._git_service.clone.side_effect = paths
+
         return processor
 
     def test_branch(self):
@@ -147,6 +150,29 @@ class InterpreterTest(unittest.TestCase):
         self._system_service.stopService.assert_called_once()
         self._builder_service.build.assert_called_once()
         self._builder_service.build.assert_called_with("java17", "gradle", f"{self.TMP_PATH}/test-pro")
+
+    def test_deploy_with_nested_scopes(self):
+        processor = self.build_processor("develop", "")
+        repo_names = ["test-pro", "test-conf"]
+        self._git_service.getRepoName.side_effect = repo_names
+
+        self.walk('open_2_scopes.desc', processor)
+
+        self.assertEqual('develop', processor._current_branch)
+        self.assertEqual(self.GIT_HOST, processor._repo_host)
+        self.assertEqual(0, len(processor.scope_stack))
+        self._git_service.clone.assert_has_calls([call(self.REPO_PATH, self.GIT_HOST),
+                                                  call("path/to/config.git", self.GIT_HOST)])
+        self._deploy_service.deploy.assert_has_calls(
+            [
+                call(f"{self.TMP_PATH}/", "/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy",
+                    exclude=None, pattern=None),
+                call(f"{self.TMP_PATH_CONF}/", "/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy/cfg",
+                     exclude=None, pattern=['*.yml'])
+            ])
+        self._system_service.startService.assert_called_once()
+        self._git_service.removeFolder.assert_has_calls([call(self.TMP_PATH_CONF), call(self.TMP_PATH)])
+        self._system_service.stopService.assert_called_once()
 
 
 if __name__ == '__main__':

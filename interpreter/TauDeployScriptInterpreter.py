@@ -18,7 +18,7 @@ class TauDeployScriptInterpreter:
             print("syntax errors")
             return None
         else:
-            processor = DescProcessor(branch, project_name, repo_path=repo_path)
+            processor = DescProcessor(branch, repo_path=repo_path)
             walker = ParseTreeWalker()
             walker.walk(processor, tree)
             return processor

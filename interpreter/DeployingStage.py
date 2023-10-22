@@ -44,6 +44,10 @@ class DeployingStage(ConfiguringStage):
 
         # self._deploy_service = DeployService()
         current_repo_data = self.scope_stack[len(self.scope_stack) - 1]
-        path_from = f"{current_repo_data['tmp_folder']}/{self._project_name}" if 'path_from' not in self._deploy_data.keys() \
-            else f"{current_repo_data['tmp_folder']}/{self._project_name}/{self._deploy_data['path_from']}"
-        self._deploy_service.deploy(path_from, self._deploy_data['path'], exclude=excluded, pattern=pattern)
+        project_name = current_repo_data["project_name"]
+        path_from = f"{current_repo_data['tmp_folder']}/{project_name}" \
+            if 'path_from' not in self._deploy_data.keys() \
+            else f"{current_repo_data['tmp_folder']}/{project_name}/{self._deploy_data['path_from']}"
+        is_merge = False if ctx.MERGE() is None else True
+        self._deploy_service.deploy(path_from, self._deploy_data['path'], exclude=excluded, pattern=pattern,
+                                    is_merge=is_merge)

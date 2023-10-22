@@ -20,6 +20,7 @@ class InterpreterTest(unittest.TestCase):
         interpreter.start_walking_with_processor(tree_and_parser[1], processor)
 
     @unittest.skip("skip due to not ready infrastructure")
+    # TODO fix DescProcessor
     def test_minimal_script(self):
         processor = DescProcessor('tauproject/alcyone-pdm/queue-scripts.git')
         self.walk('minimal_to_clone.desc', processor)
@@ -29,6 +30,7 @@ class InterpreterTest(unittest.TestCase):
         self.assertEqual(0, len(processor.scope_stack))
 
     @unittest.skip("skip due to not ready infrastructure")
+    # TODO fix DescProcessor
     def test_minimal_script_with_commented_close(self):
         processor = DescProcessor('tauproject/alcyone-pdm/queue-scripts.git')
         self.walk('minimal_to_clone_with_commented_close.desc', processor)
@@ -44,7 +46,7 @@ class InterpreterTest(unittest.TestCase):
 
     @unittest.skip("skip due to not ready infrastructure")
     def test_minimal_with_deploy(self):
-        processor = DescProcessor('develop', 'queue-scripts', 'tauproject/alcyone-pdm/queue-scripts.git')
+        processor = DescProcessor('develop', 'tauproject/alcyone-pdm/queue-scripts.git')
         self.walk('minimal_to_clone_and_deploy.desc', processor)
 
         self.assertEqual('develop', processor._current_branch)
@@ -53,7 +55,7 @@ class InterpreterTest(unittest.TestCase):
 
     @unittest.skip("skip due to not ready infrastructure")
     def test_minimal_with_deploy_and_exclude(self):
-        processor = DescProcessor('develop', 'queue-scripts', 'tauproject/alcyone-pdm/queue-scripts.git')
+        processor = DescProcessor('develop', 'tauproject/alcyone-pdm/queue-scripts.git')
         self.walk('minimal_to_clone_and_deploy_with_exclude.desc', processor)
 
         self.assertEqual('develop', processor._current_branch)
@@ -64,6 +66,15 @@ class InterpreterTest(unittest.TestCase):
     def test_minimal_with_deploy_from(self):
         processor = DescProcessor('develop', 'tauproject/alcyone-pdm/queue-scripts.git')
         self.walk('minimal_to_clone_and_deploy_from.desc', processor)
+
+        self.assertEqual('develop', processor._current_branch)
+        self.assertEqual('git.tauproject.com', processor._repo_host)
+        self.assertEqual(0, len(processor.scope_stack))
+
+    @unittest.skipIf(True, "skip due to not ready infrastructure")
+    def test_deploy_merge(self):
+        processor = DescProcessor('develop', 'tauproject/alcyone-pdm/queue-scripts.git')
+        self.walk('deploy_with_merge.desc', processor)
 
         self.assertEqual('develop', processor._current_branch)
         self.assertEqual('git.tauproject.com', processor._repo_host)

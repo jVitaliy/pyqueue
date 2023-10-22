@@ -23,9 +23,12 @@ class InitStage(Init):
 
         self._repo_data = None
         repo_obj['tmp_folder'] = self._git_service.clone(repo_obj['path'], self._repo_host)
-        self._git_service.checkout(self._current_branch, repo_obj['tmp_folder'])
         repo_obj['project_name'] = self._git_service.getRepoName(repo_obj['path'])
-        logging.info(f"cloned repo {repo_obj['project_name']} to tmp folder {repo_obj['tmp_folder']} and checkout to {self._current_branch}")
+        git_repo_path = f"{repo_obj['tmp_folder']}/{repo_obj['project_name']}"
+        self._git_service.checkout(self._current_branch, git_repo_path)
+        logging.info(f"checkout to {self._current_branch} in tmp folder {git_repo_path}")
+
+        logging.info(f"cloned repo {repo_obj['project_name']} to tmp folder {repo_obj['tmp_folder']}")
         self.scope_stack.append(repo_obj)
 
     def exitRepoPath(self, ctx: DescParser.RepoPathContext):

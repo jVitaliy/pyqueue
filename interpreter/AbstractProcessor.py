@@ -8,10 +8,9 @@ from interpreter.services.SystemService import SystemService
 
 class AbstractProcessor(DescListener):
 
-    def __init__(self, branch, project_name, repo_path=None):
+    def __init__(self, branch, repo_path=None):
         self._current_branch = None
         self._target_branch = branch
-        self._project_name = project_name
         self._repo_host = None
         self.scope_stack = list()
         self._initial_repo_path = repo_path

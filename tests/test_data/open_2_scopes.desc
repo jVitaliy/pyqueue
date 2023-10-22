@@ -5,7 +5,7 @@ stopSystemService(www-service);
 deployTo(/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy);
 
 openGitRepoLocally(path/to/config.git, config);
-deployTo(/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy/cfg, pattern=*.yml);
+deployTo(/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy/cfg, pattern=*.yml, merge);
 closeGitRepo();
 
 startSystemService(www-service);

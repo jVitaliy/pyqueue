@@ -22,7 +22,8 @@ deployTo : DEPLOY_TO '(' (pathFrom ',')? pathForDeployTo (
                     | (COMMA deployPattern)
                     | (COMMA deployPattern ',' excludePattern)
                     | (COMMA excludePattern ',' deployPattern)
-                     )?  ')';
+                     )?
+                     (COMMA MERGE)?')';
 excludePattern : 'exclude=' pattern ('|' pattern)*;
 deployPattern : 'pattern=' pattern ('|' pattern)*;
 pathForDeployTo : pathForDeploy;
@@ -41,6 +42,7 @@ serviceName : namingChars+;
 repoAliasName : namingChars+ ;
 namingChars: NUM | CHARS | '-' | '_' ;
 pathChars : namingChars | '/' ;
+MERGE : 'merge';
 DOT : '.';
 GRADLE : 'gradle';
 MAVEN : 'maven';

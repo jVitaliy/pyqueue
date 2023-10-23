@@ -60,10 +60,12 @@ class RequestFilesProcessor:
         DescLog()
         logging.info(f"start scanning {self._queue_folder}")
         try:
-            pattern = re.compile("\*\.git$")
+            pattern = re.compile(r'[a-z\.]*\.git$')
             for root, dirs, files in os.walk(self._queue_folder):
                 for filename in files:
-                    if re.findall(pattern, filename) is not None:
+                    match = pattern.search(filename)
+                    print(f"{filename} {match}")
+                    if match:
                         self.processFile(root, filename)
         except GitBranchException as gite:
             logging.error(f"error: {gite}")

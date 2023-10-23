@@ -60,5 +60,22 @@ class InterpreterTest(unittest.TestCase):
         self.interpreter.start_walking.assert_called_once()
 
 
+    def test_develop_ui_git_queue_with_script(self):
+
+        queue_folder = os.environ["PYQUEUE_QUEUE_FOLDER"]
+        script_folder = os.environ["PYQUEUE_SCRIPT_FOLDER"]
+        if os.path.exists(f"{script_folder}/ui.desc"):
+            os.remove(f"{script_folder}/ui.desc")
+        with open(f"{queue_folder}/develop.ui.git.queue", 'w') as file:
+            file.write(f"path:ui.git\n")
+            file.write(f"branch:develop\n")
+        script_folder = os.environ["PYQUEUE_SCRIPT_FOLDER"]
+        with open(f"{script_folder}/ui.desc", 'w') as file:
+            file.write(f"branch(develop);\n")
+
+        processor = self.build_processor()
+        processor.start()
+        self.interpreter.start_walking.assert_not_called()
+
 if __name__ == '__main__':
     unittest.main()

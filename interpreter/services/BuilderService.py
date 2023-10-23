@@ -11,7 +11,7 @@ class BuilderService(AbstractExternalShellCmd):
         if language == "java17" and builder == "gradle":
             self.java17GradleBuild(folder)
         elif language == "next" and builder == "npm":
-            self.nestNpmBuild(folder)
+            self.nextNpmBuild(folder)
 
     def java17GradleBuild(self, folder):
         self.shell_command = f"{folder}/gradlew build"

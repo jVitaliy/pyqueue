@@ -1,10 +1,10 @@
 grammar Desc;
-script : setBranch setRepoSource gitRepoScope* EOF;
-gitRepoScope : cloneGitToTmp (scopeCmds)* closeGitRepo;
-scopeCmds : deployTo
-    | startSystemService
-    | stopSystemService
-    | buildProject
+script : (setBranch SEMICOLON) (setRepoSource SEMICOLON) gitRepoScope* EOF;
+gitRepoScope : (cloneGitToTmp SEMICOLON)  scopeCmds* (closeGitRepo SEMICOLON);
+scopeCmds : (deployTo SEMICOLON)
+    | (startSystemService SEMICOLON)
+    | (stopSystemService SEMICOLON)
+    | (buildProject SEMICOLON)
     | gitRepoScope
     ;
 
@@ -53,6 +53,7 @@ NPM : 'npm';
 
 LANGUAGE : 'language';
 COMMA : ',';
+SEMICOLON : ';';
 BUILD_PROJECT: 'buildProject';
 START_SYSTEM_SERVICE : 'startSystemService';
 STOP_SYSTEM_SERVICE : 'stopSystemService';

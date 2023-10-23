@@ -171,6 +171,27 @@ class InterpreterTest(unittest.TestCase):
         self._git_service.removeFolder.assert_has_calls([call(self.TMP_PATH_CONF), call(self.TMP_PATH)])
         self._system_service.stopService.assert_called_once()
 
+    def test_deploy_with_build_in_deploy_dir(self):
+        processor = self.build_processor("develop")
+
+        self.walk('ui_with_build_in_deploy_dir.desc', processor)
+
+        self.assertEqual('develop', processor._current_branch)
+        self.assertEqual(self.GIT_HOST, processor._repo_host)
+        self.assertEqual(0, len(processor.scope_stack))
+        self._git_service.clone.assert_has_calls([call(self.REPO_PATH, self.GIT_HOST),
+                                                  call("tauproject/tau-config.git", self.GIT_HOST)])
+        self._deploy_service.deploy.assert_has_calls(
+            [
+                call(f"{self.TMP_PATH}/test-pro", "/var/www/tauproject/develop",
+                    exclude=['.git', '.gitignore'], pattern=None, is_merge=False),
+                call(f"{self.TMP_PATH_CONF}/test-conf/ui", "/var/www/tauproject/develop",
+                     exclude=None, pattern=['.env'], is_merge=True)
+            ])
+        self._system_service.startService.assert_called_once()
+        self._git_service.removeFolder.assert_has_calls([call(self.TMP_PATH_CONF), call(self.TMP_PATH)])
+        self._system_service.stopService.assert_called_once()
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -1,0 +1,14 @@
+branch(develop);
+repoHost(git.tauproject.com);
+openGitRepoLocally();
+stopSystemService(www-tauproject-develop);
+
+deployTo(/var/www/tauproject/develop, exclude=.git|.gitignore);
+
+openGitRepoLocally(tauproject/tau-config.git, config);
+deployTo(from=ui, /var/www/tauproject/develop, pattern=.env, merge);
+closeGitRepo();
+
+buildProject(language=next, type=npm, dir=/var/www/tauproject/develop);
+startSystemService(www-tauproject-develop);
+closeGitRepo();

@@ -10,7 +10,7 @@ class BuilderService(AbstractExternalShellCmd):
 
         if language == "java17" and builder == "gradle":
             self.java17GradleBuild(folder)
-        elif language == "nest" and builder == "npm":
+        elif language == "next" and builder == "npm":
             self.nestNpmBuild(folder)
 
     def java17GradleBuild(self, folder):
@@ -20,7 +20,7 @@ class BuilderService(AbstractExternalShellCmd):
             raise BuildServiceException(f"Java17/Gradle error - {self.error}")
         logging.info("build Java17/Gradle succeeded")
 
-    def nestNpmBuild(self, folder):
+    def nextNpmBuild(self, folder):
         self.shell_command = "/usr/bin/npm install"
         self.execute(folder)
         self.shell_command = "/usr/bin/npm run build"

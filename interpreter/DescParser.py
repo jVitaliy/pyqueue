@@ -10,98 +10,99 @@ else:
 
 def serializedATN():
     return [
-        4,1,36,267,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
+        4,1,36,271,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
         6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,
         2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,2,18,7,18,2,19,7,19,2,20,
         7,20,2,21,7,21,2,22,7,22,2,23,7,23,2,24,7,24,2,25,7,25,2,26,7,26,
-        1,0,1,0,1,0,1,0,1,0,1,0,1,0,5,0,62,8,0,10,0,12,0,65,9,0,1,0,1,0,
-        1,1,1,1,1,1,1,1,5,1,73,8,1,10,1,12,1,76,9,1,1,1,1,1,1,1,1,2,1,2,
-        1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,3,2,94,8,2,1,3,1,3,1,
-        3,1,3,1,3,1,4,1,4,1,4,1,4,1,4,1,5,4,5,107,8,5,11,5,12,5,108,1,5,
-        1,5,5,5,113,8,5,10,5,12,5,116,9,5,1,5,4,5,119,8,5,11,5,12,5,120,
-        1,6,1,6,1,6,1,6,1,6,1,6,1,6,3,6,130,8,6,1,6,1,6,1,7,1,7,1,7,1,7,
-        1,8,1,8,1,8,1,9,1,9,4,9,143,8,9,11,9,12,9,144,1,10,1,10,1,10,1,10,
-        1,10,3,10,152,8,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,1,10,
-        1,10,1,10,1,10,1,10,1,10,1,10,3,10,169,8,10,1,10,1,10,3,10,173,8,
-        10,1,10,1,10,1,11,1,11,1,11,1,11,5,11,181,8,11,10,11,12,11,184,9,
-        11,1,12,1,12,1,12,1,12,5,12,190,8,12,10,12,12,12,193,9,12,1,13,1,
-        13,1,14,1,14,1,14,1,15,1,15,1,15,1,15,1,15,3,15,205,8,15,3,15,207,
-        8,15,1,15,1,15,1,16,1,16,1,16,3,16,214,8,16,1,16,1,16,1,17,1,17,
-        4,17,220,8,17,11,17,12,17,221,1,18,4,18,225,8,18,11,18,12,18,226,
-        1,19,1,19,1,19,4,19,232,8,19,11,19,12,19,233,1,20,4,20,237,8,20,
-        11,20,12,20,238,1,21,1,21,1,21,1,21,1,21,1,22,1,22,1,22,1,22,1,22,
-        1,23,4,23,252,8,23,11,23,12,23,253,1,24,4,24,257,8,24,11,24,12,24,
-        258,1,25,1,25,1,26,1,26,3,26,265,8,26,1,26,0,0,27,0,2,4,6,8,10,12,
-        14,16,18,20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,0,3,
-        1,0,18,20,2,0,16,17,21,21,2,0,11,12,33,34,271,0,54,1,0,0,0,2,68,
-        1,0,0,0,4,93,1,0,0,0,6,95,1,0,0,0,8,100,1,0,0,0,10,114,1,0,0,0,12,
-        122,1,0,0,0,14,133,1,0,0,0,16,137,1,0,0,0,18,140,1,0,0,0,20,146,
-        1,0,0,0,22,176,1,0,0,0,24,185,1,0,0,0,26,194,1,0,0,0,28,196,1,0,
-        0,0,30,199,1,0,0,0,32,210,1,0,0,0,34,219,1,0,0,0,36,224,1,0,0,0,
-        38,231,1,0,0,0,40,236,1,0,0,0,42,240,1,0,0,0,44,245,1,0,0,0,46,251,
-        1,0,0,0,48,256,1,0,0,0,50,260,1,0,0,0,52,264,1,0,0,0,54,55,3,6,3,
-        0,55,56,5,24,0,0,56,57,1,0,0,0,57,58,3,8,4,0,58,59,5,24,0,0,59,63,
-        1,0,0,0,60,62,3,2,1,0,61,60,1,0,0,0,62,65,1,0,0,0,63,61,1,0,0,0,
-        63,64,1,0,0,0,64,66,1,0,0,0,65,63,1,0,0,0,66,67,5,0,0,1,67,1,1,0,
-        0,0,68,69,3,30,15,0,69,70,5,24,0,0,70,74,1,0,0,0,71,73,3,4,2,0,72,
-        71,1,0,0,0,73,76,1,0,0,0,74,72,1,0,0,0,74,75,1,0,0,0,75,77,1,0,0,
-        0,76,74,1,0,0,0,77,78,3,32,16,0,78,79,5,24,0,0,79,3,1,0,0,0,80,81,
-        3,20,10,0,81,82,5,24,0,0,82,94,1,0,0,0,83,84,3,42,21,0,84,85,5,24,
-        0,0,85,94,1,0,0,0,86,87,3,44,22,0,87,88,5,24,0,0,88,94,1,0,0,0,89,
-        90,3,12,6,0,90,91,5,24,0,0,91,94,1,0,0,0,92,94,3,2,1,0,93,80,1,0,
-        0,0,93,83,1,0,0,0,93,86,1,0,0,0,93,89,1,0,0,0,93,92,1,0,0,0,94,5,
-        1,0,0,0,95,96,5,28,0,0,96,97,5,1,0,0,97,98,3,40,20,0,98,99,5,2,0,
-        0,99,7,1,0,0,0,100,101,5,30,0,0,101,102,5,1,0,0,102,103,3,10,5,0,
-        103,104,5,2,0,0,104,9,1,0,0,0,105,107,3,50,25,0,106,105,1,0,0,0,
-        107,108,1,0,0,0,108,106,1,0,0,0,108,109,1,0,0,0,109,110,1,0,0,0,
-        110,111,5,15,0,0,111,113,1,0,0,0,112,106,1,0,0,0,113,116,1,0,0,0,
-        114,112,1,0,0,0,114,115,1,0,0,0,115,118,1,0,0,0,116,114,1,0,0,0,
-        117,119,3,50,25,0,118,117,1,0,0,0,119,120,1,0,0,0,120,118,1,0,0,
-        0,120,121,1,0,0,0,121,11,1,0,0,0,122,123,5,25,0,0,123,124,5,1,0,
-        0,124,125,3,14,7,0,125,126,5,23,0,0,126,129,3,16,8,0,127,128,5,23,
-        0,0,128,130,3,18,9,0,129,127,1,0,0,0,129,130,1,0,0,0,130,131,1,0,
-        0,0,131,132,5,2,0,0,132,13,1,0,0,0,133,134,5,22,0,0,134,135,5,3,
-        0,0,135,136,7,0,0,0,136,15,1,0,0,0,137,138,5,4,0,0,138,139,7,1,0,
-        0,139,17,1,0,0,0,140,142,5,5,0,0,141,143,3,52,26,0,142,141,1,0,0,
-        0,143,144,1,0,0,0,144,142,1,0,0,0,144,145,1,0,0,0,145,19,1,0,0,0,
-        146,147,5,29,0,0,147,151,5,1,0,0,148,149,3,28,14,0,149,150,5,23,
-        0,0,150,152,1,0,0,0,151,148,1,0,0,0,151,152,1,0,0,0,152,153,1,0,
-        0,0,153,168,3,26,13,0,154,155,5,23,0,0,155,169,3,22,11,0,156,157,
-        5,23,0,0,157,169,3,24,12,0,158,159,5,23,0,0,159,160,3,24,12,0,160,
-        161,5,23,0,0,161,162,3,22,11,0,162,169,1,0,0,0,163,164,5,23,0,0,
-        164,165,3,22,11,0,165,166,5,23,0,0,166,167,3,24,12,0,167,169,1,0,
-        0,0,168,154,1,0,0,0,168,156,1,0,0,0,168,158,1,0,0,0,168,163,1,0,
-        0,0,168,169,1,0,0,0,169,172,1,0,0,0,170,171,5,23,0,0,171,173,5,14,
-        0,0,172,170,1,0,0,0,172,173,1,0,0,0,173,174,1,0,0,0,174,175,5,2,
-        0,0,175,21,1,0,0,0,176,177,5,6,0,0,177,182,3,38,19,0,178,179,5,7,
-        0,0,179,181,3,38,19,0,180,178,1,0,0,0,181,184,1,0,0,0,182,180,1,
-        0,0,0,182,183,1,0,0,0,183,23,1,0,0,0,184,182,1,0,0,0,185,186,5,8,
-        0,0,186,191,3,38,19,0,187,188,5,7,0,0,188,190,3,38,19,0,189,187,
-        1,0,0,0,190,193,1,0,0,0,191,189,1,0,0,0,191,192,1,0,0,0,192,25,1,
-        0,0,0,193,191,1,0,0,0,194,195,3,36,18,0,195,27,1,0,0,0,196,197,5,
-        9,0,0,197,198,3,36,18,0,198,29,1,0,0,0,199,200,5,31,0,0,200,206,
-        5,1,0,0,201,204,3,34,17,0,202,203,5,23,0,0,203,205,3,48,24,0,204,
-        202,1,0,0,0,204,205,1,0,0,0,205,207,1,0,0,0,206,201,1,0,0,0,206,
-        207,1,0,0,0,207,208,1,0,0,0,208,209,5,2,0,0,209,31,1,0,0,0,210,211,
-        5,32,0,0,211,213,5,1,0,0,212,214,3,48,24,0,213,212,1,0,0,0,213,214,
-        1,0,0,0,214,215,1,0,0,0,215,216,5,2,0,0,216,33,1,0,0,0,217,220,3,
-        52,26,0,218,220,5,15,0,0,219,217,1,0,0,0,219,218,1,0,0,0,220,221,
-        1,0,0,0,221,219,1,0,0,0,221,222,1,0,0,0,222,35,1,0,0,0,223,225,3,
-        52,26,0,224,223,1,0,0,0,225,226,1,0,0,0,226,224,1,0,0,0,226,227,
-        1,0,0,0,227,37,1,0,0,0,228,232,3,50,25,0,229,232,5,10,0,0,230,232,
-        5,15,0,0,231,228,1,0,0,0,231,229,1,0,0,0,231,230,1,0,0,0,232,233,
-        1,0,0,0,233,231,1,0,0,0,233,234,1,0,0,0,234,39,1,0,0,0,235,237,3,
-        50,25,0,236,235,1,0,0,0,237,238,1,0,0,0,238,236,1,0,0,0,238,239,
-        1,0,0,0,239,41,1,0,0,0,240,241,5,26,0,0,241,242,5,1,0,0,242,243,
-        3,46,23,0,243,244,5,2,0,0,244,43,1,0,0,0,245,246,5,27,0,0,246,247,
-        5,1,0,0,247,248,3,46,23,0,248,249,5,2,0,0,249,45,1,0,0,0,250,252,
-        3,50,25,0,251,250,1,0,0,0,252,253,1,0,0,0,253,251,1,0,0,0,253,254,
-        1,0,0,0,254,47,1,0,0,0,255,257,3,50,25,0,256,255,1,0,0,0,257,258,
-        1,0,0,0,258,256,1,0,0,0,258,259,1,0,0,0,259,49,1,0,0,0,260,261,7,
-        2,0,0,261,51,1,0,0,0,262,265,3,50,25,0,263,265,5,13,0,0,264,262,
-        1,0,0,0,264,263,1,0,0,0,265,53,1,0,0,0,25,63,74,93,108,114,120,129,
-        144,151,168,172,182,191,204,206,213,219,221,226,231,233,238,253,
-        258,264
+        2,27,7,27,1,0,1,0,1,0,1,0,1,0,1,0,1,0,5,0,64,8,0,10,0,12,0,67,9,
+        0,1,0,1,0,1,1,1,1,1,1,1,1,5,1,75,8,1,10,1,12,1,78,9,1,1,1,1,1,1,
+        1,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,1,2,3,2,96,8,2,
+        1,3,1,3,1,3,1,3,1,3,1,4,1,4,1,4,1,4,1,4,1,5,4,5,109,8,5,11,5,12,
+        5,110,1,5,1,5,5,5,115,8,5,10,5,12,5,118,9,5,1,5,4,5,121,8,5,11,5,
+        12,5,122,1,6,1,6,1,6,1,6,1,6,1,6,1,6,3,6,132,8,6,1,6,1,6,1,7,1,7,
+        1,7,1,7,1,8,1,8,1,8,1,9,1,9,1,9,1,10,4,10,147,8,10,11,10,12,10,148,
+        1,11,1,11,1,11,1,11,1,11,3,11,156,8,11,1,11,1,11,1,11,1,11,1,11,
+        1,11,1,11,1,11,1,11,1,11,1,11,1,11,1,11,1,11,1,11,3,11,173,8,11,
+        1,11,1,11,3,11,177,8,11,1,11,1,11,1,12,1,12,1,12,1,12,5,12,185,8,
+        12,10,12,12,12,188,9,12,1,13,1,13,1,13,1,13,5,13,194,8,13,10,13,
+        12,13,197,9,13,1,14,1,14,1,15,1,15,1,15,1,16,1,16,1,16,1,16,1,16,
+        3,16,209,8,16,3,16,211,8,16,1,16,1,16,1,17,1,17,1,17,3,17,218,8,
+        17,1,17,1,17,1,18,1,18,4,18,224,8,18,11,18,12,18,225,1,19,4,19,229,
+        8,19,11,19,12,19,230,1,20,1,20,1,20,4,20,236,8,20,11,20,12,20,237,
+        1,21,4,21,241,8,21,11,21,12,21,242,1,22,1,22,1,22,1,22,1,22,1,23,
+        1,23,1,23,1,23,1,23,1,24,4,24,256,8,24,11,24,12,24,257,1,25,4,25,
+        261,8,25,11,25,12,25,262,1,26,1,26,1,27,1,27,3,27,269,8,27,1,27,
+        0,0,28,0,2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40,
+        42,44,46,48,50,52,54,0,3,1,0,18,20,2,0,16,17,21,21,2,0,11,12,33,
+        34,274,0,56,1,0,0,0,2,70,1,0,0,0,4,95,1,0,0,0,6,97,1,0,0,0,8,102,
+        1,0,0,0,10,116,1,0,0,0,12,124,1,0,0,0,14,135,1,0,0,0,16,139,1,0,
+        0,0,18,142,1,0,0,0,20,146,1,0,0,0,22,150,1,0,0,0,24,180,1,0,0,0,
+        26,189,1,0,0,0,28,198,1,0,0,0,30,200,1,0,0,0,32,203,1,0,0,0,34,214,
+        1,0,0,0,36,223,1,0,0,0,38,228,1,0,0,0,40,235,1,0,0,0,42,240,1,0,
+        0,0,44,244,1,0,0,0,46,249,1,0,0,0,48,255,1,0,0,0,50,260,1,0,0,0,
+        52,264,1,0,0,0,54,268,1,0,0,0,56,57,3,6,3,0,57,58,5,24,0,0,58,59,
+        1,0,0,0,59,60,3,8,4,0,60,61,5,24,0,0,61,65,1,0,0,0,62,64,3,2,1,0,
+        63,62,1,0,0,0,64,67,1,0,0,0,65,63,1,0,0,0,65,66,1,0,0,0,66,68,1,
+        0,0,0,67,65,1,0,0,0,68,69,5,0,0,1,69,1,1,0,0,0,70,71,3,32,16,0,71,
+        72,5,24,0,0,72,76,1,0,0,0,73,75,3,4,2,0,74,73,1,0,0,0,75,78,1,0,
+        0,0,76,74,1,0,0,0,76,77,1,0,0,0,77,79,1,0,0,0,78,76,1,0,0,0,79,80,
+        3,34,17,0,80,81,5,24,0,0,81,3,1,0,0,0,82,83,3,22,11,0,83,84,5,24,
+        0,0,84,96,1,0,0,0,85,86,3,44,22,0,86,87,5,24,0,0,87,96,1,0,0,0,88,
+        89,3,46,23,0,89,90,5,24,0,0,90,96,1,0,0,0,91,92,3,12,6,0,92,93,5,
+        24,0,0,93,96,1,0,0,0,94,96,3,2,1,0,95,82,1,0,0,0,95,85,1,0,0,0,95,
+        88,1,0,0,0,95,91,1,0,0,0,95,94,1,0,0,0,96,5,1,0,0,0,97,98,5,28,0,
+        0,98,99,5,1,0,0,99,100,3,42,21,0,100,101,5,2,0,0,101,7,1,0,0,0,102,
+        103,5,30,0,0,103,104,5,1,0,0,104,105,3,10,5,0,105,106,5,2,0,0,106,
+        9,1,0,0,0,107,109,3,52,26,0,108,107,1,0,0,0,109,110,1,0,0,0,110,
+        108,1,0,0,0,110,111,1,0,0,0,111,112,1,0,0,0,112,113,5,15,0,0,113,
+        115,1,0,0,0,114,108,1,0,0,0,115,118,1,0,0,0,116,114,1,0,0,0,116,
+        117,1,0,0,0,117,120,1,0,0,0,118,116,1,0,0,0,119,121,3,52,26,0,120,
+        119,1,0,0,0,121,122,1,0,0,0,122,120,1,0,0,0,122,123,1,0,0,0,123,
+        11,1,0,0,0,124,125,5,25,0,0,125,126,5,1,0,0,126,127,3,14,7,0,127,
+        128,5,23,0,0,128,131,3,16,8,0,129,130,5,23,0,0,130,132,3,18,9,0,
+        131,129,1,0,0,0,131,132,1,0,0,0,132,133,1,0,0,0,133,134,5,2,0,0,
+        134,13,1,0,0,0,135,136,5,22,0,0,136,137,5,3,0,0,137,138,7,0,0,0,
+        138,15,1,0,0,0,139,140,5,4,0,0,140,141,7,1,0,0,141,17,1,0,0,0,142,
+        143,5,5,0,0,143,144,3,20,10,0,144,19,1,0,0,0,145,147,3,54,27,0,146,
+        145,1,0,0,0,147,148,1,0,0,0,148,146,1,0,0,0,148,149,1,0,0,0,149,
+        21,1,0,0,0,150,151,5,29,0,0,151,155,5,1,0,0,152,153,3,30,15,0,153,
+        154,5,23,0,0,154,156,1,0,0,0,155,152,1,0,0,0,155,156,1,0,0,0,156,
+        157,1,0,0,0,157,172,3,28,14,0,158,159,5,23,0,0,159,173,3,24,12,0,
+        160,161,5,23,0,0,161,173,3,26,13,0,162,163,5,23,0,0,163,164,3,26,
+        13,0,164,165,5,23,0,0,165,166,3,24,12,0,166,173,1,0,0,0,167,168,
+        5,23,0,0,168,169,3,24,12,0,169,170,5,23,0,0,170,171,3,26,13,0,171,
+        173,1,0,0,0,172,158,1,0,0,0,172,160,1,0,0,0,172,162,1,0,0,0,172,
+        167,1,0,0,0,172,173,1,0,0,0,173,176,1,0,0,0,174,175,5,23,0,0,175,
+        177,5,14,0,0,176,174,1,0,0,0,176,177,1,0,0,0,177,178,1,0,0,0,178,
+        179,5,2,0,0,179,23,1,0,0,0,180,181,5,6,0,0,181,186,3,40,20,0,182,
+        183,5,7,0,0,183,185,3,40,20,0,184,182,1,0,0,0,185,188,1,0,0,0,186,
+        184,1,0,0,0,186,187,1,0,0,0,187,25,1,0,0,0,188,186,1,0,0,0,189,190,
+        5,8,0,0,190,195,3,40,20,0,191,192,5,7,0,0,192,194,3,40,20,0,193,
+        191,1,0,0,0,194,197,1,0,0,0,195,193,1,0,0,0,195,196,1,0,0,0,196,
+        27,1,0,0,0,197,195,1,0,0,0,198,199,3,38,19,0,199,29,1,0,0,0,200,
+        201,5,9,0,0,201,202,3,38,19,0,202,31,1,0,0,0,203,204,5,31,0,0,204,
+        210,5,1,0,0,205,208,3,36,18,0,206,207,5,23,0,0,207,209,3,50,25,0,
+        208,206,1,0,0,0,208,209,1,0,0,0,209,211,1,0,0,0,210,205,1,0,0,0,
+        210,211,1,0,0,0,211,212,1,0,0,0,212,213,5,2,0,0,213,33,1,0,0,0,214,
+        215,5,32,0,0,215,217,5,1,0,0,216,218,3,50,25,0,217,216,1,0,0,0,217,
+        218,1,0,0,0,218,219,1,0,0,0,219,220,5,2,0,0,220,35,1,0,0,0,221,224,
+        3,54,27,0,222,224,5,15,0,0,223,221,1,0,0,0,223,222,1,0,0,0,224,225,
+        1,0,0,0,225,223,1,0,0,0,225,226,1,0,0,0,226,37,1,0,0,0,227,229,3,
+        54,27,0,228,227,1,0,0,0,229,230,1,0,0,0,230,228,1,0,0,0,230,231,
+        1,0,0,0,231,39,1,0,0,0,232,236,3,52,26,0,233,236,5,10,0,0,234,236,
+        5,15,0,0,235,232,1,0,0,0,235,233,1,0,0,0,235,234,1,0,0,0,236,237,
+        1,0,0,0,237,235,1,0,0,0,237,238,1,0,0,0,238,41,1,0,0,0,239,241,3,
+        52,26,0,240,239,1,0,0,0,241,242,1,0,0,0,242,240,1,0,0,0,242,243,
+        1,0,0,0,243,43,1,0,0,0,244,245,5,26,0,0,245,246,5,1,0,0,246,247,
+        3,48,24,0,247,248,5,2,0,0,248,45,1,0,0,0,249,250,5,27,0,0,250,251,
+        5,1,0,0,251,252,3,48,24,0,252,253,5,2,0,0,253,47,1,0,0,0,254,256,
+        3,52,26,0,255,254,1,0,0,0,256,257,1,0,0,0,257,255,1,0,0,0,257,258,
+        1,0,0,0,258,49,1,0,0,0,259,261,3,52,26,0,260,259,1,0,0,0,261,262,
+        1,0,0,0,262,260,1,0,0,0,262,263,1,0,0,0,263,51,1,0,0,0,264,265,7,
+        2,0,0,265,53,1,0,0,0,266,269,3,52,26,0,267,269,5,13,0,0,268,266,
+        1,0,0,0,268,267,1,0,0,0,269,55,1,0,0,0,25,65,76,95,110,116,122,131,
+        148,155,172,176,186,195,208,210,217,223,225,230,235,237,242,257,
+        262,268
     ]
 
 class DescParser ( Parser ):
@@ -141,32 +142,33 @@ class DescParser ( Parser ):
     RULE_buildProject = 6
     RULE_projectLanguage = 7
     RULE_builderType = 8
-    RULE_buildFolder = 9
-    RULE_deployTo = 10
-    RULE_excludePattern = 11
-    RULE_deployPattern = 12
-    RULE_pathForDeployTo = 13
-    RULE_pathFrom = 14
-    RULE_cloneGitToTmp = 15
-    RULE_closeGitRepo = 16
-    RULE_repoPath = 17
-    RULE_pathForDeploy = 18
-    RULE_pattern = 19
-    RULE_branchName = 20
-    RULE_startSystemService = 21
-    RULE_stopSystemService = 22
-    RULE_serviceName = 23
-    RULE_repoAliasName = 24
-    RULE_namingChars = 25
-    RULE_pathChars = 26
+    RULE_buildDir = 9
+    RULE_buildFolder = 10
+    RULE_deployTo = 11
+    RULE_excludePattern = 12
+    RULE_deployPattern = 13
+    RULE_pathForDeployTo = 14
+    RULE_pathFrom = 15
+    RULE_cloneGitToTmp = 16
+    RULE_closeGitRepo = 17
+    RULE_repoPath = 18
+    RULE_pathForDeploy = 19
+    RULE_pattern = 20
+    RULE_branchName = 21
+    RULE_startSystemService = 22
+    RULE_stopSystemService = 23
+    RULE_serviceName = 24
+    RULE_repoAliasName = 25
+    RULE_namingChars = 26
+    RULE_pathChars = 27
 
     ruleNames =  [ "script", "gitRepoScope", "scopeCmds", "setBranch", "setRepoSource", 
                    "host", "buildProject", "projectLanguage", "builderType", 
-                   "buildFolder", "deployTo", "excludePattern", "deployPattern", 
-                   "pathForDeployTo", "pathFrom", "cloneGitToTmp", "closeGitRepo", 
-                   "repoPath", "pathForDeploy", "pattern", "branchName", 
-                   "startSystemService", "stopSystemService", "serviceName", 
-                   "repoAliasName", "namingChars", "pathChars" ]
+                   "buildDir", "buildFolder", "deployTo", "excludePattern", 
+                   "deployPattern", "pathForDeployTo", "pathFrom", "cloneGitToTmp", 
+                   "closeGitRepo", "repoPath", "pathForDeploy", "pattern", 
+                   "branchName", "startSystemService", "stopSystemService", 
+                   "serviceName", "repoAliasName", "namingChars", "pathChars" ]
 
     EOF = Token.EOF
     T__0=1
@@ -267,26 +269,26 @@ class DescParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 54
+            self.state = 56
             self.setBranch()
-            self.state = 55
+            self.state = 57
             self.match(DescParser.SEMICOLON)
 
-            self.state = 57
+            self.state = 59
             self.setRepoSource()
-            self.state = 58
+            self.state = 60
             self.match(DescParser.SEMICOLON)
-            self.state = 63
+            self.state = 65
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==31:
-                self.state = 60
+                self.state = 62
                 self.gitRepoScope()
-                self.state = 65
+                self.state = 67
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 66
+            self.state = 68
             self.match(DescParser.EOF)
         except RecognitionException as re:
             localctx.exception = re
@@ -346,23 +348,23 @@ class DescParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 68
+            self.state = 70
             self.cloneGitToTmp()
-            self.state = 69
+            self.state = 71
             self.match(DescParser.SEMICOLON)
-            self.state = 74
+            self.state = 76
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while (((_la) & ~0x3f) == 0 and ((1 << _la) & 2919235584) != 0):
-                self.state = 71
+                self.state = 73
                 self.scopeCmds()
-                self.state = 76
+                self.state = 78
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 77
+            self.state = 79
             self.closeGitRepo()
-            self.state = 78
+            self.state = 80
             self.match(DescParser.SEMICOLON)
         except RecognitionException as re:
             localctx.exception = re
@@ -422,40 +424,40 @@ class DescParser ( Parser ):
         localctx = DescParser.ScopeCmdsContext(self, self._ctx, self.state)
         self.enterRule(localctx, 4, self.RULE_scopeCmds)
         try:
-            self.state = 93
+            self.state = 95
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [29]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 80
+                self.state = 82
                 self.deployTo()
-                self.state = 81
+                self.state = 83
                 self.match(DescParser.SEMICOLON)
                 pass
             elif token in [26]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 83
+                self.state = 85
                 self.startSystemService()
-                self.state = 84
+                self.state = 86
                 self.match(DescParser.SEMICOLON)
                 pass
             elif token in [27]:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 86
+                self.state = 88
                 self.stopSystemService()
-                self.state = 87
+                self.state = 89
                 self.match(DescParser.SEMICOLON)
                 pass
             elif token in [25]:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 89
+                self.state = 91
                 self.buildProject()
-                self.state = 90
+                self.state = 92
                 self.match(DescParser.SEMICOLON)
                 pass
             elif token in [31]:
                 self.enterOuterAlt(localctx, 5)
-                self.state = 92
+                self.state = 94
                 self.gitRepoScope()
                 pass
             else:
@@ -504,13 +506,13 @@ class DescParser ( Parser ):
         self.enterRule(localctx, 6, self.RULE_setBranch)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 95
-            self.match(DescParser.BRANCH)
-            self.state = 96
-            self.match(DescParser.T__0)
             self.state = 97
-            self.branchName()
+            self.match(DescParser.BRANCH)
             self.state = 98
+            self.match(DescParser.T__0)
+            self.state = 99
+            self.branchName()
+            self.state = 100
             self.match(DescParser.T__1)
         except RecognitionException as re:
             localctx.exception = re
@@ -555,13 +557,13 @@ class DescParser ( Parser ):
         self.enterRule(localctx, 8, self.RULE_setRepoSource)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 100
-            self.match(DescParser.REPO_HOST)
-            self.state = 101
-            self.match(DescParser.T__0)
             self.state = 102
-            self.host()
+            self.match(DescParser.REPO_HOST)
             self.state = 103
+            self.match(DescParser.T__0)
+            self.state = 104
+            self.host()
+            self.state = 105
             self.match(DescParser.T__1)
         except RecognitionException as re:
             localctx.exception = re
@@ -613,36 +615,36 @@ class DescParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 114
+            self.state = 116
             self._errHandler.sync(self)
             _alt = self._interp.adaptivePredict(self._input,4,self._ctx)
             while _alt!=2 and _alt!=ATN.INVALID_ALT_NUMBER:
                 if _alt==1:
-                    self.state = 106 
+                    self.state = 108 
                     self._errHandler.sync(self)
                     _la = self._input.LA(1)
                     while True:
-                        self.state = 105
+                        self.state = 107
                         self.namingChars()
-                        self.state = 108 
+                        self.state = 110 
                         self._errHandler.sync(self)
                         _la = self._input.LA(1)
                         if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & 25769809920) != 0)):
                             break
 
-                    self.state = 110
+                    self.state = 112
                     self.match(DescParser.DOT) 
-                self.state = 116
+                self.state = 118
                 self._errHandler.sync(self)
                 _alt = self._interp.adaptivePredict(self._input,4,self._ctx)
 
-            self.state = 118 
+            self.state = 120 
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while True:
-                self.state = 117
+                self.state = 119
                 self.namingChars()
-                self.state = 120 
+                self.state = 122 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & 25769809920) != 0)):
@@ -681,8 +683,8 @@ class DescParser ( Parser ):
             return self.getTypedRuleContext(DescParser.BuilderTypeContext,0)
 
 
-        def buildFolder(self):
-            return self.getTypedRuleContext(DescParser.BuildFolderContext,0)
+        def buildDir(self):
+            return self.getTypedRuleContext(DescParser.BuildDirContext,0)
 
 
         def getRuleIndex(self):
@@ -706,27 +708,27 @@ class DescParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 122
-            self.match(DescParser.BUILD_PROJECT)
-            self.state = 123
-            self.match(DescParser.T__0)
             self.state = 124
-            self.projectLanguage()
+            self.match(DescParser.BUILD_PROJECT)
             self.state = 125
-            self.match(DescParser.COMMA)
+            self.match(DescParser.T__0)
             self.state = 126
+            self.projectLanguage()
+            self.state = 127
+            self.match(DescParser.COMMA)
+            self.state = 128
             self.builderType()
-            self.state = 129
+            self.state = 131
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==23:
-                self.state = 127
+                self.state = 129
                 self.match(DescParser.COMMA)
-                self.state = 128
-                self.buildFolder()
+                self.state = 130
+                self.buildDir()
 
 
-            self.state = 131
+            self.state = 133
             self.match(DescParser.T__1)
         except RecognitionException as re:
             localctx.exception = re
@@ -777,11 +779,11 @@ class DescParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 133
-            self.match(DescParser.LANGUAGE)
-            self.state = 134
-            self.match(DescParser.T__2)
             self.state = 135
+            self.match(DescParser.LANGUAGE)
+            self.state = 136
+            self.match(DescParser.T__2)
+            self.state = 137
             _la = self._input.LA(1)
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 1835008) != 0)):
                 self._errHandler.recoverInline(self)
@@ -834,15 +836,59 @@ class DescParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 137
+            self.state = 139
             self.match(DescParser.T__3)
-            self.state = 138
+            self.state = 140
             _la = self._input.LA(1)
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 2293760) != 0)):
                 self._errHandler.recoverInline(self)
             else:
                 self._errHandler.reportMatch(self)
                 self.consume()
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class BuildDirContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def buildFolder(self):
+            return self.getTypedRuleContext(DescParser.BuildFolderContext,0)
+
+
+        def getRuleIndex(self):
+            return DescParser.RULE_buildDir
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterBuildDir" ):
+                listener.enterBuildDir(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitBuildDir" ):
+                listener.exitBuildDir(self)
+
+
+
+
+    def buildDir(self):
+
+        localctx = DescParser.BuildDirContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 18, self.RULE_buildDir)
+        try:
+            self.enterOuterAlt(localctx, 1)
+            self.state = 142
+            self.match(DescParser.T__4)
+            self.state = 143
+            self.buildFolder()
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -883,19 +929,17 @@ class DescParser ( Parser ):
     def buildFolder(self):
 
         localctx = DescParser.BuildFolderContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 18, self.RULE_buildFolder)
+        self.enterRule(localctx, 20, self.RULE_buildFolder)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 140
-            self.match(DescParser.T__4)
-            self.state = 142 
+            self.state = 146 
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while True:
-                self.state = 141
+                self.state = 145
                 self.pathChars()
-                self.state = 144 
+                self.state = 148 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & 25769818112) != 0)):
@@ -962,73 +1006,73 @@ class DescParser ( Parser ):
     def deployTo(self):
 
         localctx = DescParser.DeployToContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 20, self.RULE_deployTo)
+        self.enterRule(localctx, 22, self.RULE_deployTo)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 146
+            self.state = 150
             self.match(DescParser.DEPLOY_TO)
-            self.state = 147
-            self.match(DescParser.T__0)
             self.state = 151
+            self.match(DescParser.T__0)
+            self.state = 155
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==9:
-                self.state = 148
+                self.state = 152
                 self.pathFrom()
-                self.state = 149
+                self.state = 153
                 self.match(DescParser.COMMA)
 
 
-            self.state = 153
+            self.state = 157
             self.pathForDeployTo()
-            self.state = 168
+            self.state = 172
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,9,self._ctx)
             if la_ == 1:
-                self.state = 154
-                self.match(DescParser.COMMA)
-                self.state = 155
-                self.excludePattern()
-
-            elif la_ == 2:
-                self.state = 156
-                self.match(DescParser.COMMA)
-                self.state = 157
-                self.deployPattern()
-
-            elif la_ == 3:
                 self.state = 158
                 self.match(DescParser.COMMA)
                 self.state = 159
-                self.deployPattern()
+                self.excludePattern()
+
+            elif la_ == 2:
                 self.state = 160
                 self.match(DescParser.COMMA)
                 self.state = 161
+                self.deployPattern()
+
+            elif la_ == 3:
+                self.state = 162
+                self.match(DescParser.COMMA)
+                self.state = 163
+                self.deployPattern()
+                self.state = 164
+                self.match(DescParser.COMMA)
+                self.state = 165
                 self.excludePattern()
 
             elif la_ == 4:
-                self.state = 163
+                self.state = 167
                 self.match(DescParser.COMMA)
-                self.state = 164
+                self.state = 168
                 self.excludePattern()
-                self.state = 165
+                self.state = 169
                 self.match(DescParser.COMMA)
-                self.state = 166
+                self.state = 170
                 self.deployPattern()
 
 
-            self.state = 172
+            self.state = 176
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==23:
-                self.state = 170
+                self.state = 174
                 self.match(DescParser.COMMA)
-                self.state = 171
+                self.state = 175
                 self.match(DescParser.MERGE)
 
 
-            self.state = 174
+            self.state = 178
             self.match(DescParser.T__1)
         except RecognitionException as re:
             localctx.exception = re
@@ -1070,23 +1114,23 @@ class DescParser ( Parser ):
     def excludePattern(self):
 
         localctx = DescParser.ExcludePatternContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 22, self.RULE_excludePattern)
+        self.enterRule(localctx, 24, self.RULE_excludePattern)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 176
+            self.state = 180
             self.match(DescParser.T__5)
-            self.state = 177
+            self.state = 181
             self.pattern()
-            self.state = 182
+            self.state = 186
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==7:
-                self.state = 178
+                self.state = 182
                 self.match(DescParser.T__6)
-                self.state = 179
+                self.state = 183
                 self.pattern()
-                self.state = 184
+                self.state = 188
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -1130,23 +1174,23 @@ class DescParser ( Parser ):
     def deployPattern(self):
 
         localctx = DescParser.DeployPatternContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 24, self.RULE_deployPattern)
+        self.enterRule(localctx, 26, self.RULE_deployPattern)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 185
+            self.state = 189
             self.match(DescParser.T__7)
-            self.state = 186
+            self.state = 190
             self.pattern()
-            self.state = 191
+            self.state = 195
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==7:
-                self.state = 187
+                self.state = 191
                 self.match(DescParser.T__6)
-                self.state = 188
+                self.state = 192
                 self.pattern()
-                self.state = 193
+                self.state = 197
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -1187,10 +1231,10 @@ class DescParser ( Parser ):
     def pathForDeployTo(self):
 
         localctx = DescParser.PathForDeployToContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 26, self.RULE_pathForDeployTo)
+        self.enterRule(localctx, 28, self.RULE_pathForDeployTo)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 194
+            self.state = 198
             self.pathForDeploy()
         except RecognitionException as re:
             localctx.exception = re
@@ -1229,12 +1273,12 @@ class DescParser ( Parser ):
     def pathFrom(self):
 
         localctx = DescParser.PathFromContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 28, self.RULE_pathFrom)
+        self.enterRule(localctx, 30, self.RULE_pathFrom)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 196
+            self.state = 200
             self.match(DescParser.T__8)
-            self.state = 197
+            self.state = 201
             self.pathForDeploy()
         except RecognitionException as re:
             localctx.exception = re
@@ -1283,33 +1327,33 @@ class DescParser ( Parser ):
     def cloneGitToTmp(self):
 
         localctx = DescParser.CloneGitToTmpContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 30, self.RULE_cloneGitToTmp)
+        self.enterRule(localctx, 32, self.RULE_cloneGitToTmp)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 199
+            self.state = 203
             self.match(DescParser.OPEN_GIT_REPO_LOCALLY)
-            self.state = 200
+            self.state = 204
             self.match(DescParser.T__0)
-            self.state = 206
+            self.state = 210
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & 25769850880) != 0):
-                self.state = 201
+                self.state = 205
                 self.repoPath()
-                self.state = 204
+                self.state = 208
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if _la==23:
-                    self.state = 202
+                    self.state = 206
                     self.match(DescParser.COMMA)
-                    self.state = 203
+                    self.state = 207
                     self.repoAliasName()
 
 
 
 
-            self.state = 208
+            self.state = 212
             self.match(DescParser.T__1)
         except RecognitionException as re:
             localctx.exception = re
@@ -1351,23 +1395,23 @@ class DescParser ( Parser ):
     def closeGitRepo(self):
 
         localctx = DescParser.CloseGitRepoContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 32, self.RULE_closeGitRepo)
+        self.enterRule(localctx, 34, self.RULE_closeGitRepo)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 210
+            self.state = 214
             self.match(DescParser.CLOSE_GIT_REPO)
-            self.state = 211
+            self.state = 215
             self.match(DescParser.T__0)
-            self.state = 213
+            self.state = 217
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if (((_la) & ~0x3f) == 0 and ((1 << _la) & 25769809920) != 0):
-                self.state = 212
+                self.state = 216
                 self.repoAliasName()
 
 
-            self.state = 215
+            self.state = 219
             self.match(DescParser.T__1)
         except RecognitionException as re:
             localctx.exception = re
@@ -1415,29 +1459,29 @@ class DescParser ( Parser ):
     def repoPath(self):
 
         localctx = DescParser.RepoPathContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 34, self.RULE_repoPath)
+        self.enterRule(localctx, 36, self.RULE_repoPath)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 219 
+            self.state = 223 
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while True:
-                self.state = 219
+                self.state = 223
                 self._errHandler.sync(self)
                 token = self._input.LA(1)
                 if token in [11, 12, 13, 33, 34]:
-                    self.state = 217
+                    self.state = 221
                     self.pathChars()
                     pass
                 elif token in [15]:
-                    self.state = 218
+                    self.state = 222
                     self.match(DescParser.DOT)
                     pass
                 else:
                     raise NoViableAltException(self)
 
-                self.state = 221 
+                self.state = 225 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & 25769850880) != 0)):
@@ -1483,17 +1527,17 @@ class DescParser ( Parser ):
     def pathForDeploy(self):
 
         localctx = DescParser.PathForDeployContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 36, self.RULE_pathForDeploy)
+        self.enterRule(localctx, 38, self.RULE_pathForDeploy)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 224 
+            self.state = 228 
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while True:
-                self.state = 223
+                self.state = 227
                 self.pathChars()
-                self.state = 226 
+                self.state = 230 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & 25769818112) != 0)):
@@ -1545,33 +1589,33 @@ class DescParser ( Parser ):
     def pattern(self):
 
         localctx = DescParser.PatternContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 38, self.RULE_pattern)
+        self.enterRule(localctx, 40, self.RULE_pattern)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 231 
+            self.state = 235 
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while True:
-                self.state = 231
+                self.state = 235
                 self._errHandler.sync(self)
                 token = self._input.LA(1)
                 if token in [11, 12, 33, 34]:
-                    self.state = 228
+                    self.state = 232
                     self.namingChars()
                     pass
                 elif token in [10]:
-                    self.state = 229
+                    self.state = 233
                     self.match(DescParser.T__9)
                     pass
                 elif token in [15]:
-                    self.state = 230
+                    self.state = 234
                     self.match(DescParser.DOT)
                     pass
                 else:
                     raise NoViableAltException(self)
 
-                self.state = 233 
+                self.state = 237 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & 25769843712) != 0)):
@@ -1617,17 +1661,17 @@ class DescParser ( Parser ):
     def branchName(self):
 
         localctx = DescParser.BranchNameContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 40, self.RULE_branchName)
+        self.enterRule(localctx, 42, self.RULE_branchName)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 236 
+            self.state = 240 
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while True:
-                self.state = 235
+                self.state = 239
                 self.namingChars()
-                self.state = 238 
+                self.state = 242 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & 25769809920) != 0)):
@@ -1673,16 +1717,16 @@ class DescParser ( Parser ):
     def startSystemService(self):
 
         localctx = DescParser.StartSystemServiceContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 42, self.RULE_startSystemService)
+        self.enterRule(localctx, 44, self.RULE_startSystemService)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 240
+            self.state = 244
             self.match(DescParser.START_SYSTEM_SERVICE)
-            self.state = 241
+            self.state = 245
             self.match(DescParser.T__0)
-            self.state = 242
+            self.state = 246
             self.serviceName()
-            self.state = 243
+            self.state = 247
             self.match(DescParser.T__1)
         except RecognitionException as re:
             localctx.exception = re
@@ -1724,16 +1768,16 @@ class DescParser ( Parser ):
     def stopSystemService(self):
 
         localctx = DescParser.StopSystemServiceContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 44, self.RULE_stopSystemService)
+        self.enterRule(localctx, 46, self.RULE_stopSystemService)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 245
+            self.state = 249
             self.match(DescParser.STOP_SYSTEM_SERVICE)
-            self.state = 246
+            self.state = 250
             self.match(DescParser.T__0)
-            self.state = 247
+            self.state = 251
             self.serviceName()
-            self.state = 248
+            self.state = 252
             self.match(DescParser.T__1)
         except RecognitionException as re:
             localctx.exception = re
@@ -1775,17 +1819,17 @@ class DescParser ( Parser ):
     def serviceName(self):
 
         localctx = DescParser.ServiceNameContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 46, self.RULE_serviceName)
+        self.enterRule(localctx, 48, self.RULE_serviceName)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 251 
+            self.state = 255 
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while True:
-                self.state = 250
+                self.state = 254
                 self.namingChars()
-                self.state = 253 
+                self.state = 257 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & 25769809920) != 0)):
@@ -1831,17 +1875,17 @@ class DescParser ( Parser ):
     def repoAliasName(self):
 
         localctx = DescParser.RepoAliasNameContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 48, self.RULE_repoAliasName)
+        self.enterRule(localctx, 50, self.RULE_repoAliasName)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 256 
+            self.state = 260 
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while True:
-                self.state = 255
+                self.state = 259
                 self.namingChars()
-                self.state = 258 
+                self.state = 262 
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
                 if not ((((_la) & ~0x3f) == 0 and ((1 << _la) & 25769809920) != 0)):
@@ -1886,11 +1930,11 @@ class DescParser ( Parser ):
     def namingChars(self):
 
         localctx = DescParser.NamingCharsContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 50, self.RULE_namingChars)
+        self.enterRule(localctx, 52, self.RULE_namingChars)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 260
+            self.state = 264
             _la = self._input.LA(1)
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 25769809920) != 0)):
                 self._errHandler.recoverInline(self)
@@ -1934,19 +1978,19 @@ class DescParser ( Parser ):
     def pathChars(self):
 
         localctx = DescParser.PathCharsContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 52, self.RULE_pathChars)
+        self.enterRule(localctx, 54, self.RULE_pathChars)
         try:
-            self.state = 264
+            self.state = 268
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [11, 12, 33, 34]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 262
+                self.state = 266
                 self.namingChars()
                 pass
             elif token in [13]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 263
+                self.state = 267
                 self.match(DescParser.T__12)
                 pass
             else:

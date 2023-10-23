@@ -12,10 +12,11 @@ setBranch : BRANCH '(' branchName ')';
 setRepoSource : REPO_HOST '(' host ')';
 host : (namingChars+ DOT)* namingChars+;
 
-buildProject : BUILD_PROJECT '(' projectLanguage COMMA builderType (COMMA buildFolder)?')';
+buildProject : BUILD_PROJECT '(' projectLanguage COMMA builderType (COMMA buildDir)?')';
 projectLanguage : LANGUAGE '=' (JAVA17 | NEXT | PYTHON39);
 builderType : 'type=' (MAVEN | GRADLE | NPM);
-buildFolder : 'dir=' pathChars+;
+buildDir : 'dir=' buildFolder;
+buildFolder : pathChars+;
 deployTo : DEPLOY_TO '(' (pathFrom ',')? pathForDeployTo (
                     (COMMA excludePattern)
                     | (COMMA deployPattern)

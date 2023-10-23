@@ -191,6 +191,7 @@ class InterpreterTest(unittest.TestCase):
         self._system_service.startService.assert_called_once()
         self._git_service.removeFolder.assert_has_calls([call(self.TMP_PATH_CONF), call(self.TMP_PATH)])
         self._system_service.stopService.assert_called_once()
+        self._builder_service.build.assert_has_calls([call("next", "npm", "/var/www/tauproject/develop")])
 
 
 if __name__ == '__main__':

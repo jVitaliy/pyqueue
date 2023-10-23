@@ -89,6 +89,15 @@ class DescListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by DescParser#buildDir.
+    def enterBuildDir(self, ctx:DescParser.BuildDirContext):
+        pass
+
+    # Exit a parse tree produced by DescParser#buildDir.
+    def exitBuildDir(self, ctx:DescParser.BuildDirContext):
+        pass
+
+
     # Enter a parse tree produced by DescParser#buildFolder.
     def enterBuildFolder(self, ctx:DescParser.BuildFolderContext):
         pass

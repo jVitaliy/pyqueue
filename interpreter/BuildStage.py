@@ -24,6 +24,7 @@ class BuildStage(PreBuildStage):
     def exitBuildProject(self, ctx: DescParser.BuildProjectContext):
         current_repo_data = self.scope_stack[len(self.scope_stack) - 1]
         repo_name = current_repo_data['project_name']
+        folder = f"{current_repo_data['tmp_folder']}/{repo_name}" if ctx.buildFolder() is None \
+            else ctx.buildFolder().getText()
         if 'language' in self._builder_data.keys() and 'builder' in self._builder_data.keys():
-            self._builder_service.build(self._builder_data['language'], self._builder_data['builder'],
-                                        f"{current_repo_data['tmp_folder']}/{repo_name}")
+            self._builder_service.build(self._builder_data['language'], self._builder_data['builder'], folder)

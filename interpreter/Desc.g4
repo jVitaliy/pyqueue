@@ -1,22 +1,21 @@
 grammar Desc;
-script : cmd ';'(cmd ';')* EOF;
-cmd : setBranch
-    | setRepoSource
-    | cloneGitToTmp
-    | closeGitRepo
-    | deployTo
+script : setBranch setRepoSource gitRepoScope* EOF;
+gitRepoScope : cloneGitToTmp (scopeCmds)* closeGitRepo;
+scopeCmds : deployTo
     | startSystemService
     | stopSystemService
     | buildProject
+    | gitRepoScope
     ;
 
 setBranch : BRANCH '(' branchName ')';
 setRepoSource : REPO_HOST '(' host ')';
 host : (namingChars+ DOT)* namingChars+;
 
-buildProject : BUILD_PROJECT '(' projectLanguage COMMA builderType')';
+buildProject : BUILD_PROJECT '(' projectLanguage COMMA builderType (COMMA buildFolder)?')';
 projectLanguage : LANGUAGE '=' (JAVA17 | NEXT | PYTHON39);
-builderType : 'type=' (MAVEN | GRADLE);
+builderType : 'type=' (MAVEN | GRADLE | NPM);
+buildFolder : 'dir=' pathChars+;
 deployTo : DEPLOY_TO '(' (pathFrom ',')? pathForDeployTo (
                     (COMMA excludePattern)
                     | (COMMA deployPattern)
@@ -44,11 +43,14 @@ namingChars: NUM | CHARS | '-' | '_' ;
 pathChars : namingChars | '/' ;
 MERGE : 'merge';
 DOT : '.';
+
 GRADLE : 'gradle';
 MAVEN : 'maven';
 JAVA17 : 'java17';
 NEXT : 'next';
 PYTHON39 : 'python39';
+NPM : 'npm';
+
 LANGUAGE : 'language';
 COMMA : ',';
 BUILD_PROJECT: 'buildProject';

@@ -17,12 +17,21 @@ class DescListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by DescParser#cmd.
-    def enterCmd(self, ctx:DescParser.CmdContext):
+    # Enter a parse tree produced by DescParser#gitRepoScope.
+    def enterGitRepoScope(self, ctx:DescParser.GitRepoScopeContext):
         pass
 
-    # Exit a parse tree produced by DescParser#cmd.
-    def exitCmd(self, ctx:DescParser.CmdContext):
+    # Exit a parse tree produced by DescParser#gitRepoScope.
+    def exitGitRepoScope(self, ctx:DescParser.GitRepoScopeContext):
+        pass
+
+
+    # Enter a parse tree produced by DescParser#scopeCmds.
+    def enterScopeCmds(self, ctx:DescParser.ScopeCmdsContext):
+        pass
+
+    # Exit a parse tree produced by DescParser#scopeCmds.
+    def exitScopeCmds(self, ctx:DescParser.ScopeCmdsContext):
         pass
 
 
@@ -77,6 +86,15 @@ class DescListener(ParseTreeListener):
 
     # Exit a parse tree produced by DescParser#builderType.
     def exitBuilderType(self, ctx:DescParser.BuilderTypeContext):
+        pass
+
+
+    # Enter a parse tree produced by DescParser#buildFolder.
+    def enterBuildFolder(self, ctx:DescParser.BuildFolderContext):
+        pass
+
+    # Exit a parse tree produced by DescParser#buildFolder.
+    def exitBuildFolder(self, ctx:DescParser.BuildFolderContext):
         pass
 
 

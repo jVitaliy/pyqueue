@@ -4,6 +4,7 @@ from unittest.mock import Mock, call
 
 from interpreter.DescProcessor import DescProcessor
 from interpreter.TauDeployScriptInterpreter import TauDeployScriptInterpreter
+from interpreter.exceptions.ParseException import ParseException
 
 
 class InterpreterTest(unittest.TestCase):
@@ -25,9 +26,9 @@ class InterpreterTest(unittest.TestCase):
         data_file = os.path.join(data_dir, filename)
         tree_and_parser = self._script_interpreter.get_tree_and_parser(data_file)
         parser = tree_and_parser[0]
-        if parser.getNumberOfSyntaxErrors() > 0:
-            print("syntax errors")
-            return
+        # if parser.getNumberOfSyntaxErrors() > 0:
+        #     print(self._script_interpreter.error_listener.errors)
+        #     return
         self._script_interpreter.start_walking_with_processor(tree_and_parser[1], processor)
 
     def build_processor(self, branch, repo_path=None):
@@ -67,15 +68,11 @@ class InterpreterTest(unittest.TestCase):
 
     def test_minimal_script_with_commented_close(self):
         processor = self.build_processor("develop")
-        self.walk('minimal_to_clone_with_commented_close.desc', processor)
+        with self.assertRaises(ParseException):
+            self.walk('minimal_to_clone_with_commented_close.desc', processor)
 
-        self.assertEqual('develop', processor._current_branch)
-        self.assertEqual(self.GIT_HOST, processor._repo_host)
-        self.assertEqual(1, len(processor.scope_stack))
-        last_repo = processor.scope_stack.pop()
-        self.assertEqual(self.REPO_PATH, last_repo['path'])
-        self._git_service.clone.assert_called_once()
-        self._git_service.clone.assert_called_with(self.REPO_PATH, self.GIT_HOST)
+        self.assertIsNone(processor._current_branch)
+        self.assertIsNone(processor._repo_host)
 
     def test_minimal_with_deploy(self):
         processor = self.build_processor("develop")

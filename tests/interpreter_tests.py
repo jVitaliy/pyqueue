@@ -72,7 +72,7 @@ class InterpreterTest(unittest.TestCase):
             self.walk('minimal_to_clone_with_commented_close.desc', processor)
 
         self.assertIsNone(processor._current_branch)
-        self.assertIsNone(processor._repo_host)
+        self.assertEqual('localhost', processor._repo_host)
 
     def test_minimal_with_deploy(self):
         processor = self.build_processor("develop")
@@ -193,6 +193,23 @@ class InterpreterTest(unittest.TestCase):
         self._system_service.stopService.assert_called_once()
         self._builder_service.build.assert_has_calls([call("next", "npm", "/var/www/tauproject/develop")])
 
+    def test_minimal_for_2_branches(self):
+        processor = self.build_processor("develop")
+        self.walk('minimal_for_2_branches.desc', processor)
+
+        # self.assertEqual('develop', processor._current_branch)
+        # self.assertEqual('localhost', processor._repo_host)
+        self.assertEqual(0, len(processor.scope_stack))
+        self._git_service.clone.assert_has_calls([call(self.REPO_PATH, 'localhost')])
+
+    def test_minimal_for_2_branches(self):
+        processor = self.build_processor("master")
+        self.walk('minimal_for_2_branches.desc', processor)
+
+        # self.assertEqual('develop', processor._current_branch)
+        # self.assertEqual('localhost', processor._repo_host)
+        self.assertEqual(0, len(processor.scope_stack))
+        self._git_service.clone.assert_has_calls([call(self.REPO_PATH, 'git.tauproject.com')])
 
 if __name__ == '__main__':
     unittest.main()

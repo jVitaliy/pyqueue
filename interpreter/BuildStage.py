@@ -24,6 +24,8 @@ class BuildStage(PreBuildStage):
             self._builder_data['builder'] = "npm"
 
     def exitBuildProject(self, ctx: DescParser.BuildProjectContext):
+        if self._current_branch is None:
+            return
         current_repo_data = self.scope_stack[len(self.scope_stack) - 1]
         repo_name = current_repo_data['project_name']
         folder = f"{current_repo_data['tmp_folder']}/{repo_name}" if ctx.buildDir() is None \

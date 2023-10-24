@@ -11,7 +11,7 @@ class AbstractProcessor(DescListener):
     def __init__(self, branch, repo_path=None):
         self._current_branch = None
         self._target_branch = branch
-        self._repo_host = None
+        self._repo_host = 'localhost'
         self.scope_stack = list()
         self._initial_repo_path = repo_path
         self._descLog = DescLog()

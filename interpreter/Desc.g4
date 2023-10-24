@@ -1,5 +1,5 @@
 grammar Desc;
-script : (setBranch SEMICOLON) (setRepoSource SEMICOLON) gitRepoScope* EOF;
+script : ((setBranch SEMICOLON) (setRepoSource SEMICOLON)? gitRepoScope*)+ EOF;
 gitRepoScope : (cloneGitToTmp SEMICOLON)  scopeCmds* (closeGitRepo SEMICOLON);
 scopeCmds : (deployTo SEMICOLON)
     | (startSystemService SEMICOLON)

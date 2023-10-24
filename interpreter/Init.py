@@ -12,21 +12,25 @@ class Init(AbstractProcessor):
         if self._current_branch.__eq__(self._target_branch):
             logging.info(f"set branch {self._current_branch}")
         else:
-            raise GitBranchException(
-                f"branch `{self._current_branch}` does not match to target branch `{self._target_branch}`")
+            self._current_branch = None
+            # raise GitBranchException(
+            #     f"branch `{self._current_branch}` does not match to target branch `{self._target_branch}`")
 
     def exitSetRepoSource(self, ctx: DescParser.SetRepoSourceContext):
         logging.info(f"set repo host to {self._repo_host}")
 
     def exitHost(self, ctx: DescParser.SetRepoSourceContext):
         self._repo_host = ctx.getText()
+        print(f"host={self._repo_host}")
 
     def exitStartSystemService(self, ctx: DescParser.StartSystemServiceContext):
-        service_name = ctx.serviceName().getText()
-        self._system_service.startService(service_name)
-        logging.info(f"service {service_name} has been started")
+        if self._current_branch is not None:
+            service_name = ctx.serviceName().getText()
+            self._system_service.startService(service_name)
+            logging.info(f"service {service_name} has been started")
 
     def exitStopSystemService(self, ctx: DescParser.StopSystemServiceContext):
-        service_name = ctx.serviceName().getText()
-        self._system_service.stopService(service_name)
-        logging.info(f"service {service_name} has been stopped")
+        if self._current_branch is not None:
+            service_name = ctx.serviceName().getText()
+            self._system_service.stopService(service_name)
+            logging.info(f"service {service_name} has been stopped")

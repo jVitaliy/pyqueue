@@ -5,19 +5,31 @@ from interpreter.services.DeployService import DeployService
 
 class DeployingStage(ConfiguringStage):
     def exitPathForDeployTo(self, ctx: DescParser.PathForDeployToContext):
+        if self._current_branch is None:
+            return
+
         path_from = ctx.pathForDeploy().getText()
         if path_from is not None:
             self._deploy_data['path'] = path_from
 
     def exitPathFrom(self, ctx: DescParser.PathFromContext):
+        if self._current_branch is None:
+            return
+
         path_from = ctx.pathForDeploy().getText()
         if path_from is not None:
             self._deploy_data['path_from'] = path_from
 
     def enterExcludePattern(self, ctx: DescParser.ExcludePatternContext):
+        if self._current_branch is None:
+            return
+
         self._exclude_pattern = list()
 
     def enterDeployPattern(self, ctx: DescParser.DeployPatternContext):
+        if self._current_branch is None:
+            return
+
         self._deploy_pattern = list()
 
     def exitPattern(self, ctx: DescParser.PatternContext):
@@ -31,6 +43,9 @@ class DeployingStage(ConfiguringStage):
         self._exclude_pattern = None
 
     def exitDeployPattern(self, ctx: DescParser.DeployPatternContext):
+        if self._current_branch is None:
+            return
+
         self._deploy_data['pattern'] = self._deploy_pattern
         self._deploy_pattern = None
 
@@ -38,6 +53,8 @@ class DeployingStage(ConfiguringStage):
         self._deploy_data = {}
 
     def exitDeployTo(self, ctx: DescParser.DeployToContext):
+        if self._current_branch is None:
+            return
 
         excluded = self._deploy_data['excluded'] if 'excluded' in self._deploy_data.keys() else None
         pattern = self._deploy_data['pattern'] if 'pattern' in self._deploy_data.keys() else None

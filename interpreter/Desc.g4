@@ -34,7 +34,7 @@ cloneGitToTmp : OPEN_GIT_REPO_LOCALLY '(' (repoPath  (COMMA repoAliasName)?)? ')
 closeGitRepo : CLOSE_GIT_REPO '(' repoAliasName? ')';
 repoPath: (pathChars | DOT)+ ;
 pathForDeploy : pathChars+ ;
-pattern : (namingChars | '*' | DOT ) +;
+pattern : (namingChars | '*' | '^' | '\\' | '$' | DOT ) +;
 branchName : namingChars+ ;
 startSystemService : START_SYSTEM_SERVICE '(' serviceName ')';
 stopSystemService : STOP_SYSTEM_SERVICE '(' serviceName ')';

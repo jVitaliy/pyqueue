@@ -24,8 +24,6 @@ class TauDeployScriptInterpreter:
         tree = parser.script()
         if parser.getNumberOfSyntaxErrors() > 0:
             logging.error(self.error_listener.errors)
-            # print(parser.())
-            # print(self.error_listener.errors)
             raise ParseException(self.error_listener.errors)
         return [parser, tree]
 

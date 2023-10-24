@@ -9,6 +9,7 @@ from interpreter.exceptions.GitBranchException import GitBranchException
 
 class RequestFilesProcessor:
     def __init__(self):
+        DescLog()
         self._queue_folder = "/var/lib/tauproject/alcyone-pdm/queue" \
             if os.environ.get("PYQUEUE_QUEUE_FOLDER") is None \
             else os.environ.get("PYQUEUE_QUEUE_FOLDER")
@@ -31,6 +32,7 @@ class RequestFilesProcessor:
         return ".".join(script_name_arr)
 
     def processFile(self, root, filename):
+        logging.info(f"processing <{filename}> in folder {root}")
         filename_processing = f"{filename}.queue"
         filename_processing_full_path = f"{root}/{filename_processing}"
         os.rename(f"{root}/{filename}", filename_processing_full_path)
@@ -51,20 +53,21 @@ class RequestFilesProcessor:
 
             if os.path.isfile(script_file_path):
                 path_to_script = f"{self._script_folder}/{script_filename}"
+                logging.info(f"interpreting {path_to_script}")
                 self._desc_interpreter.start_walking(path_to_script, branch,  path.replace(f"{self._git_home}/", ""))
             else:
                 logging.info(f"there is no script {script_file_path} - no actions")
-        os.remove(f"{root}/{filename_processing}")
+        os.remove(f"{filename_processing_full_path}")
 
     def start(self):
-        DescLog()
+
         logging.info(f"start scanning {self._queue_folder}")
         try:
             pattern = re.compile(r'[a-z\.]*\.git$')
             for root, dirs, files in os.walk(self._queue_folder):
                 for filename in files:
                     match = pattern.search(filename)
-                    print(f"{filename} {match}")
+
                     if match:
                         self.processFile(root, filename)
         except GitBranchException as gite:

@@ -48,6 +48,6 @@ class TauDeployScriptInterpreter:
 
     def start_walking(self, script_filename, branch, repo_path=None):
         tree_and_parser = self.get_tree_and_parser(script_filename)
-        processor = self.get_processor(tree_and_parser[0], tree_and_parser[1], branch, repo_path=repo_path)
-        self.start_walking_with_processor(tree_and_parser[1], processor)
+        self.get_processor(tree_and_parser[0], tree_and_parser[1], branch, repo_path=repo_path)
+        # self.start_walking_with_processor(tree_and_parser[1], processor)
 

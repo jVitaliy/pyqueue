@@ -31,11 +31,17 @@ class DeployService:
         logging.info(f"deploy from {src} to {dest} with excluding={exclude} and pattern={pattern}")
 
     def walk_through_tree(self, folder_src, folder_dest, exclude=None, pattern=None):
-        for root, dirs, files in os.walk(folder_src, topdown=False):
-            dirs_filtered = self.filter_names(dirs, exclude=exclude, pattern=pattern)
-            for df in dirs_filtered:
+        # print(f"folder_src = {folder_src} / folder_dest = {folder_dest}")
+        for root, dirs, files in os.walk(folder_src, topdown=True):
+            # print(f"root = {root} / dirs = {dirs}")
+            dirs_excluded = self.filter_names(dirs, exclude=exclude, pattern=pattern)
+            # print(f"dirs_excluded = {dirs_excluded}")
+            for df in dirs_excluded:
                 dirs.remove(df)
-            files_filtered = self.filter_names(files, exclude=exclude, pattern=pattern)
+            files_excluded = self.filter_names(files, exclude=exclude, pattern=pattern)
+
+            files_filtered = set(files).difference(files_excluded)
+            # print(f"files_filtered={files_filtered}")
             related_path = root.replace(folder_src, "")
             for file in files_filtered:
                 os.makedirs(os.path.dirname(f"{folder_dest}{related_path}/"), exist_ok=True)
@@ -45,8 +51,9 @@ class DeployService:
 
     def filter_names(self, names, exclude=None, pattern=None):
         names_excluded = self._ignore_patterns(names, exclude=exclude, patterns=pattern)
-
-        names_set = set(names)
-        a = names_set.difference(names_excluded)
-        return a
-
+        # print(f"excluded={names_excluded}")
+        # names_set = set(names)
+        # a = names_set.difference(names_excluded)
+        # print(f"a={a}")
+        # return a
+        return names_excluded

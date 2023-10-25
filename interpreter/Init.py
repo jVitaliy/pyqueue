@@ -21,7 +21,6 @@ class Init(AbstractProcessor):
 
     def exitHost(self, ctx: DescParser.SetRepoSourceContext):
         self._repo_host = ctx.getText()
-        print(f"host={self._repo_host}")
 
     def exitStartSystemService(self, ctx: DescParser.StartSystemServiceContext):
         if self._current_branch is not None:

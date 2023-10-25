@@ -16,7 +16,7 @@ class InitStage(Init):
     def exitCloneGitToTmp(self, ctx: DescParser.CloneGitToTmpContext):
         if self._current_branch is None:
             return
-        print(f"clone for branch={self._current_branch} {self._repo_host}")
+
         repo_obj = {'path': self._initial_repo_path, 'alias': None}
 
         if self._repo_data is not None and 'path' in self._repo_data.keys():

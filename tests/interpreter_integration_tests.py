@@ -98,7 +98,7 @@ class InterpreterTest(unittest.TestCase):
         self.assertEqual('git.tauproject.com', processor._repo_host)
         self.assertEqual(0, len(processor.scope_stack))
 
-    @unittest.skipIf(False, "skip due to not ready infrastructure")
+    @unittest.skipIf(True, "skip due to not ready infrastructure")
     def test_remote_deploy(self):
         processor = DescProcessor('master', 'tauproject/alcyone-pdm/pyqueue.git')
         self.walk('remote_deploy_real.desc', processor)

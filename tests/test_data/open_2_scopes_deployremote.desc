@@ -1,0 +1,12 @@
+branch(develop);
+repoHost(git.tauproject.com);
+openGitRepoLocally();
+stopSystemService(www-service);
+deployToRemote( remoteHost=localhost, remoteUser=develop, remoteUserPass=caliberda_, /develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy);
+
+openGitRepoLocally(tauproject/tau-config.git, config);
+deployToRemote(remoteHost=localhost, remoteUser=develop, remoteUserPass=caliberda_, /develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy/cfg, pattern=*.yml, merge);
+closeGitRepo();
+
+startSystemService(www-service);
+closeGitRepo();

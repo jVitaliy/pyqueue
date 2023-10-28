@@ -1,8 +1,7 @@
 import logging
 
-from interpreter.DescParser import DescParser
 from interpreter.AbstractProcessor import AbstractProcessor
-from interpreter.exceptions.GitBranchException import GitBranchException
+from interpreter.DescParser import DescParser
 
 
 class Init(AbstractProcessor):
@@ -17,10 +16,8 @@ class Init(AbstractProcessor):
             #     f"branch `{self._current_branch}` does not match to target branch `{self._target_branch}`")
 
     def exitSetRepoSource(self, ctx: DescParser.SetRepoSourceContext):
+        self._repo_host = ctx.host().getText()
         logging.info(f"set repo host to {self._repo_host}")
-
-    def exitHost(self, ctx: DescParser.SetRepoSourceContext):
-        self._repo_host = ctx.getText()
 
     def exitStartSystemService(self, ctx: DescParser.StartSystemServiceContext):
         if self._current_branch is not None:

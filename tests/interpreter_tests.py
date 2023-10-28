@@ -194,15 +194,6 @@ class InterpreterTest(unittest.TestCase):
         self._builder_service.build.assert_has_calls([call("next", "npm", "/var/www/tauproject/develop")])
 
     def test_minimal_for_2_branches(self):
-        processor = self.build_processor("develop")
-        self.walk('minimal_for_2_branches.desc', processor)
-
-        # self.assertEqual('develop', processor._current_branch)
-        # self.assertEqual('localhost', processor._repo_host)
-        self.assertEqual(0, len(processor.scope_stack))
-        self._git_service.clone.assert_has_calls([call(self.REPO_PATH, 'localhost')])
-
-    def test_minimal_for_2_branches(self):
         processor = self.build_processor("master")
         self.walk('minimal_for_2_branches.desc', processor)
 
@@ -215,6 +206,27 @@ class InterpreterTest(unittest.TestCase):
         processor = self.build_processor("master")
         self.walk('remote_deploy.desc', processor)
         self._deploy_service.deploy.assert_not_called()
+        self._git_service.clone.assert_has_calls([call(self.REPO_PATH, self.GIT_HOST)])
+        self._deploy_service.deploy_to_remote.assert_has_calls([call('localhost', 'develop', 'caliberda_',
+                                                                     '/tmp/tauproject/alcyone-pdm/test-pro/build/libs',
+                                                                     '/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy',
+                                                                     exclude=None, pattern=['*.jar'], is_merge=False)])
+        self.assertEqual(0, len(processor.scope_stack))
+        self._git_service.clone.assert_has_calls([call(self.REPO_PATH, 'git.tauproject.com')])
+
+    def test_remote_deploy_with_2_scopes(self):
+        processor = self.build_processor("develop")
+        self.walk('open_2_scopes_deployremote.desc', processor)
+        self._deploy_service.deploy.assert_not_called()
+        self._git_service.clone.assert_has_calls([call(self.REPO_PATH, self.GIT_HOST),
+                                                  call("tauproject/tau-config.git", self.GIT_HOST)])
+        call1 = call('localhost', 'develop', 'caliberda_', '/tmp/tauproject/alcyone-pdm/test-pro',
+                '/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy',
+                     exclude=None, pattern=None, is_merge=False)
+        call2 = call('localhost', 'develop', 'caliberda_', '/tmp/tauproject/alcyone-pdm/test-conf',
+                '/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy/cfg',
+                     exclude=None, pattern=['*.yml'], is_merge=True)
+        self._deploy_service.deploy_to_remote.assert_has_calls([call1, call2])
         self.assertEqual(0, len(processor.scope_stack))
         self._git_service.clone.assert_has_calls([call(self.REPO_PATH, 'git.tauproject.com')])
 

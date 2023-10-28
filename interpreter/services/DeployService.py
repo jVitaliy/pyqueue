@@ -4,6 +4,8 @@ import os
 import shutil
 from pathlib import Path
 
+import paramiko
+
 
 class DeployService:
 
@@ -27,10 +29,42 @@ class DeployService:
             shutil.rmtree(dest, ignore_errors=True)
         src = f"{src_path}"
         Path(dest).mkdir(parents=True, exist_ok=True)
-        self.walk_through_tree(src, dest, exclude=exclude, pattern=pattern)
+        self.walk_through_tree(src, dest, self.local_copier, exclude=exclude, pattern=pattern)
         logging.info(f"deploy from {src} to {dest} with excluding={exclude} and pattern={pattern}")
 
-    def walk_through_tree(self, folder_src, folder_dest, exclude=None, pattern=None):
+    def deploy_to_remote(self, remote_host, remote_user, remote_user_pass, src_path, dest_path, exclude=None, pattern=None, is_merge=False):
+        dest = f"{dest_path}"
+        logging.info(f"try to open ssh connection with {remote_host} {remote_user} {remote_user_pass}")
+        client = paramiko.SSHClient()
+        client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+
+        # client.load_system_host_keys()
+        # client.load_host_keys('~/.ssh/known_hosts')
+        # client.set_missing_host_key_policy(AutoAddPolicy())
+
+        client.connect(remote_host, username=remote_user, password=remote_user_pass)
+        try:
+            if not is_merge:
+                stdin, stdout, stderr = client.exec_command(f"rm -rd {dest}")
+                stdin.close()
+                stdout.close()
+                stderr.close()
+
+            src = f"{src_path}"
+            # Path(dest).mkdir(parents=True, exist_ok=True)
+
+            stdin, stdout, stderr = client.exec_command(f"mkdir -p {dest}")
+            stdin.close()
+            stdout.close()
+            stderr.close()
+            sftp = client.open_sftp()
+            self.walk_through_tree(src, dest, self.remote_copier, exclude=exclude, pattern=pattern, ssh_client=client,
+                                   sftp=sftp)
+            logging.info(f"deploy from {src} to {dest} with excluding={exclude} and pattern={pattern}")
+        finally:
+            client.close()
+
+    def walk_through_tree(self, folder_src, folder_dest, copier, exclude=None, pattern=None, ssh_client=None, sftp=None):
         # print(f"folder_src = {folder_src} / folder_dest = {folder_dest}")
         for root, dirs, files in os.walk(folder_src, topdown=True):
             # print(f"root = {root} / dirs = {dirs}")
@@ -44,10 +78,25 @@ class DeployService:
             # print(f"files_filtered={files_filtered}")
             related_path = root.replace(folder_src, "")
             for file in files_filtered:
-                os.makedirs(os.path.dirname(f"{folder_dest}{related_path}/"), exist_ok=True)
-                shutil.copyfile(f"{root}/{file}", f"{folder_dest}{related_path}/{file}")
+                if ssh_client is None:
+                    copier(root, file, folder_dest, related_path)
+                else:
+                    copier(ssh_client, sftp, root, file, folder_dest, related_path)
                 logging.debug(f"copied from {root}/{file} to {folder_dest}{related_path}/{file}")
 
+    def local_copier(self, root, file, folder_dest, related_path):
+        os.makedirs(os.path.dirname(f"{folder_dest}{related_path}/"), exist_ok=True)
+        shutil.copyfile(f"{root}/{file}", f"{folder_dest}{related_path}/{file}")
+
+    def remote_copier(self, client, sftp, root, file, folder_dest, related_path):
+        stdin, stdout, stderr = client.exec_command(f"mkdir -p {folder_dest}{related_path}")
+        exit_status = stdout.channel.recv_exit_status()
+        if exit_status != 0:
+            logging.error(stderr.read().decode())
+        sftp.put(f"{root}/{file}", f"{folder_dest}{related_path}/{file}")
+        stdin.close()
+        stdout.close()
+        stderr.close()
 
     def filter_names(self, names, exclude=None, pattern=None):
         names_excluded = self._ignore_patterns(names, exclude=exclude, patterns=pattern)

@@ -1,0 +1,7 @@
+branch(master);
+repoHost(git.tauproject.com);
+openGitRepoLocally();
+
+deployToRemote( remoteHost=localhost, remoteUser=develop, remoteUserPass=caliberda_, from=build/libs, /develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy, pattern=*.jar);
+
+closeGitRepo();

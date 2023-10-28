@@ -211,5 +211,12 @@ class InterpreterTest(unittest.TestCase):
         self.assertEqual(0, len(processor.scope_stack))
         self._git_service.clone.assert_has_calls([call(self.REPO_PATH, 'git.tauproject.com')])
 
+    def test_remote_deploy(self):
+        processor = self.build_processor("master")
+        self.walk('remote_deploy.desc', processor)
+        self._deploy_service.deploy.assert_not_called()
+        self.assertEqual(0, len(processor.scope_stack))
+        self._git_service.clone.assert_has_calls([call(self.REPO_PATH, 'git.tauproject.com')])
+
 if __name__ == '__main__':
     unittest.main()

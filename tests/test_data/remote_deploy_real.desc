@@ -1,0 +1,5 @@
+branch(master);
+repoHost(git.tauproject.com);
+openGitRepoLocally();
+deployToRemote( remoteHost=contabo, remoteUser=deploy, remoteUserPass=e_4F1KzUjc-1tR6e, /usr/local/tauproject/alcyone-pdm/pyqueue, exclude=.git|tests);
+closeGitRepo();

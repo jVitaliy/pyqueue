@@ -1,0 +1,8 @@
+branch(production);
+ssh =sshCredentials(remoteHost=173.249.48.192, remoteUser=deploy, remoteUserPass=e_4F1KzUjc-1tR6e);
+openGitRepoLocally();
+deployToRemote( ssh, /var/www/tauproject, exclude=.git|.gitignore);
+openGitRepoLocally(tauproject/tau-config.git, config);
+deployToRemote( ssh, from=ui, /var/www/tauproject, exclude=.git|.gitignore, pattern=.env, merge);
+closeGitRepo();
+closeGitRepo();

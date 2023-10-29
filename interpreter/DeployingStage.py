@@ -62,21 +62,6 @@ class DeployingStage(ConfiguringStage):
             return
         self._deploy_data = {}
 
-    def exitRemoteHostParam(self, ctx: DescParser.RemoteHostParamContext):
-        if self._current_branch is None:
-            return
-        self._deploy_data['remote_host'] = ctx.remoteHost().getText()
-
-    def exitRemoteUserParam(self, ctx: DescParser.RemoteUserParamContext):
-        if self._current_branch is None:
-            return
-        self._deploy_data['remote_user'] = ctx.remoteUser().getText()
-
-    def exitRemoteUserPassParam(self, ctx: DescParser.RemoteUserPassParamContext):
-        if self._current_branch is None:
-            return
-        self._deploy_data['remote_user_pass'] = ctx.remoteUserPassword().getText()
-
     def exitDeployTo(self, ctx: DescParser.DeployToContext):
         if self._current_branch is None:
             return
@@ -108,7 +93,6 @@ class DeployingStage(ConfiguringStage):
             else f"{current_repo_data['tmp_folder']}/{project_name}/{self._deploy_data['path_from']}"
         is_merge = False if ctx.MERGE() is None else True
 
-        self._deploy_service.deploy_to_remote(self._deploy_data['remote_host'], self._deploy_data['remote_user'],
-                                              self._deploy_data['remote_user_pass'],
+        self._deploy_service.deploy_to_remote(self._variables[ctx.variableName().getText()],
                                               path_from, self._deploy_data['path'], exclude=excluded, pattern=pattern,
                                     is_merge=is_merge)

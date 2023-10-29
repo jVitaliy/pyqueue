@@ -107,5 +107,14 @@ class InterpreterTest(unittest.TestCase):
         self.assertEqual('git.tauproject.com', processor._repo_host)
         self.assertEqual(0, len(processor.scope_stack))
 
+    @unittest.skipIf(True, "skip due to not ready infrastructure")
+    def test_remote_deploy(self):
+        processor = DescProcessor('production', 'tauproject/ui.git')
+        self.walk('ui_deployremote.desc', processor)
+
+        self.assertEqual('production', processor._current_branch)
+        self.assertEqual('git.tauproject.com', processor._repo_host)
+        self.assertEqual(0, len(processor.scope_stack))
+
 if __name__ == '__main__':
     unittest.main()

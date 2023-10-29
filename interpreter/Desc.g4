@@ -1,9 +1,11 @@
 grammar Desc;
-script : ((setBranch SEMICOLON) (setRepoSource SEMICOLON)? gitRepoScope*)+ EOF;
+script : ((setBranch SEMICOLON) (setRepoSource SEMICOLON)? (variableSet SEMICOLON)* gitRepoScope*)+ EOF;
 gitRepoScope : (cloneGitToTmp SEMICOLON)  scopeCmds* (closeGitRepo SEMICOLON);
 scopeCmds : (deployTo SEMICOLON)
     | (startSystemService SEMICOLON)
     | (stopSystemService SEMICOLON)
+    | (startSystemServiceRemote SEMICOLON)
+    | (stopSystemServiceRemote SEMICOLON)
     | (buildProject SEMICOLON)
     | (deployToRemote SEMICOLON)
     | gitRepoScope
@@ -12,13 +14,16 @@ scopeCmds : (deployTo SEMICOLON)
 setBranch : BRANCH '(' branchName ')';
 setRepoSource : REPO_HOST '(' host ')';
 host : (namingChars+ DOT)* namingChars+;
-
+variableSet : variableName EQUALS function ;
+variableName : namingChars+;
+function : sshCredentials ;
+sshCredentials : SSH_CREDENTIALS '(' remoteHostParam COMMA remoteUserParam (COMMA remoteUserPassParam)? ')' ;
 buildProject : BUILD_PROJECT '(' projectLanguage COMMA builderType (COMMA buildDir)?')';
 projectLanguage : LANGUAGE EQUALS (JAVA17 | NEXT | PYTHON39);
 builderType : 'type' EQUALS (MAVEN | GRADLE | NPM);
 buildDir : 'dir' EQUALS buildFolder;
 buildFolder : pathChars+;
-deployToRemote : DEPLOY_TO_REMOTE '(' remoteHostParam COMMA remoteUserParam COMMA (remoteUserPassParam COMMA)? (pathFrom COMMA)? pathForDeployTo (
+deployToRemote : DEPLOY_TO_REMOTE '(' variableName COMMA (pathFrom COMMA)? pathForDeployTo (
                     (COMMA excludePattern)
                     | (COMMA deployPattern)
                     | (COMMA deployPattern ',' excludePattern)
@@ -56,6 +61,8 @@ pattern : (namingChars | '*' | '^' | '\\' | '$' | DOT ) +;
 branchName : namingChars+ ;
 startSystemService : START_SYSTEM_SERVICE '(' serviceName ')';
 stopSystemService : STOP_SYSTEM_SERVICE '(' serviceName ')';
+startSystemServiceRemote : START_SYSTEM_SERVICE_REMOTE '(' variableName COMMA serviceName ')';
+stopSystemServiceRemote : STOP_SYSTEM_SERVICE_REMOTE '(' variableName COMMA serviceName ')';
 serviceName : namingChars+;
 repoAliasName : namingChars+ ;
 namingChars: NUM | CHARS | '-' | '_' ;
@@ -76,8 +83,11 @@ SEMICOLON : ';';
 BUILD_PROJECT: 'buildProject';
 START_SYSTEM_SERVICE : 'startSystemService';
 STOP_SYSTEM_SERVICE : 'stopSystemService';
+START_SYSTEM_SERVICE_REMOTE : 'startSystemServiceRemote';
+STOP_SYSTEM_SERVICE_REMOTE : 'stopSystemServiceRemote';
 BRANCH : 'branch';
 DEPLOY_TO : 'deployTo';
+SSH_CREDENTIALS : 'sshCredentials';
 DEPLOY_TO_REMOTE : 'deployToRemote';
 REMOTE_HOST_PARAM : 'remoteHost' ;
 REMOTE_USER_PARAM : 'remoteUser' ;

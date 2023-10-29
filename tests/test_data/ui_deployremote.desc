@@ -1,0 +1,9 @@
+branch(production);
+repoHost(git.tauproject.com);
+openGitRepoLocally();
+deployToRemote( remoteHost=173.249.48.192, remoteUser=deploy, remoteUserPass=e_4F1KzUjc-1tR6e, /var/www/tauproject, exclude=.git|.gitignore);
+openGitRepoLocally(tauproject/tau-config.git, config);
+deployToRemote( remoteHost=173.249.48.192, remoteUser=deploy, remoteUserPass=e_4F1KzUjc-1tR6e, from=ui, /var/www/tauproject, exclude=.git|.gitignore, pattern=.env, merge);
+closeGitRepo();
+
+closeGitRepo();

@@ -32,9 +32,9 @@ class DeployService:
         self.walk_through_tree(src, dest, self.local_copier, exclude=exclude, pattern=pattern)
         logging.info(f"deploy from {src} to {dest} with excluding={exclude} and pattern={pattern}")
 
-    def deploy_to_remote(self, remote_host, remote_user, remote_user_pass, src_path, dest_path, exclude=None, pattern=None, is_merge=False):
+    def deploy_to_remote(self, ssh_cred, src_path, dest_path, exclude=None, pattern=None, is_merge=False):
         dest = f"{dest_path}"
-        logging.info(f"try to open ssh connection with {remote_host} {remote_user} {remote_user_pass}")
+        logging.info(f"try to open ssh connection with {ssh_cred['host']} {ssh_cred['user']} {ssh_cred['password']}")
         client = paramiko.SSHClient()
         client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
@@ -42,7 +42,7 @@ class DeployService:
         # client.load_host_keys('~/.ssh/known_hosts')
         # client.set_missing_host_key_policy(AutoAddPolicy())
 
-        client.connect(remote_host, username=remote_user, password=remote_user_pass)
+        client.connect(ssh_cred['host'], username=ssh_cred['user'], password=ssh_cred['password'])
         try:
             if not is_merge:
                 stdin, stdout, stderr = client.exec_command(f"rm -rd {dest}")

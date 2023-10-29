@@ -14,17 +14,14 @@ class BuilderService(AbstractExternalShellCmd):
             self.nextNpmBuild(folder)
 
     def java17GradleBuild(self, folder):
-        self.shell_command = f"{folder}/gradlew build"
-        self.execute(folder)
+        self.execute(f"{folder}/gradlew build", working_folder=folder)
         if self.returncode > 0:
             raise BuildServiceException(f"Java17/Gradle error - {self.error}")
         logging.info("build Java17/Gradle succeeded")
 
     def nextNpmBuild(self, folder):
-        self.shell_command = "/usr/bin/npm install"
-        self.execute(folder)
-        self.shell_command = "/usr/bin/npm run build"
-        self.execute(folder)
+        self.execute("/usr/bin/npm install", working_folder=folder)
+        self.execute("/usr/bin/npm run build", working_folder=folder)
         if self.returncode > 0:
             raise BuildServiceException(f"NEST/npm error - {self.error}")
         logging.info("build NEST/npm succeeded")

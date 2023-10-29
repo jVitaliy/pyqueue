@@ -20,6 +20,8 @@ class AbstractProcessor(DescListener):
         self._deploy_pattern = None
         self._deploy_data = None
         self._builder_data = None
+        self._variables = None
+
         self._git_service = GitService()
         self._deploy_service = DeployService()
         self._system_service = SystemService()

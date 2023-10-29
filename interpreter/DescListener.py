@@ -62,6 +62,42 @@ class DescListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by DescParser#variableSet.
+    def enterVariableSet(self, ctx:DescParser.VariableSetContext):
+        pass
+
+    # Exit a parse tree produced by DescParser#variableSet.
+    def exitVariableSet(self, ctx:DescParser.VariableSetContext):
+        pass
+
+
+    # Enter a parse tree produced by DescParser#variableName.
+    def enterVariableName(self, ctx:DescParser.VariableNameContext):
+        pass
+
+    # Exit a parse tree produced by DescParser#variableName.
+    def exitVariableName(self, ctx:DescParser.VariableNameContext):
+        pass
+
+
+    # Enter a parse tree produced by DescParser#function.
+    def enterFunction(self, ctx:DescParser.FunctionContext):
+        pass
+
+    # Exit a parse tree produced by DescParser#function.
+    def exitFunction(self, ctx:DescParser.FunctionContext):
+        pass
+
+
+    # Enter a parse tree produced by DescParser#sshCredentials.
+    def enterSshCredentials(self, ctx:DescParser.SshCredentialsContext):
+        pass
+
+    # Exit a parse tree produced by DescParser#sshCredentials.
+    def exitSshCredentials(self, ctx:DescParser.SshCredentialsContext):
+        pass
+
+
     # Enter a parse tree produced by DescParser#buildProject.
     def enterBuildProject(self, ctx:DescParser.BuildProjectContext):
         pass
@@ -284,6 +320,24 @@ class DescListener(ParseTreeListener):
 
     # Exit a parse tree produced by DescParser#stopSystemService.
     def exitStopSystemService(self, ctx:DescParser.StopSystemServiceContext):
+        pass
+
+
+    # Enter a parse tree produced by DescParser#startSystemServiceRemote.
+    def enterStartSystemServiceRemote(self, ctx:DescParser.StartSystemServiceRemoteContext):
+        pass
+
+    # Exit a parse tree produced by DescParser#startSystemServiceRemote.
+    def exitStartSystemServiceRemote(self, ctx:DescParser.StartSystemServiceRemoteContext):
+        pass
+
+
+    # Enter a parse tree produced by DescParser#stopSystemServiceRemote.
+    def enterStopSystemServiceRemote(self, ctx:DescParser.StopSystemServiceRemoteContext):
+        pass
+
+    # Exit a parse tree produced by DescParser#stopSystemServiceRemote.
+    def exitStopSystemServiceRemote(self, ctx:DescParser.StopSystemServiceRemoteContext):
         pass
 
 

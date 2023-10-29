@@ -1,5 +1,6 @@
 import os
 import unittest
+from collections import OrderedDict
 from unittest.mock import Mock, call
 
 from interpreter.DescProcessor import DescProcessor
@@ -207,7 +208,8 @@ class InterpreterTest(unittest.TestCase):
         self.walk('remote_deploy.desc', processor)
         self._deploy_service.deploy.assert_not_called()
         self._git_service.clone.assert_has_calls([call(self.REPO_PATH, self.GIT_HOST)])
-        self._deploy_service.deploy_to_remote.assert_has_calls([call('localhost', 'develop', 'caliberda_',
+        credentials = {'host': '173.249.48.192', 'user': 'deploy', 'password': 'e_4F1KzUjc-1tR6e'}
+        self._deploy_service.deploy_to_remote.assert_has_calls([call(credentials,
                                                                      '/tmp/tauproject/alcyone-pdm/test-pro/build/libs',
                                                                      '/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy',
                                                                      exclude=None, pattern=['*.jar'], is_merge=False)])
@@ -220,15 +222,56 @@ class InterpreterTest(unittest.TestCase):
         self._deploy_service.deploy.assert_not_called()
         self._git_service.clone.assert_has_calls([call(self.REPO_PATH, self.GIT_HOST),
                                                   call("tauproject/tau-config.git", self.GIT_HOST)])
-        call1 = call('localhost', 'develop', 'caliberda_', '/tmp/tauproject/alcyone-pdm/test-pro',
+        credentials = {'host': '173.249.48.192', 'user': 'deploy', 'password': 'e_4F1KzUjc-1tR6e'}
+        call1 = call(credentials, '/tmp/tauproject/alcyone-pdm/test-pro',
                 '/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy',
-                     exclude=None, pattern=None, is_merge=False)
-        call2 = call('localhost', 'develop', 'caliberda_', '/tmp/tauproject/alcyone-pdm/test-conf',
+                     exclude=['.git'], pattern=None, is_merge=False)
+        call2 = call(credentials, '/tmp/tauproject/alcyone-pdm/test-conf',
                 '/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy/cfg',
                      exclude=None, pattern=['*.yml'], is_merge=True)
         self._deploy_service.deploy_to_remote.assert_has_calls([call1, call2])
         self.assertEqual(0, len(processor.scope_stack))
         self._git_service.clone.assert_has_calls([call(self.REPO_PATH, 'git.tauproject.com')])
+
+    def test_remote_deploy_ui(self):
+        processor = self.build_processor("production")
+        self.walk('ui_deployremote_minimal_no_build.desc', processor)
+        self._deploy_service.deploy.assert_not_called()
+        self._git_service.clone.assert_has_calls([call(self.REPO_PATH, 'localhost'),
+                                                  call("tauproject/tau-config.git", 'localhost')])
+        credentials = {'host': '173.249.48.192', 'user': 'deploy', 'password': 'e_4F1KzUjc-1tR6e'}
+        call1 = call(credentials, '/tmp/tauproject/alcyone-pdm/test-pro',
+                '/var/www/tauproject',
+                     exclude=['.git', '.gitignore'], pattern=None, is_merge=False)
+        call2 = call(credentials, '/tmp/tauproject/alcyone-pdm/test-conf/ui',
+                '/var/www/tauproject',
+                     exclude=['.git', '.gitignore'], pattern=['.env'], is_merge=True)
+        self._deploy_service.deploy_to_remote.assert_has_calls([call1, call2])
+        self.assertEqual(0, len(processor.scope_stack))
+        self._git_service.clone.assert_has_calls([call('tauproject/alcyone-pdm/queue-scripts.git', 'localhost'),
+            call('tauproject/tau-config.git', 'localhost')])
+
+    def test_remote_deploy_ui_start_stop_remote(self):
+        processor = self.build_processor("production")
+        self.walk('ui_deployremote_start_stop_remote.desc', processor)
+        self._deploy_service.deploy.assert_not_called()
+        self._git_service.clone.assert_has_calls([call(self.REPO_PATH, 'localhost'),
+                                                  call("tauproject/tau-config.git", 'localhost')])
+        credentials = {'host': '173.249.48.192', 'user': 'deploy', 'password': 'e_4F1KzUjc-1tR6e'}
+        call1 = call(credentials, '/tmp/tauproject/alcyone-pdm/test-pro',
+                '/var/www/tauproject',
+                     exclude=['.git', '.gitignore'], pattern=None, is_merge=False)
+        call2 = call(credentials, '/tmp/tauproject/alcyone-pdm/test-conf/ui',
+                '/var/www/tauproject',
+                     exclude=['.git', '.gitignore'], pattern=['.env'], is_merge=True)
+        self._deploy_service.deploy_to_remote.assert_has_calls([call1, call2])
+        self.assertEqual(0, len(processor.scope_stack))
+        self._git_service.clone.assert_has_calls([call('tauproject/alcyone-pdm/queue-scripts.git', 'localhost'),
+            call('tauproject/tau-config.git', 'localhost')])
+        # credentials = OrderedDict({'host': '173.249.48.192', 'user': 'deploy', 'password': 'e_4F1KzUjc-1tR6e'})
+        call3 = call(credentials, 'www-service')
+        self._system_service.stopServiceRemote.assert_has_calls([call3])
+        self._system_service.startServiceRemote.assert_has_calls([call3])
 
 if __name__ == '__main__':
     unittest.main()

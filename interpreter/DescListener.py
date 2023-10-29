@@ -251,6 +251,51 @@ class DescListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by DescParser#applyConfiguration.
+    def enterApplyConfiguration(self, ctx:DescParser.ApplyConfigurationContext):
+        pass
+
+    # Exit a parse tree produced by DescParser#applyConfiguration.
+    def exitApplyConfiguration(self, ctx:DescParser.ApplyConfigurationContext):
+        pass
+
+
+    # Enter a parse tree produced by DescParser#configurationBranch.
+    def enterConfigurationBranch(self, ctx:DescParser.ConfigurationBranchContext):
+        pass
+
+    # Exit a parse tree produced by DescParser#configurationBranch.
+    def exitConfigurationBranch(self, ctx:DescParser.ConfigurationBranchContext):
+        pass
+
+
+    # Enter a parse tree produced by DescParser#configBranchName.
+    def enterConfigBranchName(self, ctx:DescParser.ConfigBranchNameContext):
+        pass
+
+    # Exit a parse tree produced by DescParser#configBranchName.
+    def exitConfigBranchName(self, ctx:DescParser.ConfigBranchNameContext):
+        pass
+
+
+    # Enter a parse tree produced by DescParser#configurationPath.
+    def enterConfigurationPath(self, ctx:DescParser.ConfigurationPathContext):
+        pass
+
+    # Exit a parse tree produced by DescParser#configurationPath.
+    def exitConfigurationPath(self, ctx:DescParser.ConfigurationPathContext):
+        pass
+
+
+    # Enter a parse tree produced by DescParser#confPath.
+    def enterConfPath(self, ctx:DescParser.ConfPathContext):
+        pass
+
+    # Exit a parse tree produced by DescParser#confPath.
+    def exitConfPath(self, ctx:DescParser.ConfPathContext):
+        pass
+
+
     # Enter a parse tree produced by DescParser#cloneGitToTmp.
     def enterCloneGitToTmp(self, ctx:DescParser.CloneGitToTmpContext):
         pass

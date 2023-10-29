@@ -17,6 +17,7 @@ class InterpreterTest(unittest.TestCase):
     def __init__(self, methodName='runTest'):
         super().__init__(methodName)
         self._git_service = Mock()
+        self._config_service = Mock()
         self._deploy_service = Mock()
         self._system_service = Mock()
         self._builder_service = Mock()
@@ -39,6 +40,7 @@ class InterpreterTest(unittest.TestCase):
         processor._git_service = self._git_service
         processor._system_service = self._system_service
         processor._builder_service = self._builder_service
+        processor._config_service = self._config_service
         paths = [self.TMP_PATH, self.TMP_PATH_CONF]
         self._git_service.clone.side_effect = paths
         repo_names = ["test-pro", "test-conf"]
@@ -272,6 +274,25 @@ class InterpreterTest(unittest.TestCase):
         call3 = call(credentials, 'www-service')
         self._system_service.stopServiceRemote.assert_has_calls([call3])
         self._system_service.startServiceRemote.assert_has_calls([call3])
+
+    def test_apply_config(self):
+        processor = self.build_processor("develop")
+        self.walk('apply_config_simple.desc', processor)
+        self._deploy_service.deploy.assert_has_calls([call('/tmp/tauproject/alcyone-pdm/test-pro',
+                                                          '/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy',
+                                                          exclude=None, pattern=None, is_merge=False)])
+        self._git_service.clone.assert_has_calls([call(self.REPO_PATH, self.GIT_HOST)])
+        self._system_service.stopService.assert_has_calls([call("www-service")])
+        self._system_service.startService.assert_has_calls([call("www-service")])
+        self._deploy_service.deploy_to_remote.assert_not_called()
+        self.assertEqual(0, len(processor.scope_stack))
+        self._git_service.clone.assert_has_calls([call(self.REPO_PATH, self.GIT_HOST)])
+        self._config_service.apply.assert_has_calls([call( self.GIT_HOST, "tauproject/config.git", "prod", "devel",
+                                                          '/tmp/tauproject/alcyone-pdm/test-pro',
+                                                          exclude=None, pattern=['application.yml'],
+                                                          git_service=self._git_service)])
+
+
 
 if __name__ == '__main__':
     unittest.main()

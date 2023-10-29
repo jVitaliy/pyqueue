@@ -9,7 +9,7 @@ from interpreter.TauDeployScriptInterpreter import TauDeployScriptInterpreter
 class InterpreterTest(unittest.TestCase):
 
     def walk(self, filename, processor):
-        data_dir = os.path.join(os.path.dirname(__file__), 'test_data')
+        data_dir = os.path.join(os.path.dirname(__file__), 'integration_test_data')
         data_file = os.path.join(data_dir, filename)
         interpreter = TauDeployScriptInterpreter()
         tree_and_parser = interpreter.get_tree_and_parser(data_file)
@@ -62,14 +62,14 @@ class InterpreterTest(unittest.TestCase):
         self.assertEqual('git.tauproject.com', processor._repo_host)
         self.assertEqual(0, len(processor.scope_stack))
 
-    @unittest.skip("skip due to not ready infrastructure")
-    def test_minimal_with_deploy_from(self):
-        processor = DescProcessor('develop', 'tauproject/alcyone-pdm/queue-scripts.git')
-        self.walk('minimal_to_clone_and_deploy_from.desc', processor)
-
-        self.assertEqual('develop', processor._current_branch)
-        self.assertEqual('git.tauproject.com', processor._repo_host)
-        self.assertEqual(0, len(processor.scope_stack))
+    # @unittest.skip("skip due to not ready infrastructure")
+    # def test_minimal_with_deploy_from(self):
+    #     processor = DescProcessor('develop', 'tauproject/alcyone-pdm/queue-scripts.git')
+    #     self.walk('minimal_to_clone_and_deploy_from.desc', processor)
+    #
+    #     self.assertEqual('develop', processor._current_branch)
+    #     self.assertEqual('git.tauproject.com', processor._repo_host)
+    #     self.assertEqual(0, len(processor.scope_stack))
 
     @unittest.skipIf(True, "skip due to not ready infrastructure")
     def test_deploy_merge(self):
@@ -115,6 +115,15 @@ class InterpreterTest(unittest.TestCase):
         self.assertEqual('production', processor._current_branch)
         self.assertEqual('git.tauproject.com', processor._repo_host)
         self.assertEqual(0, len(processor.scope_stack))
+
+    @unittest.skipIf(True, "skip due to not ready infrastructure")
+    def test_remote_deploy(self):
+        processor = DescProcessor('develop', 'tauproject/ui.git')
+        self.walk('test_apply_config_simple.desc', processor)
+
+        # self.assertEqual('production', processor._current_branch)
+        # self.assertEqual('git.tauproject.com', processor._repo_host)
+        # self.assertEqual(0, len(processor.scope_stack))
 
 if __name__ == '__main__':
     unittest.main()

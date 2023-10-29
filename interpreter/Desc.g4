@@ -7,7 +7,9 @@ scopeCmds : (deployTo SEMICOLON)
     | (startSystemServiceRemote SEMICOLON)
     | (stopSystemServiceRemote SEMICOLON)
     | (buildProject SEMICOLON)
+    | (buildProject SEMICOLON)
     | (deployToRemote SEMICOLON)
+    | (applyConfiguration SEMICOLON)
     | gitRepoScope
     ;
 
@@ -26,8 +28,8 @@ buildFolder : pathChars+;
 deployToRemote : DEPLOY_TO_REMOTE '(' variableName COMMA (pathFrom COMMA)? pathForDeployTo (
                     (COMMA excludePattern)
                     | (COMMA deployPattern)
-                    | (COMMA deployPattern ',' excludePattern)
-                    | (COMMA excludePattern ',' deployPattern)
+                    | (COMMA deployPattern COMMA excludePattern)
+                    | (COMMA excludePattern COMMA deployPattern)
                      )?
                      (COMMA MERGE)?')';
 
@@ -36,15 +38,15 @@ remoteHost : host ;
 remoteUserParam : REMOTE_USER_PARAM EQUALS remoteUser ;
 remoteUser : namingChars+;
 remoteUserPassParam : REMOTE_USER_PASS_PARAM EQUALS remoteUserPassword;
-remoteUserPassword : (namingChars | '-' | '_' | '!' | ';' | ':' | '^' | '#' | '@' | '%'
+remoteUserPassword : (namingChars | '-' | '_' | '!' | SEMICOLON | ':' | '^' | '#' | '@' | '%'
                     | '^' | '&' | '(' | ')' | '[' | ']' | EQUALS | DOT)+;
 
 
-deployTo : DEPLOY_TO '(' (pathFrom ',')? pathForDeployTo (
+deployTo : DEPLOY_TO '(' (pathFrom COMMA)? pathForDeployTo (
                     (COMMA excludePattern)
                     | (COMMA deployPattern)
-                    | (COMMA deployPattern ',' excludePattern)
-                    | (COMMA excludePattern ',' deployPattern)
+                    | (COMMA deployPattern COMMA excludePattern)
+                    | (COMMA excludePattern COMMA deployPattern)
                      )?
                      (COMMA MERGE)?')';
 excludePattern : 'exclude' EQUALS pattern ('|' pattern)*;
@@ -52,6 +54,11 @@ deployPattern : 'pattern' EQUALS pattern ('|' pattern)*;
 pathForDeployTo : pathForDeploy;
 pathFrom : 'from' EQUALS pathForDeploy;
 
+applyConfiguration : APPLY_CONFIGURATION '(' repoPath (COMMA configurationBranch)? (COMMA pathFrom)? (COMMA configurationPath)? COMMA deployPattern (COMMA excludePattern)? ')';
+configurationBranch : BRANCH EQUALS configBranchName;
+configBranchName : namingChars+;
+configurationPath : CONF_PATH EQUALS confPath;
+confPath : pathChars+ ;
 
 cloneGitToTmp : OPEN_GIT_REPO_LOCALLY '(' (repoPath  (COMMA repoAliasName)?)? ')';
 closeGitRepo : CLOSE_GIT_REPO '(' repoAliasName? ')';
@@ -86,8 +93,10 @@ STOP_SYSTEM_SERVICE : 'stopSystemService';
 START_SYSTEM_SERVICE_REMOTE : 'startSystemServiceRemote';
 STOP_SYSTEM_SERVICE_REMOTE : 'stopSystemServiceRemote';
 BRANCH : 'branch';
+CONF_PATH : 'confPath';
 DEPLOY_TO : 'deployTo';
 SSH_CREDENTIALS : 'sshCredentials';
+APPLY_CONFIGURATION : 'applyConfiguration';
 DEPLOY_TO_REMOTE : 'deployToRemote';
 REMOTE_HOST_PARAM : 'remoteHost' ;
 REMOTE_USER_PARAM : 'remoteUser' ;

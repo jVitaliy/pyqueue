@@ -38,7 +38,7 @@ class InitStage(Init):
         self.scope_stack.append(repo_obj)
 
     def exitRepoPath(self, ctx: DescParser.RepoPathContext):
-        if self._current_branch is None:
+        if self._current_branch is None or self._repo_data is None:
             return
 
         if len(ctx.getText()) > 0:

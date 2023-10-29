@@ -13,8 +13,8 @@ class SystemService(AbstractExternalShellCmd):
         if self.returncode > 0:
             raise SystemServiceException(self.error)
 
-    def startService(self, service_name):
-        self.execute(f"sudo /usr/bin/systemctl start {service_name}")
+    def stopService(self, service_name):
+        self.execute(f"sudo /usr/bin/systemctl stop {service_name}")
         if self.returncode > 0:
             raise SystemServiceException(self.error)
 
@@ -24,10 +24,10 @@ class SystemService(AbstractExternalShellCmd):
         client.connect(credentials['host'], username=credentials['user'], password=credentials['password'])
         return client
 
-    def stopServiceRemote(self, credentials, service_name):
+    def startServiceRemote(self, credentials, service_name):
         client = self.sshClientInit(credentials)
         try:
-            stdin, stdout, stderr = client.exec_command(f"sudo /usr/bin/systemctl stop {service_name}")
+            stdin, stdout, stderr = client.exec_command(f"sudo /usr/bin/systemctl start {service_name}")
             exit_status = stdout.channel.recv_exit_status()
             if exit_status != 0:
                 logging.error(stderr.read().decode())

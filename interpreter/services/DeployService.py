@@ -86,6 +86,7 @@ class DeployService:
 
     def local_copier(self, root, file, folder_dest, related_path):
         os.makedirs(os.path.dirname(f"{folder_dest}{related_path}/"), exist_ok=True)
+        shutil.copyfile(f"{root}/{file}", f"{folder_dest}{related_path}/{file}")
         shutil.copymode(f"{root}/{file}", f"{folder_dest}{related_path}/{file}")
 
     def remote_copier(self, client, sftp, root, file, folder_dest, related_path):

@@ -20,9 +20,10 @@ variableSet : variableName EQUALS function ;
 variableName : namingChars+;
 function : sshCredentials ;
 sshCredentials : SSH_CREDENTIALS '(' remoteHostParam COMMA remoteUserParam (COMMA remoteUserPassParam)? ')' ;
-buildProject : BUILD_PROJECT '(' projectLanguage COMMA builderType (COMMA buildDir)?')';
-projectLanguage : LANGUAGE EQUALS (JAVA17 | NEXT | PYTHON39);
-builderType : 'type' EQUALS (MAVEN | GRADLE | NPM);
+buildProject : BUILD_PROJECT '(' (javaBuild | nextBuild | pythonBuild)  (COMMA buildDir)?')';
+javaBuild :  LANGUAGE EQUALS JAVA17 COMMA 'type' EQUALS (MAVEN | GRADLE) ;
+nextBuild :  LANGUAGE EQUALS NEXT COMMA 'type' EQUALS NPM ;
+pythonBuild : LANGUAGE EQUALS PYTHON39 COMMA 'type' EQUALS INSTALL ;
 buildDir : 'dir' EQUALS buildFolder;
 buildFolder : pathChars+;
 deployToRemote : DEPLOY_TO_REMOTE '(' variableName COMMA (pathFrom COMMA)? pathForDeployTo (
@@ -82,6 +83,7 @@ MAVEN : 'maven';
 JAVA17 : 'java17';
 NEXT : 'next';
 PYTHON39 : 'python39';
+INSTALL : 'install';
 NPM : 'npm';
 
 LANGUAGE : 'language';

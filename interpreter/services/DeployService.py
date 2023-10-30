@@ -66,7 +66,7 @@ class DeployService:
 
     def walk_through_tree(self, folder_src, folder_dest, copier, exclude=None, pattern=None, ssh_client=None, sftp=None):
         # print(f"folder_src = {folder_src} / folder_dest = {folder_dest}")
-        for root, dirs, files in os.walk(folder_src, topdown=True, followlinks=True):
+        for root, dirs, files in os.walk(folder_src, topdown=True, followlinks=False):
             # print(f"root = {root} / dirs = {dirs}")
             dirs_excluded = self.filter_names(dirs, exclude=exclude, pattern=pattern)
             # print(f"dirs_excluded = {dirs_excluded}")
@@ -86,7 +86,7 @@ class DeployService:
 
     def local_copier(self, root, file, folder_dest, related_path):
         os.makedirs(os.path.dirname(f"{folder_dest}{related_path}/"), exist_ok=True)
-        shutil.copyfile(f"{root}/{file}", f"{folder_dest}{related_path}/{file}")
+        shutil.copyfile(f"{root}/{file}", f"{folder_dest}{related_path}/{file}", follow_symlinks=False)
         shutil.copymode(f"{root}/{file}", f"{folder_dest}{related_path}/{file}")
 
     def remote_copier(self, client, sftp, root, file, folder_dest, related_path):

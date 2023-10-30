@@ -30,3 +30,4 @@ class BuildStage(PreBuildStage):
             else ctx.buildDir().buildFolder().getText()
         if self._LANGUAGE in self._builder_data.keys() and self._BUILDER in self._builder_data.keys():
             self._builder_service.build(self._builder_data[self._LANGUAGE], self._builder_data[self._BUILDER], folder)
+

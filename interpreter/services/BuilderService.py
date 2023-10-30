@@ -41,8 +41,6 @@ class BuilderService(AbstractExternalShellCmd):
         self.execute("/usr/bin/python3.9 -m venv venv", working_folder=folder)
         logging.info(f"{self.output}")
         self.execute('source "$(pwd)/venv/bin/activate" && "$(pwd)/venv/bin/pip3.9" install -r requirements.txt && deactivate', working_folder=folder)
-        # self.execute('"$(pwd)/venv/bin/pip3.9" install -r requirements.txt', working_folder=folder)
-        # self.execute("deactivate", working_folder=folder)
         logging.info(f"{self.output}")
         if self.returncode > 0:
             raise BuildServiceException(f"{self.PYTHON39}/{self.INSTALL} error - {self.error}")

@@ -86,6 +86,7 @@ class DeployService:
 
     def local_copier(self, root, file, folder_dest, related_path):
         os.makedirs(os.path.dirname(f"{folder_dest}{related_path}/"), exist_ok=True)
+        shutil.copymode(f"{root}", f"{folder_dest}{related_path}")
         shutil.copyfile(f"{root}/{file}", f"{folder_dest}{related_path}/{file}", follow_symlinks=False)
         shutil.copymode(f"{root}/{file}", f"{folder_dest}{related_path}/{file}")
 

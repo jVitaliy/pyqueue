@@ -21,7 +21,6 @@ class BuildStage(PreBuildStage):
         self._builder_data[self._LANGUAGE] = ctx.PYTHON39().getText()
         self._builder_data[self._BUILDER] = ctx.INSTALL().getText()
 
-
     def exitBuildProject(self, ctx: DescParser.BuildProjectContext):
         if self._current_branch is None:
             return

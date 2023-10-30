@@ -22,6 +22,8 @@ class BuilderService(AbstractExternalShellCmd):
     def nextNpmBuild(self, folder):
         self.execute("/usr/bin/npm install", working_folder=folder)
         self.execute("/usr/bin/npm run build", working_folder=folder)
+        self.execute("/usr/bin/chmod 0775 .next", working_folder=folder)
+        self.execute("/usr/bin/chmod 0775 node_modules", working_folder=folder)
         if self.returncode > 0:
             raise BuildServiceException(f"NEST/npm error - {self.error}")
         logging.info("build NEST/npm succeeded")

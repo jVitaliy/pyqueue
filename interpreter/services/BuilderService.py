@@ -5,13 +5,13 @@ from interpreter.services.AbstractExternalShellCmd import AbstractExternalShellC
 
 
 class BuilderService(AbstractExternalShellCmd):
-    JAVA17 = 'JAVA17'
-    MAVEN = 'MAVEN'
-    GRADLE = 'GRADLE'
-    NEXT = 'NEXT'
-    NPM = 'NPM'
-    PYTHON39 = 'PYTHON39'
-    INSTALL = 'INSTALL'
+    JAVA17 = 'java17'
+    MAVEN = 'maven'
+    GRADLE = 'gradle'
+    NEXT = 'next'
+    NPM = 'npm'
+    PYTHON39 = 'python39'
+    INSTALL = 'install'
 
     def build(self, language, builder, folder):
 
@@ -39,9 +39,10 @@ class BuilderService(AbstractExternalShellCmd):
 
     def python39Install(self, folder):
         self.execute("/usr/bin/python3.9 -m venv venv", working_folder=folder)
-        self.execute('source "$(pwd)/venv/bin/activate"', working_folder=folder)
-        self.execute('"$(pwd)/venv/bin/pip3.9" install -r requirements.txt', working_folder=folder)
-        self.execute("deactivate", working_folder=folder)
+        logging.info(f"{self.output}")
+        self.execute('source "$(pwd)/venv/bin/activate" && "$(pwd)/venv/bin/pip3.9" install -r requirements.txt && deactivate', working_folder=folder)
+        # self.execute('"$(pwd)/venv/bin/pip3.9" install -r requirements.txt', working_folder=folder)
+        # self.execute("deactivate", working_folder=folder)
         logging.info(f"{self.output}")
         if self.returncode > 0:
             raise BuildServiceException(f"{self.PYTHON39}/{self.INSTALL} error - {self.error}")

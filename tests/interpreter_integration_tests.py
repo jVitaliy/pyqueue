@@ -125,5 +125,11 @@ class InterpreterTest(unittest.TestCase):
         # self.assertEqual('git.tauproject.com', processor._repo_host)
         # self.assertEqual(0, len(processor.scope_stack))
 
+    @unittest.skipIf(False, "skip due to not ready infrastructure")
+    def test_python_build(self):
+        processor = DescProcessor('master', 'tauproject/alcyone-pdm/pyqueue.git')
+        self.walk('test_python_build.desc', processor)
+
+
 if __name__ == '__main__':
     unittest.main()

@@ -34,8 +34,8 @@ class BuilderService(AbstractExternalShellCmd):
         self.execute("/usr/bin/chmod 0775 .next", working_folder=folder)
         self.execute("/usr/bin/chmod 0775 node_modules", working_folder=folder)
         if self.returncode > 0:
-            raise BuildServiceException(f"NEST/npm error - {self.error}")
-        logging.info("build NEST/npm succeeded")
+            raise BuildServiceException(f"{self.NEXT}/{self.NPM} error - {self.error}")
+        logging.info(f"build {self.NEXT}/{self.NPM} succeeded")
 
     def python39Install(self, folder):
         self.execute("/usr/bin/python3.9 -m venv venv", working_folder=folder)

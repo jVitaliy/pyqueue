@@ -6,8 +6,10 @@ from pathlib import Path
 
 import paramiko
 
+from interpreter.services.AbstractExternalShellCmd import AbstractExternalShellCmd
 
-class DeployService:
+
+class DeployService(AbstractExternalShellCmd):
 
     def _ignore_patterns(self, names, exclude=None, patterns=None):
         ignored_names = set()
@@ -29,7 +31,27 @@ class DeployService:
             shutil.rmtree(dest, ignore_errors=True)
         src = f"{src_path}"
         Path(dest).mkdir(parents=True, exist_ok=True)
-        self.walk_through_tree(src, dest, self.local_copier, exclude=exclude, pattern=pattern)
+        command_parts = list()
+        command_parts.append("cd")
+        command_parts.append(f"{src}")
+        command_parts.append("&&")
+        command_parts.append("rsync")
+        command_parts.append("-lr")
+        if pattern:
+            files_from = f"--files-from=<(find ./"
+            names = list(map(lambda p: f"-name \"{p}\"", pattern))
+            names_str = ' -o '.join(names)
+            command_parts.append(f"{files_from} {names_str})")
+        if exclude:
+            excludes = list(map(lambda p: f"--exclude={p}", exclude))
+            excludes_str = ' '.join(excludes)
+            command_parts.append(f"{excludes_str}")
+        command_parts.append("./")
+        command_parts.append(f"{dest}")
+        # print(" ".join(command_parts))
+        self.execute(" ".join(command_parts), working_folder=dest)
+
+        # self.walk_through_tree(src, dest, self.local_copier, exclude=exclude, pattern=pattern)
         logging.info(f"deploy from {src} to {dest} with excluding={exclude} and pattern={pattern}")
 
     def deploy_to_remote(self, ssh_cred, src_path, dest_path, exclude=None, pattern=None, is_merge=False):
@@ -85,9 +107,10 @@ class DeployService:
                 logging.debug(f"copied from {root}/{file} to {folder_dest}{related_path}/{file}")
 
     def local_copier(self, root, file, folder_dest, related_path):
-        os.makedirs(os.path.dirname(f"{folder_dest}{related_path}/"), exist_ok=True)
-        shutil.copyfile(f"{root}/{file}", f"{folder_dest}{related_path}/{file}", follow_symlinks=False)
-        shutil.copymode(f"{root}/{file}", f"{folder_dest}{related_path}/{file}")
+        self.execute(f"rsync {root}/{file} {folder_dest}{related_path}/{file}")
+        # os.makedirs(os.path.dirname(f"{folder_dest}{related_path}/"), exist_ok=True)
+        # shutil.copyfile(f"{root}/{file}", f"{folder_dest}{related_path}/{file}", follow_symlinks=False)
+        # shutil.copymode(f"{root}/{file}", f"{folder_dest}{related_path}/{file}")
 
     def remote_copier(self, client, sftp, root, file, folder_dest, related_path):
         stdin, stdout, stderr = client.exec_command(f"mkdir -p {folder_dest}{related_path}")

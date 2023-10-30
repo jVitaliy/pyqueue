@@ -66,7 +66,7 @@ class DeployService:
 
     def walk_through_tree(self, folder_src, folder_dest, copier, exclude=None, pattern=None, ssh_client=None, sftp=None):
         # print(f"folder_src = {folder_src} / folder_dest = {folder_dest}")
-        for root, dirs, files in os.walk(folder_src, topdown=True):
+        for root, dirs, files in os.walk(folder_src, topdown=True, followlinks=False):
             # print(f"root = {root} / dirs = {dirs}")
             dirs_excluded = self.filter_names(dirs, exclude=exclude, pattern=pattern)
             # print(f"dirs_excluded = {dirs_excluded}")

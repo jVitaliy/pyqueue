@@ -2,7 +2,7 @@ class RsyncCmdBuilder:
     _CD = 'cd'
     _RSYNC = 'rsync'
     _FILES_FROM = '--files-from'
-    _FIND = 'find .'
+    _FIND = 'find'
     _FIND_NAME_PATTERN_KEY = '-name'
     _RSYNC_EXCLUDE_KEY = '--exclude'
 
@@ -10,9 +10,11 @@ class RsyncCmdBuilder:
         self._cmd_list = list()
         self._rsync_cmd = list()
         self._dest_ssh_prefix = None
+        self._src_path = None
 
     def cd(self, path):
         self._cmd_list.append(f"cd {path}")
+        self._src_path = path
         return self
 
     def rsync(self, params=None):
@@ -29,6 +31,7 @@ class RsyncCmdBuilder:
         if patterns:
             find = list()
             find.append(self._FIND)
+            find.append(self._src_path)
             names = list(map(lambda p: f"{self._FIND_NAME_PATTERN_KEY} \"{p}\"", patterns))
             names_str = ' -o '.join(names)
             find.append(names_str)

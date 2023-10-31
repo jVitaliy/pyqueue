@@ -1,0 +1,10 @@
+branch(production);
+repoHost(git.tauproject.com);
+ssh =sshCredentials(remoteHost=173.249.48.192, remoteUser=deploy, pathToKey=/home/vitalii/.ssh/deploy_id_rsa);
+openGitRepoLocally();
+buildProject(language=java17, type=gradle);
+applyConfiguration(tauproject/tau-config.git, branch=develop, from=backend/production, confPath=build/libs, pattern=*.yml);
+stopSystemServiceRemote(ssh, tauproject-api);
+deployToRemote( ssh, from=build/libs, /usr/local/tauproject/backend/prod, pattern=*.jar|*.yml);
+startSystemServiceRemote(ssh, tauproject-api);
+closeGitRepo();

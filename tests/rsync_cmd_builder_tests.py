@@ -17,13 +17,13 @@ class InterpreterTest(unittest.TestCase):
         cmd_str = (RsyncCmdBuilder().cd("/path/to").rsync('lr').pattern(['.git', '*.yml']).exclude(['*.desc', '*.conf'])
                    .dest_folder("/dest/folder").build())
         self.assertEqual("cd /path/to && find . -name \".git\" -o -name \"*.yml\" > selected && rsync -lr "
-                         "--files-from=selected"
+                         "--files-from=selected "
                          "--exclude=*.desc --exclude=*.conf . /dest/folder", cmd_str)
 
     def test_cd_and_rsync_ssh_remote_dest(self):
         cmd_str = (RsyncCmdBuilder().cd("/path/to").rsync('lr').dest_ssh('git.tauproject.com', 'deploy')
                    .dest_folder("/dest/folder").build())
-        self.assertEqual("cd /path/to && rsync -lr . deploy@git.tauproject.com:/dest/folder", cmd_str)
+        self.assertEqual("cd /path/to && rsync -lr -e \"ssh -o StrictHostKeyChecking=no\" . deploy@git.tauproject.com:/dest/folder", cmd_str)
 
 
 if __name__ == '__main__':

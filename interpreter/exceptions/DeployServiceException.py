@@ -1,0 +1,2 @@
+class BuildServiceException(Exception):
+    pass

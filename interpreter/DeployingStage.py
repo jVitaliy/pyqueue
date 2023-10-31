@@ -41,6 +41,8 @@ class DeployingStage(ConfiguringStage):
             self._deploy_pattern.append(ctx.getText())
 
     def exitExcludePattern(self, ctx: DescParser.ExcludePatternContext):
+        if self._current_branch is None:
+            return
         self._deploy_data['excluded'] = self._exclude_pattern
         self._exclude_pattern = None
 

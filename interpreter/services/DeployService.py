@@ -6,6 +6,7 @@ from pathlib import Path
 
 import paramiko
 
+from interpreter.exceptions.BuildServiceException import BuildServiceException
 from interpreter.services.AbstractExternalShellCmd import AbstractExternalShellCmd
 from interpreter.services.RsyncCmdBuilder import RsyncCmdBuilder
 
@@ -23,6 +24,7 @@ class DeployService(AbstractExternalShellCmd):
         self.execute(cd_rsync)
         if self.returncode > 0:
             logging.error(f"{cd_rsync}: {self.error}")
+            raise BuildServiceException(f"{cd_rsync}: {self.error}")
         else:
             logging.info(f"rsync command {cd_rsync}")
         logging.info(f"deploy from {src} to {dest} with excluding={exclude} and pattern={pattern}")
@@ -46,6 +48,7 @@ class DeployService(AbstractExternalShellCmd):
                 exit_status = stdout.channel.recv_exit_status()
                 if exit_status != 0:
                     logging.error(stderr.read().decode())
+                    raise BuildServiceException(stderr.read().decode())
                 else:
                     logging.info(f"remove folder <{dest}> on {ssh_cred['host']} : {stderr.read().decode()}")
 
@@ -60,6 +63,7 @@ class DeployService(AbstractExternalShellCmd):
             exit_status = stdout.channel.recv_exit_status()
             if exit_status != 0:
                 logging.error(stderr.read().decode())
+                raise BuildServiceException(stderr.read().decode())
             else:
                 logging.info(f"make folder <{dest}> on {ssh_cred['host']} : {stdout.read().decode()}")
 

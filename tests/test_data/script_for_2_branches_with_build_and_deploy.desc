@@ -1,0 +1,17 @@
+branch(develop);
+openGitRepoLocally();
+applyConfiguration(tauproject/tau-config.git, branch=develop, from=backend/develop, pattern=*.yml);
+buildProject(language=java17, type=gradle);
+stopSystemService(tauproject-develop-api);
+deployTo(from=build/libs, /usr/local/tauproject/backend/develop, pattern=*.jar|*.yml);
+startSystemService(tauproject-develop-api);
+closeGitRepo();
+
+branch(staging);
+openGitRepoLocally();
+applyConfiguration(tauproject/tau-config.git, branch=develop, from=backend/staging, pattern=*.yml);
+buildProject(language=java17, type=gradle);
+stopSystemService(tauproject-staging-api);
+deployTo(from=build/libs, /usr/local/tauproject/backend/staging, pattern=*.jar);
+startSystemService(tauproject-staging-api);
+closeGitRepo();

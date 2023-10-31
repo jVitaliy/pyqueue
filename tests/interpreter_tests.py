@@ -292,7 +292,20 @@ class InterpreterTest(unittest.TestCase):
                                                           exclude=None, pattern=['application.yml'],
                                                           git_service=self._git_service)])
 
-
+    def test_script_for_2_branches_and_build_and_deploy(self):
+        processor = self.build_processor("staging")
+        self.walk('script_for_2_branches_with_build_and_deploy.desc', processor)
+        self._git_service.clone.assert_has_calls([call(self.REPO_PATH, 'localhost')])
+        self._config_service.apply.assert_has_calls([call( 'localhost', "tauproject/tau-config.git", "develop", "backend/staging",
+                                                          '/tmp/tauproject/alcyone-pdm/test-pro',
+                                                          exclude=None, pattern=['*.yml'],
+                                                          git_service=self._git_service)])
+        self._system_service.stopService.assert_has_calls([call("tauproject-staging-api")])
+        self._system_service.startService.assert_has_calls([call("tauproject-staging-api")])
+        self._builder_service.build.assert_has_calls([call("java17", "gradle", "/tmp/tauproject/alcyone-pdm/test-pro")])
+        self._deploy_service.deploy.assert_has_calls([call('/tmp/tauproject/alcyone-pdm/test-pro/build/libs',
+                                                           '/usr/local/tauproject/backend/staging',
+                                                           exclude=None, pattern=['*.jar'], is_merge=False)])
 
 if __name__ == '__main__':
     unittest.main()

@@ -52,7 +52,7 @@ class RsyncCmdBuilder:
     def dest_folder(self, path):
         self._rsync_cmd.append('.')
         if self._dest_ssh_prefix:
-            self._cmd_list.append(' '.join("ssh -o StrictHostKeyChecking=no"))
+            self._cmd_list.append("ssh -o StrictHostKeyChecking=no")
             self._rsync_cmd.append(f'{self._dest_ssh_prefix}:{path}')
         else:
             self._rsync_cmd.append(f'{path}')

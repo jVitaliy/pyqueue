@@ -9,7 +9,7 @@ class RsyncCmdBuilder:
     def __init__(self):
         self._cmd_list = list()
         self._rsync_cmd = list()
-        self._dest_ssh_prefix = ""
+        self._dest_ssh_prefix = None
 
     def cd(self, path):
         self._cmd_list.append(f"cd {path}")
@@ -45,7 +45,10 @@ class RsyncCmdBuilder:
 
     def dest_folder(self, path):
         self._rsync_cmd.append('./')
-        self._rsync_cmd.append(f'{self._dest_ssh_prefix}:{path}')
+        if self._dest_ssh_prefix:
+            self._rsync_cmd.append(f'{self._dest_ssh_prefix}:{path}')
+        else:
+            self._rsync_cmd.append(f'{path}')
         self._cmd_list.append(' '.join(self._rsync_cmd))
         return self
 

@@ -34,9 +34,11 @@ class DeployService(AbstractExternalShellCmd):
         Path(dest).mkdir(parents=True, exist_ok=True)
 
         cd_rsync = RsyncCmdBuilder().cd(src).rsync('lr').pattern(pattern).exclude(exclude).dest_folder(dest).build()
-        # print(" ".join(command_parts))
-        self.execute(cd_rsync, working_folder=dest)
-
+        self.execute(cd_rsync, working_folder=src)
+        if self.returncode > 0:
+            logging.error(f"{cd_rsync}: {self.error}")
+        else:
+            logging.info(f"rsync command {cd_rsync}")
         # self.walk_through_tree(src, dest, self.local_copier, exclude=exclude, pattern=pattern)
         logging.info(f"deploy from {src} to {dest} with excluding={exclude} and pattern={pattern}")
 

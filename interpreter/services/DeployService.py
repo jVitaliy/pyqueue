@@ -20,7 +20,7 @@ class DeployService(AbstractExternalShellCmd):
         Path(dest).mkdir(parents=True, exist_ok=True)
 
         cd_rsync = RsyncCmdBuilder().cd(src).rsync('lr').pattern(pattern).exclude(exclude).dest_folder(dest).build()
-        self.execute(cd_rsync, working_folder=src)
+        self.execute(cd_rsync)
         if self.returncode > 0:
             logging.error(f"{cd_rsync}: {self.error}")
         else:
@@ -70,7 +70,7 @@ class DeployService(AbstractExternalShellCmd):
             cd_rsync = (RsyncCmdBuilder().cd(src).rsync('lr').pattern(pattern).exclude(exclude)
                         .dest_ssh(ssh_cred['host'], ssh_cred['user']).dest_folder(dest).build())
             logging.info(f"rsync cmd = {cd_rsync}")
-            self.execute(cd_rsync, working_folder=src)
+            self.execute(cd_rsync)
             if self.returncode > 0:
                 logging.error(f"{self.error}")
             # self.walk_through_tree(src, dest, self.remote_copier, exclude=exclude, pattern=pattern, ssh_client=client,

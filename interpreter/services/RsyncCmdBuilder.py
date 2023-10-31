@@ -31,7 +31,7 @@ class RsyncCmdBuilder:
         if patterns:
             find = list()
             find.append(self._FIND)
-            find.append(self._src_path)
+            find.append('.')
             names = list(map(lambda p: f"{self._FIND_NAME_PATTERN_KEY} \"{p}\"", patterns))
             names_str = ' -o '.join(names)
             find.append(names_str)
@@ -47,7 +47,7 @@ class RsyncCmdBuilder:
         return self
 
     def dest_folder(self, path):
-        self._rsync_cmd.append('./')
+        self._rsync_cmd.append('.')
         if self._dest_ssh_prefix:
             self._rsync_cmd.append(f'{self._dest_ssh_prefix}:{path}')
         else:

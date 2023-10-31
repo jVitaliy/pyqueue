@@ -55,8 +55,8 @@ class Init(AbstractProcessor):
     def exitSshCredentials(self, ctx: DescParser.SshCredentialsContext):
         ssh_remote = ctx.remoteHostParam().remoteHost().getText()
         ssh_user = ctx.remoteUserParam().remoteUser().getText()
-        ssh_user_pass = ctx.remoteUserPassParam().remoteUserPassword().getText()
-        self._variables['ssh_credentials'] = {'host': ssh_remote, 'user': ssh_user, 'password': ssh_user_pass}
+        ssh_user_key = ctx.pathToKeyFile().pathToKey().getText()
+        self._variables['ssh_credentials'] = {'host': ssh_remote, 'user': ssh_user, 'key': ssh_user_key}
 
     def exitVariableSet(self, ctx: DescParser.VariableSetContext):
         variable_name = ctx.variableName().getText()

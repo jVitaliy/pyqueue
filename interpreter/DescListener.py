@@ -98,6 +98,24 @@ class DescListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by DescParser#pathToKeyFile.
+    def enterPathToKeyFile(self, ctx:DescParser.PathToKeyFileContext):
+        pass
+
+    # Exit a parse tree produced by DescParser#pathToKeyFile.
+    def exitPathToKeyFile(self, ctx:DescParser.PathToKeyFileContext):
+        pass
+
+
+    # Enter a parse tree produced by DescParser#pathToKey.
+    def enterPathToKey(self, ctx:DescParser.PathToKeyContext):
+        pass
+
+    # Exit a parse tree produced by DescParser#pathToKey.
+    def exitPathToKey(self, ctx:DescParser.PathToKeyContext):
+        pass
+
+
     # Enter a parse tree produced by DescParser#buildProject.
     def enterBuildProject(self, ctx:DescParser.BuildProjectContext):
         pass
@@ -194,24 +212,6 @@ class DescListener(ParseTreeListener):
 
     # Exit a parse tree produced by DescParser#remoteUser.
     def exitRemoteUser(self, ctx:DescParser.RemoteUserContext):
-        pass
-
-
-    # Enter a parse tree produced by DescParser#remoteUserPassParam.
-    def enterRemoteUserPassParam(self, ctx:DescParser.RemoteUserPassParamContext):
-        pass
-
-    # Exit a parse tree produced by DescParser#remoteUserPassParam.
-    def exitRemoteUserPassParam(self, ctx:DescParser.RemoteUserPassParamContext):
-        pass
-
-
-    # Enter a parse tree produced by DescParser#remoteUserPassword.
-    def enterRemoteUserPassword(self, ctx:DescParser.RemoteUserPasswordContext):
-        pass
-
-    # Exit a parse tree produced by DescParser#remoteUserPassword.
-    def exitRemoteUserPassword(self, ctx:DescParser.RemoteUserPasswordContext):
         pass
 
 

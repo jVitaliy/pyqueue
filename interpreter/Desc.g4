@@ -19,7 +19,11 @@ host : (namingChars+ DOT)* namingChars+;
 variableSet : variableName EQUALS function ;
 variableName : namingChars+;
 function : sshCredentials ;
-sshCredentials : SSH_CREDENTIALS '(' remoteHostParam COMMA remoteUserParam (COMMA remoteUserPassParam)? ')' ;
+
+sshCredentials : SSH_CREDENTIALS '(' remoteHostParam COMMA remoteUserParam COMMA pathToKeyFile')' ;
+pathToKeyFile : PATH_TO_KEY EQUALS pathToKey;
+pathToKey : (pathChars | DOT | TILDA)+;
+
 buildProject : BUILD_PROJECT '(' (javaBuild | nextBuild | pythonBuild)  (COMMA buildDir)?')';
 javaBuild :  LANGUAGE EQUALS JAVA17 COMMA 'type' EQUALS (MAVEN | GRADLE) ;
 nextBuild :  LANGUAGE EQUALS NEXT COMMA 'type' EQUALS NPM ;
@@ -38,9 +42,9 @@ remoteHostParam : REMOTE_HOST_PARAM EQUALS remoteHost ;
 remoteHost : host ;
 remoteUserParam : REMOTE_USER_PARAM EQUALS remoteUser ;
 remoteUser : namingChars+;
-remoteUserPassParam : REMOTE_USER_PASS_PARAM EQUALS remoteUserPassword;
-remoteUserPassword : (namingChars | '-' | '_' | '!' | SEMICOLON | ':' | '^' | '#' | '@' | '%'
-                    | '^' | '&' | '(' | ')' | '[' | ']' | EQUALS | DOT)+;
+//remoteUserPassParam : REMOTE_USER_PASS_PARAM EQUALS remoteUserPassword;
+//remoteUserPassword : (namingChars | '-' | '_' | '!' | SEMICOLON | ':' | '^' | '#' | '@' | '%'
+//                    | '^' | '&' | '(' | ')' | '[' | ']' | EQUALS | DOT)+;
 
 
 deployTo : DEPLOY_TO '(' (pathFrom COMMA)? pathForDeployTo (
@@ -65,7 +69,7 @@ cloneGitToTmp : OPEN_GIT_REPO_LOCALLY '(' (repoPath  (COMMA repoAliasName)?)? ')
 closeGitRepo : CLOSE_GIT_REPO '(' repoAliasName? ')';
 repoPath: (pathChars | DOT)+ ;
 pathForDeploy : pathChars+ ;
-pattern : (namingChars | '*' | '^' | '\\' | '$' | DOT ) +;
+pattern : (namingChars | STAR | '^' | '\\' | '$' | DOT ) +;
 branchName : namingChars+ ;
 startSystemService : START_SYSTEM_SERVICE '(' serviceName ')';
 stopSystemService : STOP_SYSTEM_SERVICE '(' serviceName ')';
@@ -76,8 +80,6 @@ repoAliasName : namingChars+ ;
 namingChars: NUM | CHARS | '-' | '_' ;
 pathChars : namingChars | '/' ;
 MERGE : 'merge';
-DOT : '.';
-EQUALS : '=';
 GRADLE : 'gradle';
 MAVEN : 'maven';
 JAVA17 : 'java17';
@@ -87,8 +89,8 @@ INSTALL : 'install';
 NPM : 'npm';
 
 LANGUAGE : 'language';
-COMMA : ',';
-SEMICOLON : ';';
+
+PATH_TO_KEY : 'pathToKey';
 BUILD_PROJECT: 'buildProject';
 START_SYSTEM_SERVICE : 'startSystemService';
 STOP_SYSTEM_SERVICE : 'stopSystemService';
@@ -106,6 +108,13 @@ REMOTE_USER_PASS_PARAM : 'remoteUserPass' ;
 REPO_HOST : 'repoHost';
 OPEN_GIT_REPO_LOCALLY: 'openGitRepoLocally';
 CLOSE_GIT_REPO: 'closeGitRepo';
+
+TILDA : '~';
+STAR : '*';
+DOT : '.';
+EQUALS : '=';
+COMMA : ',';
+SEMICOLON : ';';
 NUM : [0-9] ;
 CHARS : [a-zA-Z] ;
 WS : [ \t\n\r]+ -> skip ;

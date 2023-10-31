@@ -55,6 +55,8 @@ There are 7 stages
 ## Initialization
 This stage includes opening git repo and setup for cloning
 
+`ssh =sshCredentials(remoteHost=host, remoteUser=user, pathToKey=/path);` create a bag with name ssh which contains list of credentials to ssh
+
 `branch(master);`  function to open scope for the master branch. 
 If the branch name from this function does not match branch name from task file 
 then script interpretation will be stopped. 
@@ -81,6 +83,9 @@ Current repo url means the url which was read by scanner from task file (path in
 from, exclude and pattern are not mandatory. Folder `to` should have an absolute path to destination folder.
 Folder `from` should have the relative path, it is related on local repo folder which has been created by git clone.
 exclude and pattern contain the list of patterns separated by pipline `|`.
+
+`deployToRemote( credentials, /absolute/path, exclude=.git|tests);` deploy to remote, except `credentials` all other parameters 
+are similar to deployTo parameters. For now deployToRemote supports deployment only over ssh, so credentials should be a var from sshCredentials. 
 
 Example:
 ```

@@ -1,5 +1,5 @@
 branch(production);
-ssh =sshCredentials(remoteHost=173.249.48.192, remoteUser=deploy, remoteUserPass=e_4F1KzUjc-1tR6e);
+ssh =sshCredentials(remoteHost=173.249.48.192, remoteUser=deploy, pathToKey=~/.ssh/deploy_id_rsa);
 openGitRepoLocally();
 stopSystemServiceRemote(ssh, www-service);
 deployToRemote( ssh, /var/www/tauproject, exclude=.git|.gitignore);

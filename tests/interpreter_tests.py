@@ -210,7 +210,7 @@ class InterpreterTest(unittest.TestCase):
         self.walk('remote_deploy.desc', processor)
         self._deploy_service.deploy.assert_not_called()
         self._git_service.clone.assert_has_calls([call(self.REPO_PATH, self.GIT_HOST)])
-        credentials = {'host': '173.249.48.192', 'user': 'deploy', 'password': 'e_4F1KzUjc-1tR6e'}
+        credentials = {'host': '173.249.48.192', 'user': 'deploy', 'key': '~/.ssh/deploy_id_rsa'}
         self._deploy_service.deploy_to_remote.assert_has_calls([call(credentials,
                                                                      '/tmp/tauproject/alcyone-pdm/test-pro/build/libs',
                                                                      '/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy',
@@ -224,7 +224,7 @@ class InterpreterTest(unittest.TestCase):
         self._deploy_service.deploy.assert_not_called()
         self._git_service.clone.assert_has_calls([call(self.REPO_PATH, self.GIT_HOST),
                                                   call("tauproject/tau-config.git", self.GIT_HOST)])
-        credentials = {'host': '173.249.48.192', 'user': 'deploy', 'password': 'e_4F1KzUjc-1tR6e'}
+        credentials = {'host': '173.249.48.192', 'user': 'deploy', 'key': '~/.ssh/deploy_id_rsa'}
         call1 = call(credentials, '/tmp/tauproject/alcyone-pdm/test-pro',
                 '/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy',
                      exclude=['.git'], pattern=None, is_merge=False)
@@ -241,7 +241,7 @@ class InterpreterTest(unittest.TestCase):
         self._deploy_service.deploy.assert_not_called()
         self._git_service.clone.assert_has_calls([call(self.REPO_PATH, 'localhost'),
                                                   call("tauproject/tau-config.git", 'localhost')])
-        credentials = {'host': '173.249.48.192', 'user': 'deploy', 'password': 'e_4F1KzUjc-1tR6e'}
+        credentials = {'host': '173.249.48.192', 'user': 'deploy', 'key': '~/.ssh/deploy_id_rsa'}
         call1 = call(credentials, '/tmp/tauproject/alcyone-pdm/test-pro',
                 '/var/www/tauproject',
                      exclude=['.git', '.gitignore'], pattern=None, is_merge=False)
@@ -259,7 +259,7 @@ class InterpreterTest(unittest.TestCase):
         self._deploy_service.deploy.assert_not_called()
         self._git_service.clone.assert_has_calls([call(self.REPO_PATH, 'localhost'),
                                                   call("tauproject/tau-config.git", 'localhost')])
-        credentials = {'host': '173.249.48.192', 'user': 'deploy', 'password': 'e_4F1KzUjc-1tR6e'}
+        credentials = {'host': '173.249.48.192', 'user': 'deploy', 'key': '~/.ssh/deploy_id_rsa'}
         call1 = call(credentials, '/tmp/tauproject/alcyone-pdm/test-pro',
                 '/var/www/tauproject',
                      exclude=['.git', '.gitignore'], pattern=None, is_merge=False)

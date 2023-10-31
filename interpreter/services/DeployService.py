@@ -40,7 +40,7 @@ class DeployService(AbstractExternalShellCmd):
 
         # client.set_missing_host_key_policy(AutoAddPolicy())
 
-        client.connect(ssh_cred['host'], username=ssh_cred['user'], key_filename="/home/vitalii/.ssh/deploy_id_rsa")
+        client.connect(ssh_cred['host'], username=ssh_cred['user'], key_filename=ssh_cred['key'])
         try:
             if not is_merge:
 

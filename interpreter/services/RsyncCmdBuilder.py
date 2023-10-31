@@ -35,8 +35,11 @@ class RsyncCmdBuilder:
             names = list(map(lambda p: f"{self._FIND_NAME_PATTERN_KEY} \"{p}\"", patterns))
             names_str = ' -o '.join(names)
             find.append(names_str)
+            find.append('>')
+            find.append("selected")
             find_cmd = ' '.join(find)
-            self._rsync_cmd.append(f"{self._FILES_FROM}=<({find_cmd})")
+            self._cmd_list.append(find_cmd)
+            self._rsync_cmd.append(f"{self._FILES_FROM}=selected")
         return self
 
     def exclude(self, excludes):

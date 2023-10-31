@@ -2,7 +2,7 @@ class RsyncCmdBuilder:
     _CD = 'cd'
     _RSYNC = 'rsync'
     _FILES_FROM = '--files-from'
-    _FIND = 'find ./'
+    _FIND = 'find .'
     _FIND_NAME_PATTERN_KEY = '-name'
     _RSYNC_EXCLUDE_KEY = '--exclude'
 

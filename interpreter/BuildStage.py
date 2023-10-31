@@ -7,17 +7,25 @@ class BuildStage(PreBuildStage):
     _BUILDER = 'builder'
 
     def enterBuildProject(self, ctx: DescParser.BuildProjectContext):
+        if self._current_branch is None:
+            return
         self._builder_data = dict()
 
     def exitJavaBuild(self, ctx: DescParser.JavaBuildContext):
+        if self._current_branch is None:
+            return
         self._builder_data[self._LANGUAGE] = ctx.JAVA17().getText()
         self._builder_data[self._BUILDER] = ctx.GRADLE().getText() if ctx.MAVEN() is None else ctx.MAVEN().getText()
 
     def exitNextBuild(self, ctx: DescParser.NextBuildContext):
+        if self._current_branch is None:
+            return
         self._builder_data[self._LANGUAGE] = ctx.NEXT().getText()
         self._builder_data[self._BUILDER] = ctx.NPM().getText()
 
     def exitPythonBuild(self, ctx: DescParser.PythonBuildContext):
+        if self._current_branch is None:
+            return
         self._builder_data[self._LANGUAGE] = ctx.PYTHON39().getText()
         self._builder_data[self._BUILDER] = ctx.INSTALL().getText()
 

@@ -16,7 +16,8 @@ class InterpreterTest(unittest.TestCase):
     def test_cd_and_rsync_pattern_exclude(self):
         cmd_str = (RsyncCmdBuilder().cd("/path/to").rsync('lr').pattern(['.git', '*.yml']).exclude(['*.desc', '*.conf'])
                    .dest_folder("/dest/folder").build())
-        self.assertEqual("cd /path/to && find . -name \".git\" -o -name \"*.yml\" > selected && rsync -lr --files-from=selected "
+        self.assertEqual("cd /path/to && find . -name \".git\" -o -name \"*.yml\" > selected && rsync -lr "
+                         "--files-from=selected"
                          "--exclude=*.desc --exclude=*.conf . /dest/folder", cmd_str)
 
     def test_cd_and_rsync_ssh_remote_dest(self):

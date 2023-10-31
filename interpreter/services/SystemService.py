@@ -21,7 +21,7 @@ class SystemService(AbstractExternalShellCmd):
     def sshClientInit(self, credentials):
         client = paramiko.SSHClient()
         client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        client.connect(credentials['host'], username=credentials['user'], password=credentials['password'])
+        client.connect(credentials['host'], username=credentials['user'], key_filename=credentials['key'])
         return client
 
     def startServiceRemote(self, credentials, service_name):

@@ -8,6 +8,8 @@ class ConfiguringStage(PostBuildStage):
         self._deploy_data = dict()
 
     def exitApplyConfiguration(self, ctx: DescParser.ApplyConfigurationContext):
+        if self._current_branch is None:
+            return
         # print(self._deploy_data)
         excluded = self._deploy_data['excluded'] if 'excluded' in self._deploy_data.keys() else None
         pattern = self._deploy_data['pattern'] if 'pattern' in self._deploy_data.keys() else None

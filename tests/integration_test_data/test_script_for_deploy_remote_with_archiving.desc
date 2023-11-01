@@ -1,0 +1,9 @@
+branch(develop);
+
+repoHost(git.tauproject.com);
+ssh =sshCredentials(remoteHost=173.249.48.192, remoteUser=deploy, pathToKey=/home/vitalii/.ssh/deploy_id_rsa);
+openGitRepoLocally();
+buildProject(language=next, type=npm);
+deployArchivedToRemote( ssh, /usr/local/tauproject/alcyone-pdm/pyqueue-scripts, exclude=.git|tests);
+
+closeGitRepo();

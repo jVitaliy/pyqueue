@@ -98,6 +98,42 @@ class DescListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by DescParser#remoteHostParam.
+    def enterRemoteHostParam(self, ctx:DescParser.RemoteHostParamContext):
+        pass
+
+    # Exit a parse tree produced by DescParser#remoteHostParam.
+    def exitRemoteHostParam(self, ctx:DescParser.RemoteHostParamContext):
+        pass
+
+
+    # Enter a parse tree produced by DescParser#remoteHost.
+    def enterRemoteHost(self, ctx:DescParser.RemoteHostContext):
+        pass
+
+    # Exit a parse tree produced by DescParser#remoteHost.
+    def exitRemoteHost(self, ctx:DescParser.RemoteHostContext):
+        pass
+
+
+    # Enter a parse tree produced by DescParser#remoteUserParam.
+    def enterRemoteUserParam(self, ctx:DescParser.RemoteUserParamContext):
+        pass
+
+    # Exit a parse tree produced by DescParser#remoteUserParam.
+    def exitRemoteUserParam(self, ctx:DescParser.RemoteUserParamContext):
+        pass
+
+
+    # Enter a parse tree produced by DescParser#remoteUser.
+    def enterRemoteUser(self, ctx:DescParser.RemoteUserContext):
+        pass
+
+    # Exit a parse tree produced by DescParser#remoteUser.
+    def exitRemoteUser(self, ctx:DescParser.RemoteUserContext):
+        pass
+
+
     # Enter a parse tree produced by DescParser#pathToKeyFile.
     def enterPathToKeyFile(self, ctx:DescParser.PathToKeyFileContext):
         pass
@@ -179,39 +215,12 @@ class DescListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by DescParser#remoteHostParam.
-    def enterRemoteHostParam(self, ctx:DescParser.RemoteHostParamContext):
+    # Enter a parse tree produced by DescParser#deployArchivedToRemote.
+    def enterDeployArchivedToRemote(self, ctx:DescParser.DeployArchivedToRemoteContext):
         pass
 
-    # Exit a parse tree produced by DescParser#remoteHostParam.
-    def exitRemoteHostParam(self, ctx:DescParser.RemoteHostParamContext):
-        pass
-
-
-    # Enter a parse tree produced by DescParser#remoteHost.
-    def enterRemoteHost(self, ctx:DescParser.RemoteHostContext):
-        pass
-
-    # Exit a parse tree produced by DescParser#remoteHost.
-    def exitRemoteHost(self, ctx:DescParser.RemoteHostContext):
-        pass
-
-
-    # Enter a parse tree produced by DescParser#remoteUserParam.
-    def enterRemoteUserParam(self, ctx:DescParser.RemoteUserParamContext):
-        pass
-
-    # Exit a parse tree produced by DescParser#remoteUserParam.
-    def exitRemoteUserParam(self, ctx:DescParser.RemoteUserParamContext):
-        pass
-
-
-    # Enter a parse tree produced by DescParser#remoteUser.
-    def enterRemoteUser(self, ctx:DescParser.RemoteUserContext):
-        pass
-
-    # Exit a parse tree produced by DescParser#remoteUser.
-    def exitRemoteUser(self, ctx:DescParser.RemoteUserContext):
+    # Exit a parse tree produced by DescParser#deployArchivedToRemote.
+    def exitDeployArchivedToRemote(self, ctx:DescParser.DeployArchivedToRemoteContext):
         pass
 
 

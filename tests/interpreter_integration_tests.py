@@ -132,10 +132,16 @@ class InterpreterTest(unittest.TestCase):
         processor = DescProcessor('master', 'tauproject/alcyone-pdm/queue-scripts.git')
         self.walk('test_deploy_scripts.desc', processor)
 
-    @unittest.skipIf(False, "skip due to not ready infrastructure")
+    @unittest.skipIf(True, "skip due to not ready infrastructure")
     def test_remote_be_deploy(self):
         processor = DescProcessor('production', 'tauproject/tauproject-api.git')
         self.walk('test_backend_remote_deploy.desc', processor)
+
+    @unittest.skipIf(False, "skip due to not ready infrastructure")
+    def test_remote_deploy_with_archiving(self):
+        processor = DescProcessor('develop', 'tauproject/ui.git')
+        self.walk('test_script_for_deploy_remote_with_archiving.desc', processor)
+
 
 if __name__ == '__main__':
     unittest.main()

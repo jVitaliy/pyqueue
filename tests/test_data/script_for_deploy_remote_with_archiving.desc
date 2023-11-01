@@ -1,0 +1,9 @@
+branch(staging);
+
+repoHost(git.tauproject.com);
+ssh =sshCredentials(remoteHost=173.249.48.192, remoteUser=deploy, pathToKey=~/.ssh/deploy_id_rsa);
+openGitRepoLocally();
+
+deployArchivedToRemote( ssh, from=build/libs, /develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy, pattern=*.jar);
+
+closeGitRepo();

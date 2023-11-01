@@ -6,6 +6,7 @@ from unittest.mock import Mock, call
 from interpreter.DescProcessor import DescProcessor
 from interpreter.TauDeployScriptInterpreter import TauDeployScriptInterpreter
 from interpreter.exceptions.ParseException import ParseException
+from interpreter.services.DeployParameters import DeployParameters
 
 
 class InterpreterTest(unittest.TestCase):
@@ -88,9 +89,10 @@ class InterpreterTest(unittest.TestCase):
         self._git_service.clone.assert_called_once()
         self._git_service.clone.assert_called_with(self.REPO_PATH, self.GIT_HOST)
         self._deploy_service.deploy.assert_called_once()
-        self._deploy_service.deploy.assert_called_with(f"{self.TMP_PATH}/test-pro",
-                                                       '/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy',
-                                                       exclude=None, pattern=None, is_merge=False)
+        deploy_param1 = DeployParameters(src_path=f"{self.TMP_PATH}/test-pro",
+                                         dest_path="/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy",
+                                         exclude=None, pattern=None, is_merge=False, project_name="test-pro")
+        self._deploy_service.deploy.assert_called_with(deploy_param1)
 
     def test_minimal_with_deploy_and_exclude(self):
         processor = self.build_processor("develop")
@@ -102,10 +104,11 @@ class InterpreterTest(unittest.TestCase):
         self._git_service.clone.assert_called_once()
         self._git_service.clone.assert_called_with(self.REPO_PATH, self.GIT_HOST)
         self._deploy_service.deploy.assert_called_once()
-        self._deploy_service.deploy.assert_called_with(f"{self.TMP_PATH}/test-pro",
-                                                       '/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy',
-                                                       exclude=['.git'], pattern=['queue-scripts', 'queue.git'],
-                                                       is_merge=False)
+        deploy_param1 = DeployParameters(src_path=f"{self.TMP_PATH}/test-pro",
+                                         dest_path="/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy",
+                                         exclude=['.git'], pattern=['queue-scripts', 'queue.git'], is_merge=False,
+                                         project_name="test-pro")
+        self._deploy_service.deploy.assert_called_with(deploy_param1)
 
     def test_minimal_with_deploy_from(self):
         processor = self.build_processor("develop")
@@ -117,9 +120,10 @@ class InterpreterTest(unittest.TestCase):
         self._git_service.clone.assert_called_once()
         self._git_service.clone.assert_called_with(self.REPO_PATH, self.GIT_HOST)
         self._deploy_service.deploy.assert_called_once()
-        self._deploy_service.deploy.assert_called_with(f"{self.TMP_PATH}/test-pro/scripts",
-                                                       '/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy',
-                                                       exclude=['.git'], pattern=None, is_merge=False)
+        deploy_param1 = DeployParameters(src_path=f"{self.TMP_PATH}/test-pro/scripts",
+                                         dest_path="/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy",
+                                         exclude=['.git'], pattern=None, is_merge=False, project_name="test-pro")
+        self._deploy_service.deploy.assert_called_with(deploy_param1)
 
     def test_deploy_with_start_stop_service(self):
         processor = self.build_processor("develop")
@@ -131,9 +135,10 @@ class InterpreterTest(unittest.TestCase):
         self._git_service.clone.assert_called_once()
         self._git_service.clone.assert_called_with(self.REPO_PATH, self.GIT_HOST)
         self._deploy_service.deploy.assert_called_once()
-        self._deploy_service.deploy.assert_called_with(f"{self.TMP_PATH}/test-pro",
-                                                       '/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy',
-                                                       exclude=None, pattern=None, is_merge=False)
+        deploy_param1 = DeployParameters(src_path=f"{self.TMP_PATH}/test-pro",
+                                         dest_path="/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy",
+                                         exclude=None, pattern=None, is_merge=False, project_name="test-pro")
+        self._deploy_service.deploy.assert_called_with(deploy_param1)
         self._system_service.startService.assert_called_once()
         self._system_service.stopService.assert_called_once()
 
@@ -163,13 +168,13 @@ class InterpreterTest(unittest.TestCase):
         self.assertEqual(0, len(processor.scope_stack))
         self._git_service.clone.assert_has_calls([call(self.REPO_PATH, self.GIT_HOST),
                                                   call("path/to/config.git", self.GIT_HOST)])
-        self._deploy_service.deploy.assert_has_calls(
-            [
-                call(f"{self.TMP_PATH}/test-pro", "/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy",
-                    exclude=None, pattern=None, is_merge=False),
-                call(f"{self.TMP_PATH_CONF}/test-conf", "/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy/cfg",
-                     exclude=None, pattern=['*.yml'], is_merge=True)
-            ])
+        deploy_param1 = DeployParameters(src_path=f"{self.TMP_PATH}/test-pro",
+                                        dest_path="/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy",
+                                        exclude=None, pattern=None, is_merge=False, project_name="test-pro")
+        deploy_param2 = DeployParameters(src_path=f"{self.TMP_PATH_CONF}/test-conf",
+                                        dest_path="/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy/cfg",
+                                        exclude=None, pattern=['*.yml'], is_merge=True, project_name="test-conf")
+        self._deploy_service.deploy.assert_has_calls([call(deploy_param1),call(deploy_param2)])
         self._system_service.startService.assert_called_once()
         self._git_service.removeFolder.assert_has_calls([call(self.TMP_PATH_CONF), call(self.TMP_PATH)])
         self._system_service.stopService.assert_called_once()
@@ -184,13 +189,13 @@ class InterpreterTest(unittest.TestCase):
         self.assertEqual(0, len(processor.scope_stack))
         self._git_service.clone.assert_has_calls([call(self.REPO_PATH, self.GIT_HOST),
                                                   call("tauproject/tau-config.git", self.GIT_HOST)])
-        self._deploy_service.deploy.assert_has_calls(
-            [
-                call(f"{self.TMP_PATH}/test-pro", "/var/www/tauproject/develop",
-                    exclude=['.git', '.gitignore'], pattern=None, is_merge=False),
-                call(f"{self.TMP_PATH_CONF}/test-conf/ui", "/var/www/tauproject/develop",
-                     exclude=None, pattern=['.env'], is_merge=True)
-            ])
+        deploy_param1 = DeployParameters(src_path=f"{self.TMP_PATH}/test-pro",
+                                        dest_path="/var/www/tauproject/develop",
+                                        exclude=['.git', '.gitignore'], pattern=None, is_merge=False, project_name="test-pro")
+        deploy_param2 = DeployParameters(src_path=f"{self.TMP_PATH_CONF}/test-conf/ui",
+                                        dest_path="/var/www/tauproject/develop",
+                                        exclude=None, pattern=['.env'], is_merge=True, project_name="test-conf")
+        self._deploy_service.deploy.assert_has_calls([call(deploy_param1), call(deploy_param2)])
         self._system_service.startService.assert_called_once()
         self._git_service.removeFolder.assert_has_calls([call(self.TMP_PATH_CONF), call(self.TMP_PATH)])
         self._system_service.stopService.assert_called_once()
@@ -211,10 +216,10 @@ class InterpreterTest(unittest.TestCase):
         self._deploy_service.deploy.assert_not_called()
         self._git_service.clone.assert_has_calls([call(self.REPO_PATH, self.GIT_HOST)])
         credentials = {'host': '173.249.48.192', 'user': 'deploy', 'key': '~/.ssh/deploy_id_rsa'}
-        self._deploy_service.deploy_to_remote.assert_has_calls([call(credentials,
-                                                                     '/tmp/tauproject/alcyone-pdm/test-pro/build/libs',
-                                                                     '/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy',
-                                                                     exclude=None, pattern=['*.jar'], is_merge=False)])
+        deploy_param1 = DeployParameters(src_path='/tmp/tauproject/alcyone-pdm/test-pro/build/libs',
+                                         dest_path='/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy',
+                                         exclude=None, pattern=['*.jar'], is_merge=False, project_name="test-pro")
+        self._deploy_service.deploy_to_remote.assert_has_calls([call(credentials, deploy_param1)])
         self.assertEqual(0, len(processor.scope_stack))
         self._git_service.clone.assert_has_calls([call(self.REPO_PATH, 'git.tauproject.com')])
 
@@ -225,12 +230,14 @@ class InterpreterTest(unittest.TestCase):
         self._git_service.clone.assert_has_calls([call(self.REPO_PATH, self.GIT_HOST),
                                                   call("tauproject/tau-config.git", self.GIT_HOST)])
         credentials = {'host': '173.249.48.192', 'user': 'deploy', 'key': '~/.ssh/deploy_id_rsa'}
-        call1 = call(credentials, '/tmp/tauproject/alcyone-pdm/test-pro',
-                '/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy',
-                     exclude=['.git'], pattern=None, is_merge=False)
-        call2 = call(credentials, '/tmp/tauproject/alcyone-pdm/test-conf',
-                '/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy/cfg',
-                     exclude=None, pattern=['*.yml'], is_merge=True)
+        deploy_param1 = DeployParameters(src_path='/tmp/tauproject/alcyone-pdm/test-pro',
+                                         dest_path='/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy',
+                                         exclude=['.git'], pattern=None, is_merge=False, project_name="test-pro")
+        call1 = call(credentials, deploy_param1)
+        deploy_param2 = DeployParameters(src_path='/tmp/tauproject/alcyone-pdm/test-conf',
+                                         dest_path='/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy/cfg',
+                                         exclude=None, pattern=['*.yml'], is_merge=True, project_name="test-conf")
+        call2 = call(credentials, deploy_param2)
         self._deploy_service.deploy_to_remote.assert_has_calls([call1, call2])
         self.assertEqual(0, len(processor.scope_stack))
         self._git_service.clone.assert_has_calls([call(self.REPO_PATH, 'git.tauproject.com')])
@@ -242,12 +249,16 @@ class InterpreterTest(unittest.TestCase):
         self._git_service.clone.assert_has_calls([call(self.REPO_PATH, 'localhost'),
                                                   call("tauproject/tau-config.git", 'localhost')])
         credentials = {'host': '173.249.48.192', 'user': 'deploy', 'key': '~/.ssh/deploy_id_rsa'}
-        call1 = call(credentials, '/tmp/tauproject/alcyone-pdm/test-pro',
-                '/var/www/tauproject',
-                     exclude=['.git', '.gitignore'], pattern=None, is_merge=False)
-        call2 = call(credentials, '/tmp/tauproject/alcyone-pdm/test-conf/ui',
-                '/var/www/tauproject',
-                     exclude=['.git', '.gitignore'], pattern=['.env'], is_merge=True)
+        deploy_param1 = DeployParameters(src_path='/tmp/tauproject/alcyone-pdm/test-pro',
+                                         dest_path='/var/www/tauproject',
+                                         exclude=['.git', '.gitignore'], pattern=None, is_merge=False,
+                                         project_name="test-pro")
+        call1 = call(credentials, deploy_param1)
+        deploy_param2 = DeployParameters(src_path='/tmp/tauproject/alcyone-pdm/test-conf/ui',
+                                         dest_path='/var/www/tauproject',
+                                         exclude=['.git', '.gitignore'], pattern=['.env'], is_merge=True,
+                                         project_name="test-conf")
+        call2 = call(credentials, deploy_param2)
         self._deploy_service.deploy_to_remote.assert_has_calls([call1, call2])
         self.assertEqual(0, len(processor.scope_stack))
         self._git_service.clone.assert_has_calls([call('tauproject/alcyone-pdm/queue-scripts.git', 'localhost'),
@@ -260,12 +271,16 @@ class InterpreterTest(unittest.TestCase):
         self._git_service.clone.assert_has_calls([call(self.REPO_PATH, 'localhost'),
                                                   call("tauproject/tau-config.git", 'localhost')])
         credentials = {'host': '173.249.48.192', 'user': 'deploy', 'key': '~/.ssh/deploy_id_rsa'}
-        call1 = call(credentials, '/tmp/tauproject/alcyone-pdm/test-pro',
-                '/var/www/tauproject',
-                     exclude=['.git', '.gitignore'], pattern=None, is_merge=False)
-        call2 = call(credentials, '/tmp/tauproject/alcyone-pdm/test-conf/ui',
-                '/var/www/tauproject',
-                     exclude=['.git', '.gitignore'], pattern=['.env'], is_merge=True)
+        deploy_param1 = DeployParameters(src_path='/tmp/tauproject/alcyone-pdm/test-pro',
+                                         dest_path='/var/www/tauproject',
+                                         exclude=['.git', '.gitignore'], pattern=None, is_merge=False,
+                                         project_name="test-pro")
+        call1 = call(credentials, deploy_param1)
+        deploy_param2 = DeployParameters(src_path='/tmp/tauproject/alcyone-pdm/test-conf/ui',
+                                         dest_path='/var/www/tauproject',
+                                         exclude=['.git', '.gitignore'], pattern=['.env'], is_merge=True,
+                                         project_name="test-conf")
+        call2 = call(credentials, deploy_param2)
         self._deploy_service.deploy_to_remote.assert_has_calls([call1, call2])
         self.assertEqual(0, len(processor.scope_stack))
         self._git_service.clone.assert_has_calls([call('tauproject/alcyone-pdm/queue-scripts.git', 'localhost'),
@@ -278,9 +293,13 @@ class InterpreterTest(unittest.TestCase):
     def test_apply_config(self):
         processor = self.build_processor("develop")
         self.walk('apply_config_simple.desc', processor)
-        self._deploy_service.deploy.assert_has_calls([call('/tmp/tauproject/alcyone-pdm/test-pro',
-                                                          '/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy',
-                                                          exclude=None, pattern=None, is_merge=False)])
+        deploy_param1 = DeployParameters(src_path='/tmp/tauproject/alcyone-pdm/test-pro',
+                                        dest_path='/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy',
+                                        exclude=None, pattern=None, is_merge=False, project_name="test-pro")
+        calls = self._deploy_service.deploy.call_args
+        param = calls[0][0]
+        self.assertEqual(param, deploy_param1)
+        self._deploy_service.deploy.assert_has_calls([call(deploy_param1)])
         self._git_service.clone.assert_has_calls([call(self.REPO_PATH, self.GIT_HOST)])
         self._system_service.stopService.assert_has_calls([call("www-service")])
         self._system_service.startService.assert_has_calls([call("www-service")])
@@ -303,9 +322,21 @@ class InterpreterTest(unittest.TestCase):
         self._system_service.stopService.assert_has_calls([call("tauproject-staging-api")])
         self._system_service.startService.assert_has_calls([call("tauproject-staging-api")])
         self._builder_service.build.assert_has_calls([call("java17", "gradle", "/tmp/tauproject/alcyone-pdm/test-pro")])
-        self._deploy_service.deploy.assert_has_calls([call('/tmp/tauproject/alcyone-pdm/test-pro/build/libs',
-                                                           '/usr/local/tauproject/backend/staging',
-                                                           exclude=None, pattern=['*.jar'], is_merge=False)])
+        deploy_param1 = DeployParameters(src_path='/tmp/tauproject/alcyone-pdm/test-pro/build/libs',
+                                         dest_path='/usr/local/tauproject/backend/staging',
+                                         exclude=None, pattern=['*.jar'], is_merge=False, project_name="test-pro")
+        self._deploy_service.deploy.assert_has_calls([call(deploy_param1)])
+
+    def test_script_for_deploy_remote_with_archiving(self):
+        processor = self.build_processor("staging")
+        self.walk('script_for_deploy_remote_with_archiving.desc', processor)
+        self._git_service.clone.assert_has_calls([call(self.REPO_PATH, self.GIT_HOST)])
+        credentials = {'host': '173.249.48.192', 'user': 'deploy', 'key': '~/.ssh/deploy_id_rsa'}
+        deploy_param1 = DeployParameters(src_path='/tmp/tauproject/alcyone-pdm/test-pro/build/libs',
+                                         dest_path='/develop/tauprojects/alcyone/alcyone-pdm/pyqueue/testdeploy',
+                                         exclude=None, pattern=['*.jar'], is_merge=False, project_name="test-pro")
+        self._deploy_service.deploy_archived_to_remote.assert_has_calls([call(credentials, deploy_param1)])
+
 
 if __name__ == '__main__':
     unittest.main()

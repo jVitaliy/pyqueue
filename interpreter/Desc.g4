@@ -9,6 +9,7 @@ scopeCmds : (deployTo SEMICOLON)
     | (buildProject SEMICOLON)
     | (buildProject SEMICOLON)
     | (deployToRemote SEMICOLON)
+    | (deployArchivedToRemote SEMICOLON)
     | (applyConfiguration SEMICOLON)
     | gitRepoScope
     ;
@@ -21,6 +22,10 @@ variableName : namingChars+;
 function : sshCredentials ;
 
 sshCredentials : SSH_CREDENTIALS '(' remoteHostParam COMMA remoteUserParam COMMA pathToKeyFile')' ;
+remoteHostParam : REMOTE_HOST_PARAM EQUALS remoteHost ;
+remoteHost : host ;
+remoteUserParam : REMOTE_USER_PARAM EQUALS remoteUser ;
+remoteUser : namingChars+;
 pathToKeyFile : PATH_TO_KEY EQUALS pathToKey;
 pathToKey : (pathChars | DOT | TILDA)+;
 
@@ -30,6 +35,7 @@ nextBuild :  LANGUAGE EQUALS NEXT COMMA 'type' EQUALS NPM ;
 pythonBuild : LANGUAGE EQUALS PYTHON39 COMMA 'type' EQUALS INSTALL ;
 buildDir : 'dir' EQUALS buildFolder;
 buildFolder : pathChars+;
+
 deployToRemote : DEPLOY_TO_REMOTE '(' variableName COMMA (pathFrom COMMA)? pathForDeployTo (
                     (COMMA excludePattern)
                     | (COMMA deployPattern)
@@ -38,10 +44,14 @@ deployToRemote : DEPLOY_TO_REMOTE '(' variableName COMMA (pathFrom COMMA)? pathF
                      )?
                      (COMMA MERGE)?')';
 
-remoteHostParam : REMOTE_HOST_PARAM EQUALS remoteHost ;
-remoteHost : host ;
-remoteUserParam : REMOTE_USER_PARAM EQUALS remoteUser ;
-remoteUser : namingChars+;
+deployArchivedToRemote : DEPLOY_ARCHIVED_TO_REMOTE '(' variableName COMMA (pathFrom COMMA)? pathForDeployTo (
+                    (COMMA excludePattern)
+                    | (COMMA deployPattern)
+                    | (COMMA deployPattern COMMA excludePattern)
+                    | (COMMA excludePattern COMMA deployPattern)
+                     )?
+                     (COMMA MERGE)?')';
+
 //remoteUserPassParam : REMOTE_USER_PASS_PARAM EQUALS remoteUserPassword;
 //remoteUserPassword : (namingChars | '-' | '_' | '!' | SEMICOLON | ':' | '^' | '#' | '@' | '%'
 //                    | '^' | '&' | '(' | ')' | '[' | ']' | EQUALS | DOT)+;
@@ -102,6 +112,7 @@ DEPLOY_TO : 'deployTo';
 SSH_CREDENTIALS : 'sshCredentials';
 APPLY_CONFIGURATION : 'applyConfiguration';
 DEPLOY_TO_REMOTE : 'deployToRemote';
+DEPLOY_ARCHIVED_TO_REMOTE : 'deployArchivedToRemote';
 REMOTE_HOST_PARAM : 'remoteHost' ;
 REMOTE_USER_PARAM : 'remoteUser' ;
 REMOTE_USER_PASS_PARAM : 'remoteUserPass' ;

@@ -103,11 +103,12 @@ class DeployService(AbstractExternalShellCmd):
                      .exclude(None)
                      .unarchive()
                      .build())
-        logging.info(f"archiving with {untar_cmd}")
+
         client = self.create_client(ssh_cred)
 
         try:
             self.execute_remote(client, untar_cmd, "untar on remote machine")
+            logging.info(f"unarchiving with {untar_cmd}")
             self.execute_remote(client, f"rm {deploy_param.dest_path}/{deploy_param.project_name}.tar",
                                 f"remove tar {deploy_param.project_name}.tar")
         finally:
